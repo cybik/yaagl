@@ -1,6 +1,8 @@
-//
-// Created by cybik on 22-02-13.
-//
+/**
+ * Created by cybik on 22-02-13.
+ * The contents of this file are https://gitlab.com/KRypt0n_/an-anime-game-launcher/-/blob/main/src/ts/Constants.ts
+ *  made into a C++/QT class.
+ **/
 
 #ifndef QAGL_CONSTANTS_H
 #define QAGL_CONSTANTS_H
