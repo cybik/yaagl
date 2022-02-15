@@ -2,8 +2,6 @@
 
 #include "launcher/Landing.h"
 
-#include "qtees/test.h"
-
 using namespace QAGL;
 
 int main(int argc, char *argv[]) {
