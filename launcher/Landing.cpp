@@ -10,26 +10,34 @@ namespace QAGL {
     void Landing::quit_clicked() {
         qmw->close();
     }
-    void Landing::background_req(QNetworkReply *) {
-        background = std::make_shared<QJsonDocument>(QJsonDocument::fromJson(qnre->readAll()));
+
+    // Final method after getting background URL, load up
+    void Landing::background_req(QNetworkReply *reply) {
+        background = std::make_shared<QJsonDocument>(QJsonDocument::fromJson(reply->readAll()));
         QString back = background->object().find("data").value().toObject()
                                            .find("adv").value().toObject()
                                            .find("background").value().toString();
-
-        qev->page()->runJavaScript("document.body.background = ('"+back+"');");
-        qmw->show();
+        qev->page()->runJavaScript(
+            "document.body.background = ('"+back+"');",
+            [this](const QVariant& var) {
+                qnr.reset();
+                qmw->show();
+            }
+        );
     }
 
     void Landing::runBackground() {
-        qnam = std::make_shared<QNetworkAccessManager>();
+        if(qnam == nullptr) {
+            qnam = std::make_shared<QNetworkAccessManager>();
+            QObject::connect(qnam.get(), SIGNAL(finished(QNetworkReply*)),
+                             this, SLOT(background_req(QNetworkReply*))
+            );
+        }
         qnr = std::make_shared<QNetworkRequest>(QUrl((backgroundUri+"en-us").c_str()));
-        QObject::connect(qnam.get(), SIGNAL(finished(QNetworkReply*)),
-                         this, SLOT(background_req(QNetworkReply*))
-        );
-        qnre = std::shared_ptr<QNetworkReply>(qnam->get(*qnr));
+        qnam->get(*qnr);
     }
 
-    void Landing::load_finished(bool is) {
+    void Landing::loaded(bool is) {
         if(is) {
             qev->page()->runJavaScript(
                 "document.getElementsByClassName('home')[0].clientWidth;",
@@ -47,30 +55,34 @@ namespace QAGL {
             );
         }
     }
-    void Landing::address_gimme() {
-        qDebug() << generate_url().toStdString().c_str();
-    }
+
     Landing::Landing(const QApplication &app) {
         qmw = std::make_shared<QMainWindow>();
 
         // defaults
         qmw->setFixedSize(1280,720);
+        qmw->setWindowTitle("Yet Another Anime Game Launcher");
 
+        // Menu
         qmnu = std::make_shared<QMenu>("Checks");
         qq = std::shared_ptr<QAction>(qmnu->addAction("Quit"));
-        qev = std::make_shared<QWebEngineView>();
-
         QObject::connect(qq.get(), SIGNAL(triggered()), this, SLOT(quit_clicked()));
-        QObject::connect(qev.get(), SIGNAL(loadFinished(bool)), this, SLOT(load_finished(bool)));
-
-        qmw->setCentralWidget(qev.get());
         qmw->menuBar()->addMenu(qmnu.get());
 
-        qmw->setWindowTitle("Yet Another Anime Game Launcher");
+        // Web core
+        qev = std::make_shared<QWebEngineView>();
+        qev->setContextMenuPolicy(Qt::NoContextMenu);
+        qev->setAcceptDrops(false);
+        qev->setPage(new LandingWebEnginePage());
+        QObject::connect(qev.get(), SIGNAL(loadFinished(bool)), this, SLOT(loaded(bool)));
+
+        // Add the web core to the window
+        qmw->setCentralWidget(qev.get());
     }
 
     QString Landing::generate_url() {
-        return QString("https://").append(placeholders::lowercase::first.c_str()).append(".")
+        return QString("https://")
+                .append(placeholders::lowercase::first.c_str()).append(".")
                 .append(placeholders::lowercase::company.c_str())
                 .append(".com/launcher/10/en-us?api_url=https%3A%2F%2Fapi-os-takumi.")
                 .append(placeholders::lowercase::company.c_str())
@@ -80,4 +92,17 @@ namespace QAGL {
     void Landing::show(const QApplication &app) {
         qev->load(QUrl(generate_url()));
     }
+}
+
+QWebEnginePage * LandingWebEnginePage::createWindow(WebWindowType type) {
+    return new LandingWebEnginePage();
+}
+
+bool LandingWebEnginePage::acceptNavigationRequest(const QUrl & url, QWebEnginePage::NavigationType type, bool isMainFrame) {
+    if (type == QWebEnginePage::NavigationTypeLinkClicked) {
+        //qDebug() << url.toString();
+        QDesktopServices::openUrl(url);
+        return false;
+    }
+    return true;
 }
