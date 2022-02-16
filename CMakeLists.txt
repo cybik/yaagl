@@ -17,6 +17,11 @@ find_package(Qt5
     REQUIRED
 )
 
+include_directories(
+    AFTER
+        "${PROJECT_SOURCE_DIR}/3rdParty/libsass/include"
+)
+
 add_executable(
     QAGL
         main.cpp
@@ -28,7 +33,7 @@ add_executable(
         launcher/Splash.h
         launcher/util/Constants.h
         launcher/util/Locales.h
-)
+        launcher/resources/SASSProcess.cpp launcher/resources/SASSProcess.h launcher/resources/gear_image.h)
 target_link_libraries(
     QAGL
         Qt5::Core
@@ -37,5 +42,6 @@ target_link_libraries(
         Qt5::Widgets
         Qt5::WebEngine
         Qt5::WebEngineWidgets
+        "${PROJECT_SOURCE_DIR}/3rdParty/libsass/lib/libsass.a"
 )
 
