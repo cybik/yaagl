@@ -35,9 +35,7 @@ namespace QAGL {
             "document.body.background = ('"+back+"');",
             [this](const QVariant& var) {
                 qnr.reset();
-                inject_settings();
                 qmw->show();
-                devtools_clicked();
             }
         );
     }
@@ -111,18 +109,25 @@ namespace QAGL {
             QString s = QString::fromLatin1("(function() {\n" \
                                     "img_idle = document.createElement('img');\n"\
                                     "img_idle.src = '%1';\n"\
-                                    "img_idle.alt = 'Settings';\n"\
                                     "img_idle.className = 'unactive';\n"\
+                                    "img_idle.alt = 'icon';\n"\
                                     "img_hovr = document.createElement('img');\n"\
                                     "img_hovr.src = '%2';\n"\
-                                    "img_hovr.alt = 'Settings';\n"\
                                     "img_hovr.className = 'active';\n"\
+                                    "img_hovr.alt = 'icon';\n"\
                                     "settings = document.createElement('div');\n"\
-                                    "settings.className = '';\n"\
                                     "settings.id = 'settings';\n"\
+                                    "settings.className = \"\";\n"\
                                     "settings.appendChild(img_idle);\n"\
                                     "settings.appendChild(img_hovr);\n"\
                                     "document.body.appendChild(settings);\n"\
+                                    "const t = document.getElementById(\"settings\");\n"
+                                    "t.onmouseenter = () => {\n"
+                                    "t == null || t.classList.add(\"hovered\")\n"
+                                    "},\n"
+                                    "t.onmouseleave = () => {\n"
+                                    "t == null || t.classList.remove(\"hovered\")\n"
+                                    "}"\
                                     "})()")
                     .arg(get_gear_idle().c_str())
                     .arg(get_gear_hovr().c_str());
@@ -132,7 +137,7 @@ namespace QAGL {
             script.setSourceCode(s);
             script.setInjectionPoint(QWebEngineScript::DocumentReady);
             script.setRunsOnSubFrames(true);
-            script.setWorldId(QWebEngineScript::ApplicationWorld);
+            script.setWorldId(QWebEngineScript::UserWorld);
             qev->page()->scripts().insert(script);
         }
     }
@@ -158,6 +163,7 @@ namespace QAGL {
         qev->setAcceptDrops(false);
         qev->setPage(new LandingWebEnginePage());
         inject_stylesheet();
+        inject_settings();
         QObject::connect(qev.get(), SIGNAL(loadFinished(bool)), this, SLOT(loaded(bool)));
 
         // Add the web core to the window
