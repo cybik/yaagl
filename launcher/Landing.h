@@ -17,7 +17,6 @@ Q_OBJECT
         void show(const QApplication &app);
     public slots:
         void devtools_clicked();
-        void quit_clicked();
         void background_req(QNetworkReply *);
         void loaded(bool);
 
@@ -25,15 +24,11 @@ Q_OBJECT
         void inject_stylesheet();
         void inject_settings();
         void runBackground();
-        std::string get_gear_idle();
-        std::string get_gear_hovr();
         std::shared_ptr<QMainWindow> qmw;
         std::shared_ptr<QMainWindow> qdt;
         std::shared_ptr<QWebEngineView> qev;
         std::shared_ptr<QWebEngineView> qevdt;
-        std::shared_ptr<QMenu> qmnu;
-        std::shared_ptr<QAction> qq;
-        std::shared_ptr<QAction> qd;
+        std::shared_ptr<QShortcut> qdk;
         QString generate_url();
 
         std::shared_ptr<QNetworkAccessManager> qnam;

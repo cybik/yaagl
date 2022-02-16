@@ -10,18 +10,20 @@
 
 #include <QVBoxLayout>
 #include <QWebEngineScript>
+#include <QShortcut>
+
+#define YAAGL_SETTINGS "#yaagl-settings"
 
 namespace QAGL {
-    void Landing::quit_clicked() {
-        qmw->close();
-    }
     void Landing::devtools_clicked() {
-        qdt = std::make_shared<QMainWindow>();
-        qdt->setFixedSize(1920,1080);
-        qevdt = std::make_shared<QWebEngineView>();
-        qev->page()->setInspectedPage(qev->page());
-        qev->page()->setDevToolsPage(qevdt->page());
-        qdt->setCentralWidget(qevdt.get());
+        if(!qdt) {
+            qdt = std::make_shared<QMainWindow>();
+            qdt->setFixedSize(1920,1080);
+            qevdt = std::make_shared<QWebEngineView>();
+            qev->page()->setInspectedPage(qev->page());
+            qev->page()->setDevToolsPage(qevdt->page());
+            qdt->setCentralWidget(qevdt.get());
+        }
         qdt->show();
     }
 
@@ -72,21 +74,19 @@ namespace QAGL {
 
     void Landing::inject_stylesheet() {
         if( qev->page()->scripts().isEmpty() ||
-           qev->page()->scripts().findScript("sass").isNull()
+           qev->page()->scripts().findScript("cpp-sends-their-regards").isNull()
         ) {
             QWebEngineScript script;
-            QString s = QString::fromLatin1("(function() {\n" \
-                                    "css = document.createElement('style');\n"\
-                                    "css.type = 'text/css';\n"\
-                                    "css.id = '%1';\n"\
-                                    "document.head.appendChild(css);\n"\
-                                    "css.textContent = `%2`;\n"\
-                                    "})()")
-                                        .arg("sass")
-                                        .arg(SASSProcess(idx_sass.toStdString()).c_str());
+            QString s = QString::fromLatin1(
+                "(function() {\n" \
+                    "css = document.createElement('style'); css.type = 'text/css'; css.id = '%1';\n"\
+                    "css.textContent = `%2`;\n"\
+                    "document.head.appendChild(css);\n"\
+                "})()")
+                .arg("cpp-sends-their-regards").arg(SASSProcess(idx_sass.toStdString()).c_str());
             qev->page()->runJavaScript(s, QWebEngineScript::ApplicationWorld);
 
-            script.setName("sass");
+            script.setName("cpp-sends-their-regards");
             script.setSourceCode(s);
             script.setInjectionPoint(QWebEngineScript::DocumentReady);
             script.setRunsOnSubFrames(true);
@@ -94,50 +94,33 @@ namespace QAGL {
             qev->page()->scripts().insert(script);
         }
     }
-    std::string Landing::get_gear_idle() {
-        return std::string("data:image/png;base64,").append(gear_idle);
-    }
-    std::string Landing::get_gear_hovr() {
-        return std::string("data:image/png;base64,").append(gear_hover);
-    }
 
     void Landing::inject_settings() {
         if( qev->page()->scripts().isEmpty() ||
             qev->page()->scripts().findScript("setts").isNull()
         ) {
             QWebEngineScript script;
-            QString s = QString::fromLatin1("(function() {\n" \
-                                    "img_idle = document.createElement('img');\n"\
-                                    "img_idle.src = '%1';\n"\
-                                    "img_idle.className = 'unactive';\n"\
-                                    "img_idle.alt = 'icon';\n"\
-                                    "img_hovr = document.createElement('img');\n"\
-                                    "img_hovr.src = '%2';\n"\
-                                    "img_hovr.className = 'active';\n"\
-                                    "img_hovr.alt = 'icon';\n"\
-                                    "settings = document.createElement('div');\n"\
-                                    "settings.id = 'settings';\n"\
-                                    "settings.className = \"\";\n"\
-                                    "settings.appendChild(img_idle);\n"\
-                                    "settings.appendChild(img_hovr);\n"\
-                                    "document.body.appendChild(settings);\n"\
-                                    "const t = document.getElementById(\"settings\");\n"
-                                    "t.onmouseenter = () => {\n"
-                                    "t == null || t.classList.add(\"hovered\")\n"
-                                    "},\n"
-                                    "t.onmouseleave = () => {\n"
-                                    "t == null || t.classList.remove(\"hovered\")\n"
-                                    "}"\
-                                    "})()")
-                    .arg(get_gear_idle().c_str())
-                    .arg(get_gear_hovr().c_str());
+            QString s = QString::fromLatin1(
+                "(function() {\n" \
+                    "img_idle = document.createElement('img'); img_idle.src = '%1';\n"\
+                    "img_idle.className = 'unactive'; img_idle.alt = 'icon';\n"\
+                    "img_hovr = document.createElement('img'); img_hovr.src = '%2';\n"\
+                    "img_hovr.className = 'active'; img_hovr.alt = 'icon';\n"\
+                    "settings = document.createElement('div'); settings.id = 'settings';\n"\
+                    "settings.appendChild(img_idle); settings.appendChild(img_hovr);\n"\
+                    "document.body.appendChild(settings);\n"\
+                    "const t = document.getElementById(\"settings\");\n"
+                    "t.onclick = () => { t == null || location.assign('%3'); },\n"
+                    "t.onmouseenter = () => { t == null || t.classList.add(\"hovered\"); },\n"
+                    "t.onmouseleave = () => { t == null || t.classList.remove(\"hovered\"); }"\
+                "})()").arg(gear_idle.c_str()).arg(gear_hover.c_str()).arg(YAAGL_SETTINGS);
             qev->page()->runJavaScript(s, QWebEngineScript::ApplicationWorld);
 
             script.setName("setts");
             script.setSourceCode(s);
             script.setInjectionPoint(QWebEngineScript::DocumentReady);
             script.setRunsOnSubFrames(true);
-            script.setWorldId(QWebEngineScript::UserWorld);
+            script.setWorldId(QWebEngineScript::ApplicationWorld);
             qev->page()->scripts().insert(script);
         }
     }
@@ -150,16 +133,12 @@ namespace QAGL {
         qmw->setWindowTitle("Yet Another Anime Game Launcher");
 
         // Menu
-        qmnu = std::make_shared<QMenu>("Checks");
-        qd = std::shared_ptr<QAction>(qmnu->addAction("Devtools"));
-        qq = std::shared_ptr<QAction>(qmnu->addAction("Quit"));
-        QObject::connect(qd.get(), SIGNAL(triggered()), this, SLOT(devtools_clicked()));
-        QObject::connect(qq.get(), SIGNAL(triggered()), this, SLOT(quit_clicked()));
-        qmw->menuBar()->addMenu(qmnu.get());
+        qdk = std::make_shared<QShortcut>(QKeySequence(Qt::Key_F12), qmw.get());
+        QObject::connect(qdk.get(), SIGNAL(activated()), this, SLOT(devtools_clicked()));
 
         // Web core
         qev = std::make_shared<QWebEngineView>();
-        qev->setContextMenuPolicy(Qt::DefaultContextMenu);
+        qev->setContextMenuPolicy(Qt::NoContextMenu);
         qev->setAcceptDrops(false);
         qev->setPage(new LandingWebEnginePage());
         inject_stylesheet();
@@ -189,9 +168,12 @@ QWebEnginePage * LandingWebEnginePage::createWindow(WebWindowType type) {
 }
 
 bool LandingWebEnginePage::acceptNavigationRequest(const QUrl & url, QWebEnginePage::NavigationType type, bool isMainFrame) {
-    if (type == QWebEnginePage::NavigationTypeLinkClicked) {
-        //qDebug() << url.toString();
-        QDesktopServices::openUrl(url);
+    if (type == QWebEnginePage::NavigationTypeLinkClicked || type == QWebEnginePage::NavigationTypeRedirect) {
+        if(url.toString().contains(YAAGL_SETTINGS)) {
+            qDebug() << "TODO: Settings";
+        } else {
+            QDesktopServices::openUrl(url);
+        }
         return false;
     }
     return true;
