@@ -33,7 +33,11 @@ add_executable(
         launcher/Splash.h
         launcher/util/Constants.h
         launcher/util/Locales.h
-        launcher/resources/SASSProcess.cpp launcher/resources/SASSProcess.h launcher/resources/gear_image.h)
+        launcher/resources/SASSProcess.cpp
+        launcher/resources/SASSProcess.h
+        launcher/resources/gear_image.h
+        launcher/resources/stylesheets.h
+)
 target_link_libraries(
     QAGL
         Qt5::Core

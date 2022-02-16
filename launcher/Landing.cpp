@@ -15,55 +15,65 @@
 #define YAAGL_SETTINGS "#yaagl-settings"
 
 namespace QAGL {
-    void Landing::devtools_clicked() {
-        if(!qdt) {
-            qdt = std::make_shared<QMainWindow>();
-            qdt->setFixedSize(1920,1080);
-            qevdt = std::make_shared<QWebEngineView>();
-            qev->page()->setInspectedPage(qev->page());
-            qev->page()->setDevToolsPage(qevdt->page());
-            qdt->setCentralWidget(qevdt.get());
+    void Landing::show_dev() {
+        if(!devTools_Window) {
+            devTools_Window = std::make_shared<QMainWindow>();
+            devTools_Window->setFixedSize(1920, 1080);
+            devTools_WebEngine = std::make_shared<QWebEngineView>();
+            launcher_WebEngine->page()->setInspectedPage(launcher_WebEngine->page());
+            launcher_WebEngine->page()->setDevToolsPage(devTools_WebEngine->page());
+            devTools_Window->setCentralWidget(devTools_WebEngine.get());
         }
-        qdt->show();
+        devTools_Window->show();
+    }
+
+    void Landing::background_set() {
+        QString back = background->object().find("data").value().toObject()
+                .find("adv").value().toObject()
+                .find("background").value().toString();
+        launcher_WebEngine->page()->runJavaScript(
+            "document.body.background = ('"+back+"');",
+            [this](const QVariant& var) {
+                networkRequest.reset();
+                launcher_Window->show();
+            }
+        );
     }
 
     // Final method after getting background URL, load up
     void Landing::background_req(QNetworkReply *reply) {
         background = std::make_shared<QJsonDocument>(QJsonDocument::fromJson(reply->readAll()));
-        QString back = background->object().find("data").value().toObject()
-                                           .find("adv").value().toObject()
-                                           .find("background").value().toString();
-        qev->page()->runJavaScript(
-            "document.body.background = ('"+back+"');",
-            [this](const QVariant& var) {
-                qnr.reset();
-                qmw->show();
-            }
-        );
+        background_set();
     }
 
     void Landing::runBackground() {
-        if(qnam == nullptr) {
-            qnam = std::make_shared<QNetworkAccessManager>();
-            QObject::connect(qnam.get(), SIGNAL(finished(QNetworkReply*)),
-                             this, SLOT(background_req(QNetworkReply*))
-            );
+        if(!background) {
+            if(networkLink == nullptr) {
+                networkLink = std::make_shared<QNetworkAccessManager>();
+                QObject::connect(networkLink.get(), SIGNAL(finished(QNetworkReply *)),
+                                 this, SLOT(background_req(QNetworkReply*))
+                );
+            }
+            networkRequest = std::make_shared<QNetworkRequest>(QUrl((backgroundUri + "en-us").c_str()));
+            networkLink->get(*networkRequest);
+            return;
         }
-        qnr = std::make_shared<QNetworkRequest>(QUrl((backgroundUri+"en-us").c_str()));
-        qnam->get(*qnr);
+        background_set();
     }
 
     void Landing::loaded(bool is) {
         if(is) {
-            qev->page()->runJavaScript(
+            launcher_WebEngine->page()->runJavaScript(
                 "document.getElementsByClassName('home')[0].clientWidth;",
                 [this](const QVariant& var) {
-                    qmw->setFixedWidth(var.toInt());
-                    qev->page()->runJavaScript(
+                    launcher_Window->setFixedWidth(var.toInt());
+                    launcher_WebEngine->page()->runJavaScript(
                         "document.getElementsByClassName('home')[0].clientHeight;",
                         [this](const QVariant& var) {
-                            qmw->setFixedHeight(var.toInt() + qmw->menuBar()->height());
-                            qmw->move(QGuiApplication::primaryScreen()->geometry().center() - qmw->rect().center());
+                            launcher_Window->setFixedHeight(var.toInt() + launcher_Window->menuBar()->height());
+                            launcher_Window->move(
+                                QGuiApplication::primaryScreen()->geometry().center() - launcher_Window->rect().center()
+                            );
                             runBackground();
                         }
                     );
@@ -73,8 +83,8 @@ namespace QAGL {
     }
 
     void Landing::inject_stylesheet() {
-        if( qev->page()->scripts().isEmpty() ||
-           qev->page()->scripts().findScript("cpp-sends-their-regards").isNull()
+        if(launcher_WebEngine->page()->scripts().isEmpty() ||
+           launcher_WebEngine->page()->scripts().findScript("cpp-sends-their-regards").isNull()
         ) {
             QWebEngineScript script;
             QString s = QString::fromLatin1(
@@ -84,20 +94,20 @@ namespace QAGL {
                     "document.head.appendChild(css);\n"\
                 "})()")
                 .arg("cpp-sends-their-regards").arg(SASSProcess(idx_sass.toStdString()).c_str());
-            qev->page()->runJavaScript(s, QWebEngineScript::ApplicationWorld);
+            launcher_WebEngine->page()->runJavaScript(s, QWebEngineScript::ApplicationWorld);
 
             script.setName("cpp-sends-their-regards");
             script.setSourceCode(s);
             script.setInjectionPoint(QWebEngineScript::DocumentReady);
             script.setRunsOnSubFrames(true);
             script.setWorldId(QWebEngineScript::ApplicationWorld);
-            qev->page()->scripts().insert(script);
+            launcher_WebEngine->page()->scripts().insert(script);
         }
     }
 
     void Landing::inject_settings() {
-        if( qev->page()->scripts().isEmpty() ||
-            qev->page()->scripts().findScript("setts").isNull()
+        if(launcher_WebEngine->page()->scripts().isEmpty() ||
+           launcher_WebEngine->page()->scripts().findScript("setts").isNull()
         ) {
             QWebEngineScript script;
             QString s = QString::fromLatin1(
@@ -114,39 +124,43 @@ namespace QAGL {
                     "t.onmouseenter = () => { t == null || t.classList.add(\"hovered\"); },\n"
                     "t.onmouseleave = () => { t == null || t.classList.remove(\"hovered\"); }"\
                 "})()").arg(gear_idle.c_str()).arg(gear_hover.c_str()).arg(YAAGL_SETTINGS);
-            qev->page()->runJavaScript(s, QWebEngineScript::ApplicationWorld);
+            launcher_WebEngine->page()->runJavaScript(s, QWebEngineScript::ApplicationWorld);
 
             script.setName("setts");
             script.setSourceCode(s);
             script.setInjectionPoint(QWebEngineScript::DocumentReady);
             script.setRunsOnSubFrames(true);
             script.setWorldId(QWebEngineScript::ApplicationWorld);
-            qev->page()->scripts().insert(script);
+            launcher_WebEngine->page()->scripts().insert(script);
         }
     }
 
     Landing::Landing(const QApplication &app) {
-        qmw = std::make_shared<QMainWindow>();
+        launcher_Window = std::make_shared<QMainWindow>();
 
         // defaults
-        qmw->setFixedSize(1280,720);
-        qmw->setWindowTitle("Yet Another Anime Game Launcher");
+        launcher_Window->setFixedSize(1280, 720);
+        launcher_Window->setWindowTitle("Yet Another Anime Game Launcher");
 
         // Menu
-        qdk = std::make_shared<QShortcut>(QKeySequence(Qt::Key_F12), qmw.get());
-        QObject::connect(qdk.get(), SIGNAL(activated()), this, SLOT(devtools_clicked()));
+        devTools_Combo = std::make_shared<QShortcut>(QKeySequence(Qt::Key_F12), launcher_Window.get());
+        QObject::connect(devTools_Combo.get(), SIGNAL(activated()),
+                         this, SLOT(show_dev())
+        );
 
         // Web core
-        qev = std::make_shared<QWebEngineView>();
-        qev->setContextMenuPolicy(Qt::NoContextMenu);
-        qev->setAcceptDrops(false);
-        qev->setPage(new LandingWebEnginePage());
+        launcher_WebEngine = std::make_shared<QWebEngineView>();
+        launcher_WebEngine->setContextMenuPolicy(Qt::NoContextMenu);
+        launcher_WebEngine->setAcceptDrops(false);
+        launcher_WebEngine->setPage(new LandingWebEnginePage());
         inject_stylesheet();
         inject_settings();
-        QObject::connect(qev.get(), SIGNAL(loadFinished(bool)), this, SLOT(loaded(bool)));
+        QObject::connect(launcher_WebEngine.get(), SIGNAL(loadFinished(bool)),
+                         this, SLOT(loaded(bool))
+        );
 
         // Add the web core to the window
-        qmw->setCentralWidget(qev.get());
+        launcher_Window->setCentralWidget(launcher_WebEngine.get());
     }
 
     QString Landing::generate_url() {
@@ -159,7 +173,7 @@ namespace QAGL {
     }
 
     void Landing::show(const QApplication &app) {
-        qev->load(QUrl(generate_url()));
+        launcher_WebEngine->load(QUrl(generate_url()));
     }
 }
 
@@ -167,7 +181,7 @@ QWebEnginePage * LandingWebEnginePage::createWindow(WebWindowType type) {
     return new LandingWebEnginePage();
 }
 
-bool LandingWebEnginePage::acceptNavigationRequest(const QUrl & url, QWebEnginePage::NavigationType type, bool isMainFrame) {
+bool LandingWebEnginePage::acceptNavigationRequest(const QUrl & url, QWebEnginePage::NavigationType type, bool) {
     if (type == QWebEnginePage::NavigationTypeLinkClicked || type == QWebEnginePage::NavigationTypeRedirect) {
         if(url.toString().contains(YAAGL_SETTINGS)) {
             qDebug() << "TODO: Settings";

@@ -13,28 +13,38 @@ namespace QAGL {
 Q_OBJECT
     public:
         explicit Landing(const QApplication &app);
-
         void show(const QApplication &app);
+
     public slots:
-        void devtools_clicked();
         void background_req(QNetworkReply *);
+        void show_dev();
         void loaded(bool);
 
     private:
         void inject_stylesheet();
         void inject_settings();
         void runBackground();
-        std::shared_ptr<QMainWindow> qmw;
-        std::shared_ptr<QMainWindow> qdt;
-        std::shared_ptr<QWebEngineView> qev;
-        std::shared_ptr<QWebEngineView> qevdt;
-        std::shared_ptr<QShortcut> qdk;
-        QString generate_url();
 
-        std::shared_ptr<QNetworkAccessManager> qnam;
-        std::shared_ptr<QNetworkRequest> qnr;
+        // Launcher Landing
+        std::shared_ptr<QMainWindow> launcher_Window;
+        std::shared_ptr<QWebEngineView> launcher_WebEngine;
 
+        // Webkit/Chromium Developer Console
+        std::shared_ptr<QMainWindow> devTools_Window;
+        std::shared_ptr<QWebEngineView> devTools_WebEngine;
+        std::shared_ptr<QShortcut> devTools_Combo;
+
+        // Network requests to our gaming overlords
+        std::shared_ptr<QNetworkAccessManager> networkLink;
+        std::shared_ptr<QNetworkRequest> networkRequest;
+
+        // JSON - Background Image data
         std::shared_ptr<QJsonDocument> background;
+
+        // Utilities
+        QString generate_url();
+        void background_set();
+
     };
 }
 
@@ -44,7 +54,7 @@ Q_OBJECT
 
 public:
     explicit LandingWebEnginePage(QObject* parent = 0) : QWebEnginePage(parent) { }
-    bool acceptNavigationRequest(const QUrl & url, QWebEnginePage::NavigationType type, bool isMainFrame) override;
+    bool acceptNavigationRequest(const QUrl & url, QWebEnginePage::NavigationType type, bool) override;
 
     QWebEnginePage *createWindow(WebWindowType type) override;
 };
