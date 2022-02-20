@@ -1,0 +1,6 @@
+[submodule "3rdParty/yaml-cpp"]
+	path = 3rdParty/yaml-cpp
+	url = git@github.com:jbeder/yaml-cpp.git
+[submodule "3rdParty/an-anime-game-launcher"]
+	path = 3rdParty/an-anime-game-launcher
+	url = https://gitlab.com/KRypt0n_/an-anime-game-launcher.git

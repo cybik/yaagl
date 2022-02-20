@@ -5,6 +5,7 @@
 #ifndef QAGL_SPLASH_H
 #define QAGL_SPLASH_H
 
+
 namespace QAGL {
     class Splash {
 

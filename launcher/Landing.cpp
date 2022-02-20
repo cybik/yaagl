@@ -3,6 +3,7 @@
 //
 
 #include "Landing.h"
+#include "about.h"
 #include "util/Constants.h"
 #include "resources/stylesheets.h"
 #include "resources/SASSProcess.h"
@@ -11,6 +12,8 @@
 #include <QVBoxLayout>
 #include <QWebEngineScript>
 #include <QShortcut>
+
+#include "Settings.h"
 
 #define YAAGL_SETTINGS "#yaagl-settings"
 
@@ -182,12 +185,14 @@ QWebEnginePage * LandingWebEnginePage::createWindow(WebWindowType type) {
 }
 
 bool LandingWebEnginePage::acceptNavigationRequest(const QUrl & url, QWebEnginePage::NavigationType type, bool) {
-    if (type == QWebEnginePage::NavigationTypeLinkClicked || type == QWebEnginePage::NavigationTypeRedirect) {
-        if(url.toString().contains(YAAGL_SETTINGS)) {
-            qDebug() << "TODO: Settings";
-        } else {
-            QDesktopServices::openUrl(url);
-        }
+    if (type == QWebEnginePage::NavigationTypeLinkClicked) {
+        QDesktopServices::openUrl(url);
+        return false;
+    } else if(type == QWebEnginePage::NavigationTypeRedirect && (url.toString().contains(YAAGL_SETTINGS))) {
+        qDebug() << "TODO: Settings";
+        //fakesettings = std::make_shared<QSettings>(new QSettings(QString(ORG_NAME), QString(ORG_DOMAIN), nullptr));
+        //fakesettings->setValue("mikkiku", 1);
+        (new QAGL::Settings());
         return false;
     }
     return true;

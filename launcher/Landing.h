@@ -57,5 +57,7 @@ public:
     bool acceptNavigationRequest(const QUrl & url, QWebEnginePage::NavigationType type, bool) override;
 
     QWebEnginePage *createWindow(WebWindowType type) override;
+private:
+    std::shared_ptr<QSettings> fakesettings;
 };
 #endif //QAGL_LANDING_H
