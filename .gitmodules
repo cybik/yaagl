@@ -4,3 +4,6 @@
 [submodule "3rdParty/an-anime-game-launcher"]
 	path = 3rdParty/an-anime-game-launcher
 	url = https://gitlab.com/KRypt0n_/an-anime-game-launcher.git
+[submodule "3rdParty/wribbon"]
+	path = 3rdParty/wribbon
+	url = https://github.com/wteamit/wribbon.git
