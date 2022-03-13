@@ -122,9 +122,9 @@ namespace QAGL {
                     "settings = document.createElement('div'); settings.id = 'settings';\n"\
                     "settings.appendChild(img_idle); settings.appendChild(img_hovr);\n"\
                     "document.body.appendChild(settings);\n"\
-                    "const t = document.getElementById(\"settings\");\n"
-                    "t.onclick = () => { t == null || location.assign('%3'); },\n"
-                    "t.onmouseenter = () => { t == null || t.classList.add(\"hovered\"); },\n"
+                    "const t = document.getElementById(\"settings\");\n"\
+                    "t.onclick = () => { t == null || location.assign('%3'); },\n"\
+                    "t.onmouseenter = () => { t == null || t.classList.add(\"hovered\"); },\n"\
                     "t.onmouseleave = () => { t == null || t.classList.remove(\"hovered\"); }"\
                 "})()").arg(gear_idle.c_str()).arg(gear_hover.c_str()).arg(YAAGL_SETTINGS);
             launcher_WebEngine->page()->runJavaScript(s, QWebEngineScript::ApplicationWorld);

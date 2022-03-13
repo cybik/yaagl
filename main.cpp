@@ -7,12 +7,15 @@
 using namespace QAGL;
 
 int main(int argc, char *argv[]) {
+    QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
     QApplication app(argc, argv);
+
     app.setApplicationName(APP_NAME_SHORT);
     app.setOrganizationName(ORG_DOMAIN);
     app.setOrganizationDomain(ORG_DOMAIN);
     app.setApplicationDisplayName(APP_NAME);
-    std::shared_ptr<Landing> landing = std::make_shared<Landing>(app);
+    std::unique_ptr<Landing> landing = std::make_unique<Landing>(app);
     landing->show(app);
     return QApplication::exec();
 }
