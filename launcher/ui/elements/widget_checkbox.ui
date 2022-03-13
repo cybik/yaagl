@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QLabel" name="lblLang">
+  <widget class="QLabel" name="lblCheckbox">
    <property name="geometry">
     <rect>
      <x>12</x>
@@ -26,7 +26,7 @@
     <string>Text</string>
    </property>
   </widget>
-  <widget class="QCheckBox" name="cbxInput">
+  <widget class="QCheckBox" name="cbxCheck">
    <property name="geometry">
     <rect>
      <x>610</x>

@@ -28,13 +28,9 @@ namespace QAGL {
             );
         }
         if(!settings_Window) {
-            //settings_Window = std::make_unique<WRibbon::MainWindow>(true);
             settings_Window = std::make_unique<QMainWindow>();
             settings_Window->setFixedSize(900, 600);
             settings_Window->setWindowTitle("Settings");
-            //settings_Window->setApplicationButtonText("About");
-            //QObject::connect(settings_Window->getApplicationButton(), SIGNAL(clicked()), this, SLOT(about_clicked()));
-            //settings_Window->m_ribbon->setFixedHeight(32);
             widget_main = std::make_unique<widget_baseline>();
             settings_Window->setCentralWidget(widget_main.get());
             widget_tabs = std::make_unique<widget_section>(widget_main.get());
@@ -42,7 +38,7 @@ namespace QAGL {
 
             add_general();
             add_enhancements();
-            //cat_Enhancements_Wine = add_runtimes();
+            add_wines();
             add_dxvks();
             add_shaders();
             add_environment();
@@ -51,33 +47,30 @@ namespace QAGL {
         settings_Window->show();
     }
     void Settings::add_general() {
-        general_page = std::make_unique<widget_page>();
-        common_tab_creation("General", general_page);
+        common_tab_creation(general_page = std::make_unique<page_general>());
     }
     void Settings::add_enhancements() {
-        enhancements_page = std::make_unique<widget_page>();
-        common_tab_creation("Enhancements", enhancements_page);
+        common_tab_creation(enhancements_page = std::make_unique<page_enhancements>());
+    }
+    void Settings::add_wines() {
+        common_tab_creation(wines_page = std::make_unique<page_wines>());
     }
     void Settings::add_dxvks() {
-        dxvks_page = std::make_unique<widget_page>();
-        common_tab_creation("DXVK", dxvks_page);
+        common_tab_creation(dxvks_page = std::make_unique<page_dxvks>());
     }
     void Settings::add_shaders() {
-        shaders_page = std::make_unique<widget_page>();
-        common_tab_creation("Shaders", shaders_page);
+        common_tab_creation(shaders_page = std::make_unique<page_shaders>());
     }
     void Settings::add_environment() {
-        envs_page = std::make_unique<widget_page>();
-        common_tab_creation("Environment", envs_page);
+        common_tab_creation(envs_page = std::make_unique<page_env>());
     }
     void Settings::add_misc() {
-        misc_page = std::make_unique<widget_page>();
-        common_tab_creation("Miscelaneous", misc_page);
+        common_tab_creation(misc_page = std::make_unique<page_misc>());
     }
 
-    void Settings::common_tab_creation(QString tab_name, const std::unique_ptr<widget_page>& page) {
-        widget_main->ui->listWidget->addItem(tab_name);
-        widget_tabs->ui->tbxTabs->addItem(page.get(), tab_name);
+    void Settings::common_tab_creation(const std::unique_ptr<IPage>& page) {
+        widget_main->ui->listWidget->addItem(page->getPageName());
+        widget_tabs->ui->tbxTabs->addItem(page->getPage().get(), page->getPageName());
     }
 
 }
