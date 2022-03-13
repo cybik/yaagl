@@ -4,6 +4,13 @@
 [submodule "3rdParty/an-anime-game-launcher"]
 	path = 3rdParty/an-anime-game-launcher
 	url = https://gitlab.com/KRypt0n_/an-anime-game-launcher.git
+        branch = 2.2.1
 [submodule "3rdParty/wribbon"]
 	path = 3rdParty/wribbon
 	url = https://github.com/wteamit/wribbon.git
+[submodule "3rdParty/qt-ribbon"]
+	path = 3rdParty/qt-ribbon
+	url = https://github.com/nedrysoft/qt-ribbon.git
+[submodule "3rdParty/SettingsDialog"]
+	path = 3rdParty/SettingsDialog
+	url = https://github.com/nedrysoft/SettingsDialog.git
