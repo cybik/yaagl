@@ -1,13 +1,25 @@
 cmake_minimum_required(VERSION 3.21)
-project(QAGL)
+project(QAGL LANGUAGES CXX)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 add_subdirectory("${PROJECT_SOURCE_DIR}/3rdParty/yaml-cpp")
 
+
+find_package(QT
+    NAMES
+        Qt5
+    COMPONENTS
+        Widgets
+    REQUIRED
+)
 find_package(Qt5
     COMPONENTS
         Core
@@ -22,6 +34,7 @@ find_package(Qt5
 include_directories(
     AFTER
         "${PROJECT_SOURCE_DIR}/3rdParty/libsass/include"
+        "${PROJECT_SOURCE_DIR}/3rdParty/wribbon/src"
 )
 
 # hi https://dev.my-gate.net/2021/08/04/understanding-rpath-with-cmake/
@@ -52,7 +65,14 @@ add_executable(
         launcher/resources/SASSProcess.h
         launcher/resources/gear_image.h
         launcher/resources/stylesheets.h
-        launcher/about.h)
+        launcher/about.h
+
+        launcher/ui/widget_baseline.cpp launcher/ui/widget_baseline.h launcher/ui/widget_baseline.ui
+        launcher/ui/widget_page.cpp launcher/ui/widget_section.h  launcher/ui/widget_section.ui
+        launcher/ui/elements/widget_page.cpp      launcher/ui/elements/widget_page.h      launcher/ui/elements/widget_page.ui
+        launcher/ui/elements/widget_combo.cpp     launcher/ui/elements/widget_combo.h     launcher/ui/elements/widget_combo.ui
+        launcher/ui/elements/widget_checkbox.cpp  launcher/ui/elements/widget_checkbox.h  launcher/ui/elements/widget_checkbox.ui
+)
 
 target_link_libraries(
     QAGL
