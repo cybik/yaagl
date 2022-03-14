@@ -54,10 +54,12 @@ Q_OBJECT
 
 public:
     explicit LandingWebEnginePage(QObject* parent = 0) : QWebEnginePage(parent) { }
+    LandingWebEnginePage *setParentWindow(std::shared_ptr<QMainWindow> ptr);
     bool acceptNavigationRequest(const QUrl & url, QWebEnginePage::NavigationType type, bool) override;
 
     QWebEnginePage *createWindow(WebWindowType type) override;
 private:
     std::shared_ptr<QSettings> fakesettings;
+    std::shared_ptr<QMainWindow> _parent;
 };
 #endif //QAGL_LANDING_H

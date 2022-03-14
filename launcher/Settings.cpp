@@ -44,6 +44,10 @@ namespace QAGL {
             add_environment();
             add_misc();
         }
+        settings_Window->setWindowModality(Qt::ApplicationModal);
+    }
+    void Settings::show(std::shared_ptr<QMainWindow> ptr) {
+        //settings_Window->setParent(ptr.get());
         settings_Window->show();
     }
     void Settings::add_general() {

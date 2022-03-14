@@ -10,6 +10,7 @@
 #include "../elements/widget_page.h"
 #include "../elements/widget_combo.h"
 #include "../elements/widget_checkbox.h"
+#include "../elements/widget_set_section.h"
 
 class IPage {
 public:

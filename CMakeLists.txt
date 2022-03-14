@@ -67,11 +67,12 @@ add_executable(
         launcher/resources/stylesheets.h
         launcher/about.h
 
-        launcher/ui/widget_baseline.cpp           launcher/ui/widget_baseline.h           launcher/ui/widget_baseline.ui
-        launcher/ui/widget_section.cpp            launcher/ui/widget_section.h            launcher/ui/widget_section.ui
-        launcher/ui/elements/widget_page.cpp      launcher/ui/elements/widget_page.h      launcher/ui/elements/widget_page.ui
-        launcher/ui/elements/widget_combo.cpp     launcher/ui/elements/widget_combo.h     launcher/ui/elements/widget_combo.ui
-        launcher/ui/elements/widget_checkbox.cpp  launcher/ui/elements/widget_checkbox.h  launcher/ui/elements/widget_checkbox.ui
+        launcher/ui/widget_baseline.cpp              launcher/ui/widget_baseline.h              launcher/ui/widget_baseline.ui
+        launcher/ui/widget_section.cpp               launcher/ui/widget_section.h               launcher/ui/widget_section.ui
+        launcher/ui/elements/widget_page.cpp         launcher/ui/elements/widget_page.h         launcher/ui/elements/widget_page.ui
+        launcher/ui/elements/widget_combo.cpp        launcher/ui/elements/widget_combo.h        launcher/ui/elements/widget_combo.ui
+        launcher/ui/elements/widget_checkbox.cpp     launcher/ui/elements/widget_checkbox.h     launcher/ui/elements/widget_checkbox.ui
+        launcher/ui/elements/widget_set_section.cpp  launcher/ui/elements/widget_set_section.h  launcher/ui/elements/widget_set_section.ui
         launcher/ui/pages/IPage.h
         launcher/ui/pages/page_general.h launcher/ui/pages/page_general.cpp
         launcher/ui/pages/page_enhancements.cpp launcher/ui/pages/page_enhancements.h

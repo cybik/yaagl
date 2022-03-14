@@ -155,7 +155,7 @@ namespace QAGL {
         launcher_WebEngine = std::make_shared<QWebEngineView>();
         launcher_WebEngine->setContextMenuPolicy(Qt::NoContextMenu);
         launcher_WebEngine->setAcceptDrops(false);
-        launcher_WebEngine->setPage(new LandingWebEnginePage());
+        launcher_WebEngine->setPage((new LandingWebEnginePage())->setParentWindow(launcher_Window));
         inject_stylesheet();
         inject_settings();
         QObject::connect(launcher_WebEngine.get(), SIGNAL(loadFinished(bool)),
@@ -192,8 +192,13 @@ bool LandingWebEnginePage::acceptNavigationRequest(const QUrl & url, QWebEngineP
         qDebug() << "TODO: Settings";
         //fakesettings = std::make_shared<QSettings>(new QSettings(QString(ORG_NAME), QString(ORG_DOMAIN), nullptr));
         //fakesettings->setValue("mikkiku", 1);
-        (new QAGL::Settings());
+        (new QAGL::Settings())->show(_parent);
         return false;
     }
     return true;
+}
+
+LandingWebEnginePage* LandingWebEnginePage::setParentWindow(std::shared_ptr<QMainWindow> ptr) {
+    _parent = ptr;
+    return this;
 }

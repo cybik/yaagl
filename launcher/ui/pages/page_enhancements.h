@@ -17,6 +17,10 @@ public:
 protected:
     std::shared_ptr<widget_page> enh_page;
 
+    std::unique_ptr<widget_combo> section_wine;
+    std::unique_ptr<widget_combo> section_game;
+    std::unique_ptr<widget_combo> section_launcher;
+
 };
 
 

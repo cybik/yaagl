@@ -28,6 +28,7 @@ namespace QAGL {
 Q_OBJECT
     public:
         explicit Settings();
+        void show(std::shared_ptr<QMainWindow> ptr);
     public slots:
         void about_clicked();
     private:
@@ -46,12 +47,12 @@ Q_OBJECT
         std::unique_ptr<widget_baseline> widget_main;
         std::unique_ptr<widget_section> widget_tabs;
 
+        std::unique_ptr<IPage> general_page;
+        std::unique_ptr<IPage> enhancements_page;
         std::unique_ptr<IPage> wines_page;
         std::unique_ptr<IPage> dxvks_page;
-        std::unique_ptr<IPage> enhancements_page;
-        std::unique_ptr<IPage> envs_page;
-        std::unique_ptr<IPage> general_page;
         std::unique_ptr<IPage> shaders_page;
+        std::unique_ptr<IPage> envs_page;
         std::unique_ptr<IPage> misc_page;
 
     };
