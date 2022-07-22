@@ -81,7 +81,7 @@ add_executable(
         launcher/ui/pages/page_shaders.cpp launcher/ui/pages/page_shaders.h
         launcher/ui/pages/page_env.cpp launcher/ui/pages/page_env.h
         launcher/ui/pages/page_misc.cpp launcher/ui/pages/page_misc.h
-)
+        launcher/ui/qml/qml_settings.cpp launcher/ui/qml/qml_settings.h)
 
 target_link_libraries(
     QAGL

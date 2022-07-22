@@ -17,6 +17,8 @@
 
 #define YAAGL_SETTINGS "#yaagl-settings"
 
+#include "ui/qml/qml_settings.h"
+
 namespace QAGL {
     void Landing::show_dev() {
         if(!devTools_Window) {
@@ -73,7 +75,7 @@ namespace QAGL {
                     launcher_WebEngine->page()->runJavaScript(
                         "document.getElementsByClassName('home')[0].clientHeight;",
                         [this](const QVariant& var) {
-                            launcher_Window->setFixedHeight(var.toInt() + launcher_Window->menuBar()->height());
+                            launcher_Window->setFixedHeight(var.toInt());
                             launcher_Window->move(
                                 QGuiApplication::primaryScreen()->geometry().center() - launcher_Window->rect().center()
                             );
@@ -142,7 +144,7 @@ namespace QAGL {
         launcher_Window = std::make_shared<QMainWindow>();
 
         // defaults
-        launcher_Window->setFixedSize(1280, 720);
+        launcher_Window->setFixedSize(1280, 720 - QApplication::style()->pixelMetric(QStyle::PM_TitleBarHeight));
         launcher_Window->setWindowTitle("Yet Another Anime Game Launcher");
 
         // Menu
@@ -192,7 +194,8 @@ bool LandingWebEnginePage::acceptNavigationRequest(const QUrl & url, QWebEngineP
         qDebug() << "TODO: Settings";
         //fakesettings = std::make_shared<QSettings>(new QSettings(QString(ORG_NAME), QString(ORG_DOMAIN), nullptr));
         //fakesettings->setValue("mikkiku", 1);
-        (new QAGL::Settings())->show(_parent);
+        //(new QAGL::Settings())->show(_parent);
+        (new Settings_QML())->show();
         return false;
     }
     return true;
