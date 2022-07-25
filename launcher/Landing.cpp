@@ -3,11 +3,9 @@
 //
 
 #include "Landing.h"
-#include "about.h"
 #include "util/Constants.h"
 #include "resources/stylesheets.h"
 #include "resources/SASSProcess.h"
-#include "resources/gear_image.h"
 
 #include <QVBoxLayout>
 #include <QWebEngineScript>
@@ -171,8 +169,9 @@ namespace QAGL {
     }
 
     void Landing::load_settings() {
-        if(settings == nullptr)
-            settings = std::make_shared<SettingsWindow>();
+        if(settings == nullptr) {
+            settings = std::make_shared<SettingsWindow>(launcher_Window.get());
+        }
         settings->show();
     }
 
@@ -198,7 +197,7 @@ namespace QAGL {
             QDesktopServices::openUrl(url);
             return false;
         } else if(type == QWebEnginePage::NavigationTypeRedirect && (url.toString().contains(YAAGL_SETTINGS))) {
-            qDebug() << "TODO: Settings";
+            qDebug() << "WIP: Settings";
             _parentSettings();
             return false;
         }

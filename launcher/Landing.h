@@ -5,6 +5,7 @@
 #ifndef QAGL_LANDING_H
 #define QAGL_LANDING_H
 
+#include "resources/gear_image.h"
 #include <QMainWindow>
 #include <QtWebEngineWidgets/QtWebEngineWidgets>
 

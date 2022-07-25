@@ -16,8 +16,9 @@
 
 class SettingsWindow {
 public:
-    SettingsWindow();
+    SettingsWindow(QWidget* parent = nullptr);
     void show();
+    std::shared_ptr<QMainWindow> getWidget();
 private:
 
     std::shared_ptr<Nedrysoft::Ribbon::RibbonWidget> setup();

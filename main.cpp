@@ -16,6 +16,9 @@ int main(int argc, char *argv[]) {
     app.setOrganizationDomain(ORG_DOMAIN);
     app.setApplicationDisplayName(APP_NAME);
     std::unique_ptr<Landing> landing = std::make_unique<Landing>(app);
+    QPixmap pix;
+    pix.loadFromData(QByteArray::fromBase64(qiqi_smol.toLocal8Bit(), QByteArray::Base64Encoding));
+    app.setWindowIcon(pix);
     landing->show(app);
     return QApplication::exec();
 }

@@ -4,8 +4,8 @@
 
 #include "SettingsWindow.h"
 
-SettingsWindow::SettingsWindow() {
-    _settingsWindow = std::make_shared<QMainWindow>();
+SettingsWindow::SettingsWindow(QWidget* parent) {
+    _settingsWindow = std::make_shared<QMainWindow>(parent);
     _settingsWindow->setWindowTitle("QAGL Settings");
 
     ri = std::make_shared<Nedrysoft::Ribbon::RibbonWidget>();
@@ -37,4 +37,8 @@ std::shared_ptr<QWebEngineView> SettingsWindow::setupGol() {
 
 void SettingsWindow::show() {
     _settingsWindow->show();
+}
+
+std::shared_ptr<QMainWindow> SettingsWindow::getWidget() {
+    return _settingsWindow;
 }
