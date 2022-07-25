@@ -14,3 +14,15 @@
 [submodule "3rdParty/SettingsDialog"]
 	path = 3rdParty/SettingsDialog
 	url = https://github.com/nedrysoft/SettingsDialog.git
+[submodule "3rdParty/nedrysoft/SettingsDialog"]
+	path = 3rdParty/nedrysoft/SettingsDialog
+	url = git@github.com:nedrysoft/SettingsDialog.git
+[submodule "3rdParty/nedrysoft/Ribbon"]
+	path = 3rdParty/nedrysoft/Ribbon
+	url = git@github.com:nedrysoft/qt-ribbon.git
+[submodule "3rdParty/nedrysoft/ThemeSupport"]
+	path = 3rdParty/nedrysoft/ThemeSupport
+	url = git@github.com:nedrysoft/ThemeSupport.git
+[submodule "3rdParty/nedrysoft/ComponentSystem"]
+	path = 3rdParty/nedrysoft/ComponentSystem
+	url = git@github.com:cybik/componentsystem.git

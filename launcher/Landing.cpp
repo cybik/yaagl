@@ -17,8 +17,6 @@
 
 #define YAAGL_SETTINGS "#yaagl-settings"
 
-#include "ui/qml/qml_settings.h"
-
 namespace QAGL {
     void Landing::show_dev() {
         if(!devTools_Window) {
@@ -157,7 +155,13 @@ namespace QAGL {
         launcher_WebEngine = std::make_shared<QWebEngineView>();
         launcher_WebEngine->setContextMenuPolicy(Qt::NoContextMenu);
         launcher_WebEngine->setAcceptDrops(false);
-        launcher_WebEngine->setPage((new LandingWebEnginePage())->setParentWindow(launcher_Window));
+        launcher_WebEngine->setPage(
+            (new LandingWebEnginePage())
+                ->setSettingsLambda([this]() {
+                    this->load_settings();
+                })
+                ->setParentWindow(launcher_Window)
+        );
         inject_stylesheet();
         inject_settings();
         QObject::connect(launcher_WebEngine.get(), SIGNAL(loadFinished(bool)),
@@ -166,6 +170,12 @@ namespace QAGL {
 
         // Add the web core to the window
         launcher_Window->setCentralWidget(launcher_WebEngine.get());
+    }
+
+    void Landing::load_settings() {
+        if(settings == nullptr)
+            settings = std::make_shared<SettingsWindow>();
+        settings->show();
     }
 
     QString Landing::generate_url() {
@@ -180,28 +190,30 @@ namespace QAGL {
     void Landing::show(const QApplication &app) {
         launcher_WebEngine->load(QUrl(generate_url()));
     }
-}
 
-QWebEnginePage * LandingWebEnginePage::createWindow(WebWindowType type) {
-    return new LandingWebEnginePage();
-}
-
-bool LandingWebEnginePage::acceptNavigationRequest(const QUrl & url, QWebEnginePage::NavigationType type, bool) {
-    if (type == QWebEnginePage::NavigationTypeLinkClicked) {
-        QDesktopServices::openUrl(url);
-        return false;
-    } else if(type == QWebEnginePage::NavigationTypeRedirect && (url.toString().contains(YAAGL_SETTINGS))) {
-        qDebug() << "TODO: Settings";
-        //fakesettings = std::make_shared<QSettings>(new QSettings(QString(ORG_NAME), QString(ORG_DOMAIN), nullptr));
-        //fakesettings->setValue("mikkiku", 1);
-        //(new QAGL::Settings())->show(_parent);
-        (new Settings_QML())->show();
-        return false;
+    QWebEnginePage * LandingWebEnginePage::createWindow(WebWindowType type) {
+        return new LandingWebEnginePage();
     }
-    return true;
-}
 
-LandingWebEnginePage* LandingWebEnginePage::setParentWindow(std::shared_ptr<QMainWindow> ptr) {
-    _parent = ptr;
-    return this;
+    bool LandingWebEnginePage::acceptNavigationRequest(const QUrl & url, QWebEnginePage::NavigationType type, bool) {
+        if (type == QWebEnginePage::NavigationTypeLinkClicked) {
+            QDesktopServices::openUrl(url);
+            return false;
+        } else if(type == QWebEnginePage::NavigationTypeRedirect && (url.toString().contains(YAAGL_SETTINGS))) {
+            qDebug() << "TODO: Settings";
+            _parentSettings();
+            return false;
+        }
+        return true;
+    }
+
+    LandingWebEnginePage* LandingWebEnginePage::setSettingsLambda(std::function<void()> lambda) {
+        _parentSettings = std::move(lambda);
+        return this;
+    }
+
+    LandingWebEnginePage* LandingWebEnginePage::setParentWindow(std::shared_ptr<QMainWindow> ptr) {
+        _parent = ptr;
+        return this;
+    }
 }
