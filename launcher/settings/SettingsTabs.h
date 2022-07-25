@@ -7,7 +7,6 @@
 
 #include "SettingsTabGeneral.h"
 #include "SettingsTabGame.h"
-#include "SettingsTabDiscord.h"
 #include "SettingsTabEnhancements.h"
 #include "SettingsTabRunner.h"
 #include "SettingsTabMore.h"
