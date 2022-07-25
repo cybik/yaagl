@@ -13,8 +13,6 @@
 #include <QWebEngineScript>
 #include <QShortcut>
 
-#include "Settings.h"
-
 #define YAAGL_SETTINGS "#yaagl-settings"
 
 namespace QAGL {

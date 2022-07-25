@@ -67,6 +67,7 @@ add_executable(
 
         launcher/resources/SASSProcess.cpp launcher/resources/SASSProcess.h
 
+        launcher/settings/SettingsTabs.h
         launcher/settings/SettingsWindow.cpp launcher/settings/SettingsWindow.h
         launcher/settings/SettingsTab.cpp launcher/settings/SettingsTab.h
         launcher/settings/SettingsTabGeneral.cpp launcher/settings/SettingsTabGeneral.h
@@ -74,7 +75,6 @@ add_executable(
         launcher/settings/SettingsTabRunner.cpp launcher/settings/SettingsTabRunner.h
         launcher/settings/SettingsTabMore.cpp launcher/settings/SettingsTabMore.h
         launcher/settings/SettingsTabGame.cpp launcher/settings/SettingsTabGame.h
-        #launcher/settings/SettingsTabDiscord.cpp launcher/settings/SettingsTabDiscord.h
         launcher/settings/util/SettingsGroup.cpp launcher/settings/util/SettingsGroup.h
         launcher/settings/util/SettingsCombo.cpp launcher/settings/util/SettingsCombo.h
         launcher/settings/util/SettingsControl.cpp launcher/settings/util/SettingsControl.h
