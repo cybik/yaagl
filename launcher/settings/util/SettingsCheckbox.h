@@ -5,7 +5,6 @@
 #ifndef QAGL_SETTINGSCHECK_H
 #define QAGL_SETTINGSCHECK_H
 
-#include <RibbonGroup>
 #include <RibbonCheckBox>
 #include <string>
 #include <QHBoxLayout>
@@ -16,10 +15,9 @@
 
 class SettingsCheckbox : public SettingsControl {
 public:
+    explicit SettingsCheckbox(std::string name);
     QLayout* getLayout() override;
-    SettingsCheckbox(std::string name);
-    std::shared_ptr<QGridLayout> _layout;
-    std::shared_ptr<QFormLayout> _formLayout;
+private:
     std::shared_ptr<Nedrysoft::Ribbon::RibbonCheckBox> _control;
 };
 

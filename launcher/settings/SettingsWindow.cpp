@@ -17,11 +17,10 @@ SettingsWindow::SettingsWindow() {
 
 std::shared_ptr<Nedrysoft::Ribbon::RibbonWidget> SettingsWindow::setup() {
     _tabGeneral = std::make_shared<SettingsTabGeneral>(ri);
-    _tabDiscord = std::make_shared<SettingsTabDiscord>(ri);
-    _tabEnhancements = std::make_shared<SettingsTabEnhancements>(ri);
 
     _tabGame = std::make_shared<SettingsTabGame>(ri);
     _tabRunner = std::make_shared<SettingsTabRunner>(ri);
+    _tabEnhancements = std::make_shared<SettingsTabEnhancements>(ri);
     _tabMore = std::make_shared<SettingsTabMore>(ri);
 
     ri->setFixedHeight(ri->height()+30);

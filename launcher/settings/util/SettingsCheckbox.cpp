@@ -4,16 +4,7 @@
 
 #include "SettingsCheckbox.h"
 
-SettingsCheckbox::SettingsCheckbox(std::string name) {
-    _layout = std::make_shared<QGridLayout>();
-    _layout->setSizeConstraint(QLayout::SetDefaultConstraint);
-    _layout->setObjectName((name+"_cbx_layout").c_str());
-
-    _formLayout = std::make_shared<QFormLayout>();
-    _formLayout->setSizeConstraint(QLayout::SetMinimumSize);
-    _formLayout->setVerticalSpacing(8);
-    _formLayout->setObjectName((name+"_cbx_cf_layout").c_str());
-
+SettingsCheckbox::SettingsCheckbox(std::string name) : SettingsControl(name){
     _control = std::make_shared<Nedrysoft::Ribbon::RibbonCheckBox>();
     _control->setText(name.c_str());
 

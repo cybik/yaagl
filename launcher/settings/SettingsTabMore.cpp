@@ -15,5 +15,5 @@ SettingsTabMore::SettingsTabMore(std::shared_ptr<Nedrysoft::Ribbon::RibbonWidget
     _tabLayout->addWidget(_moreShaders.get());
     _tabLayout->addWidget(_moreEnv.get());
 
-    ri->addTab(_tabWidget.get(), "More");
+    addTab(ri, "Advanced");
 }

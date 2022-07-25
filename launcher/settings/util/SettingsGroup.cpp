@@ -7,6 +7,8 @@
 SettingsGroup::SettingsGroup(std::string name) {
     _group = std::make_shared<Nedrysoft::Ribbon::RibbonGroup>();
     _group->setGroupName(name.c_str());
+    _group->setMinimumSize(0, 0);
+    _group->setSizePolicy(QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Preferred);
     _groupLayout = std::make_shared<QVBoxLayout>();
     _group->setLayout(_groupLayout.get());
 }

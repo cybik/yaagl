@@ -10,8 +10,7 @@
 #include <QWidget>
 #include <QHBoxLayout>
 
-#include "util/SettingsCombo.h"
-
+#include "util/SettingsControls.h"
 #include "util/SettingsGroup.h"
 
 class SettingsTabGeneral : public SettingsTab {
@@ -19,15 +18,26 @@ public:
     SettingsTabGeneral(std::shared_ptr<Nedrysoft::Ribbon::RibbonWidget> ri);
 private:
     void setupGeneralGroup();
-    void setupPatchGroup();
     std::shared_ptr<SettingsGroup> _general;
-    std::shared_ptr<SettingsGroup> _general2;
-
-    std::shared_ptr<SettingsCombo> _cbLang;
-    std::shared_ptr<SettingsCombo> _cbTheme;
 
     void setupLanguage();
+    std::shared_ptr<SettingsCombo> _cbLang;
     void setupTheme();
+    std::shared_ptr<SettingsCombo> _cbTheme;
+
+
+    void setupDiscordGroup();
+    std::shared_ptr<SettingsGroup> _discord;
+    void setupDiscord();
+    std::shared_ptr<SettingsCheckbox> _cbDiscordEnabled;
+
+    void setupDiscordTextOptionsGroup();
+    std::shared_ptr<SettingsGroup> _discordSettings;
+    void setupDiscordTextOptions();
+
+    void setupDiscordIconOptionsGroup();
+    std::shared_ptr<SettingsGroup> _discordIconSettings;
+    void setupDiscordIconOptions();
 };
 
 

@@ -18,14 +18,8 @@ class SettingsTabEnhancements : public SettingsTab {
 public:
     SettingsTabEnhancements(std::shared_ptr<Nedrysoft::Ribbon::RibbonWidget> ri);
 private:
-    std::shared_ptr<SettingsGroup> _enhWine;
-    std::shared_ptr<SettingsGroup> _enhGame;
-    std::shared_ptr<SettingsGroup> _enhLauncher;
-
     void setupWINEGroup();
-    void setupGameGroup();
-    void setupLauncherGroup();
-
+    std::shared_ptr<SettingsGroup> _enhWine;
     void setupHudCombo();
     std::shared_ptr<SettingsCombo> _cbHud;
     void setupWineSyncCombo();
@@ -34,6 +28,9 @@ private:
     std::shared_ptr<SettingsCheckbox> _cbFSR;
     void setupVirtualDesktopCb();
     std::shared_ptr<SettingsCheckbox> _cbVirDesk;
+
+    void setupGameGroup();
+    std::shared_ptr<SettingsGroup> _enhGame;
     void setupGameModeCb();
     std::shared_ptr<SettingsCheckbox> _cbGamemode;
     void setupBorderlessWindowCb();
@@ -43,6 +40,8 @@ private:
     void setupTerminalCb();
     std::shared_ptr<SettingsCheckbox> _cbTerm;
 
+    void setupLauncherGroup();
+    std::shared_ptr<SettingsGroup> _enhLauncher;
     void setupLauncherCombo();
     std::shared_ptr<SettingsCombo> _cbLauncherCombo;
 };

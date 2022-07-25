@@ -12,12 +12,31 @@
 #include <QWidget>
 #include <QHBoxLayout>
 
+#include "util/SettingsControls.h"
+#include "util/SettingsGroup.h"
+
+
 class SettingsTabGame : public SettingsTab {
 public:
     SettingsTabGame(std::shared_ptr<Nedrysoft::Ribbon::RibbonWidget> ri);
 private:
     std::shared_ptr<Nedrysoft::Ribbon::RibbonGroup> _setup;
-    std::shared_ptr<Nedrysoft::Ribbon::RibbonGroup> _misc;
+
+    void setupGeneralGroup();
+    std::shared_ptr<SettingsGroup> _general;
+    void setupGeneral();
+
+    void setupVoicePacksGroup();
+    std::shared_ptr<SettingsGroup> _voicepacks;
+    void setupVoicePacks();
+    std::shared_ptr<SettingsCheckbox> _cbEN;
+    std::shared_ptr<SettingsCheckbox> _cbJA;
+    std::shared_ptr<SettingsCheckbox> _cbKR;
+    std::shared_ptr<SettingsCheckbox> _cbZH;
+
+    void setupMiscGroup();
+    std::shared_ptr<SettingsGroup> _misc;
+    void setupMisc();
 };
 
 #endif //QAGL_SETTINGSTABGAME_H

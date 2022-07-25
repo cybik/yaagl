@@ -5,7 +5,6 @@
 #ifndef QAGL_SETTINGSCOMBO_H
 #define QAGL_SETTINGSCOMBO_H
 
-#include <RibbonGroup>
 #include <RibbonComboBox>
 #include <string>
 #include <QHBoxLayout>
@@ -16,12 +15,11 @@
 
 class SettingsCombo : public SettingsControl {
 public:
+    explicit SettingsCombo(std::string name);
     QLayout* getLayout() override;
-    SettingsCombo(std::string name);
     void addChoice(const char* choice);
     void addChoices(int count, ...);
-    std::shared_ptr<QGridLayout> _layout;
-    std::shared_ptr<QFormLayout> _formLayout;
+private:
     std::shared_ptr<Nedrysoft::Ribbon::RibbonComboBox> _control;
 };
 

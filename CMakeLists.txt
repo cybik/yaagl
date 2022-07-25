@@ -52,20 +52,20 @@ set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
 # which point to directories outside the build tree to the install RPATH
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 
+
 add_executable(
     QAGL
         main.cpp
-        launcher/Landing.cpp
-        launcher/Landing.h
-        launcher/Splash.cpp
-        launcher/Splash.h
-        launcher/util/Constants.h
-        launcher/util/Locales.h
-        launcher/resources/SASSProcess.cpp
-        launcher/resources/SASSProcess.h
         launcher/resources/gear_image.h
         launcher/resources/stylesheets.h
+        launcher/util/Locales.h
+        launcher/util/Constants.h
         launcher/about.h
+
+        launcher/Landing.cpp launcher/Landing.h
+        launcher/Splash.cpp launcher/Splash.h
+
+        launcher/resources/SASSProcess.cpp launcher/resources/SASSProcess.h
 
         launcher/settings/SettingsWindow.cpp launcher/settings/SettingsWindow.h
         launcher/settings/SettingsTab.cpp launcher/settings/SettingsTab.h
@@ -74,9 +74,10 @@ add_executable(
         launcher/settings/SettingsTabRunner.cpp launcher/settings/SettingsTabRunner.h
         launcher/settings/SettingsTabMore.cpp launcher/settings/SettingsTabMore.h
         launcher/settings/SettingsTabGame.cpp launcher/settings/SettingsTabGame.h
-        launcher/settings/SettingsTabDiscord.cpp launcher/settings/SettingsTabDiscord.h
+        #launcher/settings/SettingsTabDiscord.cpp launcher/settings/SettingsTabDiscord.h
         launcher/settings/util/SettingsGroup.cpp launcher/settings/util/SettingsGroup.h
         launcher/settings/util/SettingsCombo.cpp launcher/settings/util/SettingsCombo.h
+        launcher/settings/util/SettingsControl.cpp launcher/settings/util/SettingsControl.h
         launcher/settings/util/SettingsCheckbox.cpp launcher/settings/util/SettingsCheckbox.h
         launcher/settings/util/SettingsControl.h launcher/settings/util/SettingsControls.h
 )

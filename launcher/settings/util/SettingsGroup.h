@@ -13,7 +13,7 @@
 
 class SettingsGroup {
 public:
-    SettingsGroup(std::string);
+    explicit SettingsGroup(std::string);
     QWidget* getWidget();
     void addControl(std::shared_ptr<SettingsControl>);
 private:

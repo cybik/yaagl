@@ -12,12 +12,13 @@ SettingsTabEnhancements::SettingsTabEnhancements(std::shared_ptr<Nedrysoft::Ribb
     setupGameGroup();
     setupLauncherGroup();
 
-    ri->addTab(_tabWidget.get(), "Enhancements");
+    addTab(ri, "Enhancements");
 }
 
 void SettingsTabEnhancements::setupWINEGroup() {
     _enhWine = std::make_shared<SettingsGroup>("WINE");
     _tabLayout->addWidget(_enhWine->getWidget());
+
     setupHudCombo();
     setupWineSyncCombo();
     setupAmdFSRCb();

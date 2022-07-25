@@ -16,5 +16,5 @@ SettingsTabRunner::SettingsTabRunner(std::shared_ptr<Nedrysoft::Ribbon::RibbonWi
     _tabLayout->addWidget(_runWINE.get());
     _tabLayout->addWidget(_runDXVK.get());
 
-    ri->addTab(_tabWidget.get(), "Runner");
+    addTab(ri, "Runner");
 }

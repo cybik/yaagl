@@ -4,16 +4,7 @@
 
 #include "SettingsCombo.h"
 
-SettingsCombo::SettingsCombo(std::string name) {
-    _layout = std::make_shared<QGridLayout>();
-    _layout->setSizeConstraint(QLayout::SetDefaultConstraint);
-    _layout->setObjectName((name + "_cb_layout").c_str());
-
-    _formLayout = std::make_shared<QFormLayout>();
-    _formLayout->setSizeConstraint(QLayout::SetMinimumSize);
-    _formLayout->setVerticalSpacing(8);
-    _formLayout->setObjectName((name + "_cb_cf_layout").c_str());
-
+SettingsCombo::SettingsCombo(std::string name) : SettingsControl(name) {
     _control = std::make_shared<Nedrysoft::Ribbon::RibbonComboBox>();
     _formLayout->addRow(name.c_str(), _control.get());
 

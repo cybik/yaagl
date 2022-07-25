@@ -13,5 +13,5 @@ SettingsTabDiscord::SettingsTabDiscord(std::shared_ptr<Nedrysoft::Ribbon::Ribbon
 
     _tabLayout->addWidget(_setup.get());
 
-    ri->addTab(_tabWidget.get(), "Discord");
+    addTab(ri, "Discord");
 }
