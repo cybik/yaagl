@@ -82,24 +82,6 @@ add_executable(
 )
 
 
-#launcher/Settings.cpp
-#launcher/Settings.h
-#launcher/ui/widget_baseline.cpp              launcher/ui/widget_baseline.h              launcher/ui/widget_baseline.ui
-#launcher/ui/widget_section.cpp               launcher/ui/widget_section.h               launcher/ui/widget_section.ui
-#launcher/ui/elements/widget_page.cpp         launcher/ui/elements/widget_page.h         launcher/ui/elements/widget_page.ui
-#launcher/ui/elements/widget_combo.cpp        launcher/ui/elements/widget_combo.h        launcher/ui/elements/widget_combo.ui
-#launcher/ui/elements/widget_checkbox.cpp     launcher/ui/elements/widget_checkbox.h     launcher/ui/elements/widget_checkbox.ui
-#launcher/ui/elements/widget_set_section.cpp  launcher/ui/elements/widget_set_section.h  launcher/ui/elements/widget_set_section.ui
-#launcher/ui/pages/IPage.h
-#launcher/ui/pages/page_general.h launcher/ui/pages/page_general.cpp
-#launcher/ui/pages/page_enhancements.cpp launcher/ui/pages/page_enhancements.h
-#launcher/ui/pages/page_wines.cpp launcher/ui/pages/page_wines.h
-#launcher/ui/pages/page_dxvks.cpp launcher/ui/pages/page_dxvks.h
-#launcher/ui/pages/page_shaders.cpp launcher/ui/pages/page_shaders.h
-#launcher/ui/pages/page_env.cpp launcher/ui/pages/page_env.h
-#launcher/ui/pages/page_misc.cpp launcher/ui/pages/page_misc.h
-#launcher/ui/qml/qml_settings.cpp launcher/ui/qml/qml_settings.h
-
 target_link_libraries(
     QAGL
         yaml-cpp
