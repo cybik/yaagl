@@ -18,10 +18,11 @@ SettingsTabGeneral::SettingsTabGeneral(std::shared_ptr<Nedrysoft::Ribbon::Ribbon
 
 void SettingsTabGeneral::setupGeneralGroup() {
     _general = std::make_shared<SettingsGroup>("Launcher");
-    _tabLayout->addWidget(_general->getWidget());
 
     setupLanguage();
     setupTheme();
+
+    _tabLayout->addWidget(_general->getWidget());
 }
 
 
@@ -44,9 +45,10 @@ void SettingsTabGeneral::setupTheme() {
 
 void SettingsTabGeneral::setupDiscordGroup() {
     _discord = std::make_shared<SettingsGroup>("Discord");
-    _tabLayout->addWidget(_discord->getWidget());
 
     setupDiscord();
+
+    _tabLayout->addWidget(_discord->getWidget());
 }
 
 void SettingsTabGeneral::setupDiscord() {
@@ -56,10 +58,11 @@ void SettingsTabGeneral::setupDiscord() {
 
 void SettingsTabGeneral::setupDiscordTextOptionsGroup() {
     _discordSettings = std::make_shared<SettingsGroup>("Discord");
-    _tabLayout->addWidget(_discordSettings->getWidget());
-    _discordSettings->getWidget()->setVisible(false);
 
     setupDiscordTextOptions();
+    _discordSettings->getWidget()->setVisible(false);
+
+    _tabLayout->addWidget(_discordSettings->getWidget());
 }
 
 void SettingsTabGeneral::setupDiscordTextOptions() {
@@ -68,10 +71,11 @@ void SettingsTabGeneral::setupDiscordTextOptions() {
 
 void SettingsTabGeneral::setupDiscordIconOptionsGroup() {
     _discordIconSettings = std::make_shared<SettingsGroup>("Discord Icons");
-    _tabLayout->addWidget(_discordIconSettings->getWidget());
-    _discordIconSettings->getWidget()->setVisible(false);
 
     setupDiscordIconOptions();
+    _discordIconSettings->getWidget()->setVisible(false);
+
+    _tabLayout->addWidget(_discordIconSettings->getWidget());
 }
 
 void SettingsTabGeneral::setupDiscordIconOptions() {

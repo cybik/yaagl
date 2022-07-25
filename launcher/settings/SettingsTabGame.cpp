@@ -17,18 +17,19 @@ SettingsTabGame::SettingsTabGame(std::shared_ptr<Nedrysoft::Ribbon::RibbonWidget
 
 void SettingsTabGame::setupGeneralGroup() {
     _general = std::make_shared<SettingsGroup>("General");
-    _tabLayout->addWidget(_general->getWidget());
 
     setupGeneral();
+    _tabLayout->addWidget(_general->getWidget());
 }
 
 void SettingsTabGame::setupGeneral() { }
 
 void SettingsTabGame::setupVoicePacksGroup() {
     _voicepacks = std::make_shared<SettingsGroup>("Voice Packs");
-    _tabLayout->addWidget(_voicepacks->getWidget());
 
     setupVoicePacks();
+
+    _tabLayout->addWidget(_voicepacks->getWidget());
 }
 
 void SettingsTabGame::setupVoicePacks() {
@@ -47,9 +48,10 @@ void SettingsTabGame::setupVoicePacks() {
 
 void SettingsTabGame::setupMiscGroup() {
     _misc = std::make_shared<SettingsGroup>("Miscellaneous");
-    _tabLayout->addWidget(_misc->getWidget());
 
     setupGeneral();
+
+    _tabLayout->addWidget(_misc->getWidget());
 }
 
 void SettingsTabGame::setupMisc() { }

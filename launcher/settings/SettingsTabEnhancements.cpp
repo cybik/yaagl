@@ -17,12 +17,12 @@ SettingsTabEnhancements::SettingsTabEnhancements(std::shared_ptr<Nedrysoft::Ribb
 
 void SettingsTabEnhancements::setupWINEGroup() {
     _enhWine = std::make_shared<SettingsGroup>("WINE");
-    _tabLayout->addWidget(_enhWine->getWidget());
-
     setupHudCombo();
     setupWineSyncCombo();
     setupAmdFSRCb();
     setupVirtualDesktopCb();
+
+    _tabLayout->addWidget(_enhWine->getWidget());
 }
 
 void SettingsTabEnhancements::setupHudCombo() {
@@ -51,12 +51,11 @@ void SettingsTabEnhancements::setupVirtualDesktopCb() {
 
 void SettingsTabEnhancements::setupGameGroup() {
     _enhGame = std::make_shared<SettingsGroup>("Game");
-    _tabLayout->addWidget(_enhGame->getWidget());
-
     setupGameModeCb();
     setupBorderlessWindowCb();
     setupUnlocFPSCb();
     setupTerminalCb();
+    _tabLayout->addWidget(_enhGame->getWidget());
 }
 
 void SettingsTabEnhancements::setupGameModeCb() {
@@ -81,8 +80,8 @@ void SettingsTabEnhancements::setupTerminalCb() {
 
 void SettingsTabEnhancements::setupLauncherGroup() {
     _enhLauncher = std::make_shared<SettingsGroup>("Launcher");
-    _tabLayout->addWidget(_enhLauncher->getWidget());
     setupLauncherCombo();
+    _tabLayout->addWidget(_enhLauncher->getWidget());
 }
 
 void SettingsTabEnhancements::setupLauncherCombo() {

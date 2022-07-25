@@ -15,8 +15,13 @@ SettingsGroup::SettingsGroup(std::string name) {
 
 void SettingsGroup::addControl(std::shared_ptr<SettingsControl> cb) {
     _groupLayout->addLayout(cb->getLayout());
+    _control_count++;
 }
 
 QWidget* SettingsGroup::getWidget() {
+    if( _control_count < 4 && !stretched) {
+        _groupLayout->addStretch();
+        stretched = true;
+    }
     return _group.get();
 }

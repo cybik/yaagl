@@ -8,6 +8,7 @@
 #include <RibbonGroup>
 #include <string>
 #include <QVBoxLayout>
+#include <QSpacerItem>
 
 #include "SettingsControls.h"
 
@@ -19,6 +20,9 @@ public:
 private:
     std::shared_ptr<Nedrysoft::Ribbon::RibbonGroup> _group;
     std::shared_ptr<QVBoxLayout> _groupLayout;
+
+    bool stretched = false;
+    int _control_count = 0;
 };
 
 
