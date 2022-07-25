@@ -27,7 +27,6 @@ private:
 
     // meta-principle: a group is a widget hbox containing a bunch of ribbongroups?
     std::shared_ptr<SettingsTabGeneral> _tabGeneral;
-    std::shared_ptr<SettingsTabDiscord> _tabDiscord;
     std::shared_ptr<SettingsTabGame> _tabGame;
     std::shared_ptr<SettingsTabEnhancements> _tabEnhancements;
     std::shared_ptr<SettingsTabRunner> _tabRunner;
