@@ -19,12 +19,21 @@ public:
 private:
     void setupGeneralGroup();
     std::shared_ptr<SettingsGroup> _general;
-
     void setupLanguage();
     std::shared_ptr<SettingsCombo> _cbLang;
     void setupTheme();
     std::shared_ptr<SettingsCombo> _cbTheme;
 
+    void setupPatchGroup();
+    std::shared_ptr<SettingsGroup> _patch;
+    void setupPatchDesc();
+    std::shared_ptr<SettingsLabel> _cbPatchDesc;
+    void setupPatchInfo();
+    std::shared_ptr<SettingsLabel> _cbPatchInfo;
+    void setupPatchRevert();
+    std::shared_ptr<SettingsButton> _cbPatchRevert;
+    void setupPatchReapply();
+    std::shared_ptr<SettingsButton> _cbPatchReapply;
 
     void setupDiscordGroup();
     std::shared_ptr<SettingsGroup> _discord;

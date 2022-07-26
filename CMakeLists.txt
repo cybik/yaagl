@@ -76,6 +76,8 @@ add_executable(
         launcher/settings/SettingsTabMore.cpp launcher/settings/SettingsTabMore.h
         launcher/settings/SettingsTabGame.cpp launcher/settings/SettingsTabGame.h
         launcher/settings/util/SettingsGroup.cpp launcher/settings/util/SettingsGroup.h
+        launcher/settings/util/SettingsButton.cpp launcher/settings/util/SettingsButton.h
+        launcher/settings/util/SettingsLabel.cpp launcher/settings/util/SettingsLabel.h
         launcher/settings/util/SettingsCombo.cpp launcher/settings/util/SettingsCombo.h
         launcher/settings/util/SettingsControl.cpp launcher/settings/util/SettingsControl.h
         launcher/settings/util/SettingsCheckbox.cpp launcher/settings/util/SettingsCheckbox.h

@@ -6,6 +6,8 @@
 
 SettingsCombo::SettingsCombo(std::string name) : SettingsControl(name) {
     _control = std::make_shared<Nedrysoft::Ribbon::RibbonComboBox>();
+    _control->setSizePolicy(QSizePolicy(QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Minimum));
+
     _formLayout->addRow(name.c_str(), _control.get());
 
     _layout->addLayout(_formLayout->layout(), 0, 0);

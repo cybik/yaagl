@@ -9,6 +9,7 @@ SettingsTabGeneral::SettingsTabGeneral(std::shared_ptr<Nedrysoft::Ribbon::Ribbon
     _tabLayout = _setupRibbonPage(std::make_shared<QHBoxLayout>(_tabWidget.get()));
 
     setupGeneralGroup();
+    setupPatchGroup();
     setupDiscordGroup();
     setupDiscordTextOptionsGroup();
     setupDiscordIconOptionsGroup();
@@ -40,6 +41,42 @@ void SettingsTabGeneral::setupTheme() {
     _cbTheme = std::make_shared<SettingsCombo>("Theme");
     _cbTheme->addChoices(3, "System", "Dark", "Light");
     _general->addControl(_cbTheme);
+}
+
+
+void SettingsTabGeneral::setupPatchGroup() {
+    _patch = std::make_shared<SettingsGroup>("Patch Ops");
+
+    setupPatchDesc();
+    setupPatchInfo();
+    setupPatchRevert();
+    setupPatchReapply();
+
+    _tabLayout->addWidget(_patch->getWidget());
+}
+
+void SettingsTabGeneral::setupPatchDesc() {
+    _cbPatchDesc = std::make_shared<SettingsLabel>("Patch Version:");
+    _patch->addControl(_cbPatchDesc);
+}
+
+void SettingsTabGeneral::setupPatchInfo() {
+    _cbPatchInfo = std::make_shared<SettingsLabel>("Patch Info");
+    _cbPatchInfo->getControl()
+                ->setStyleSheet("QLabel { color : blue; }");
+    _cbPatchInfo->getControl()
+                ->setAlignment(Qt::AlignmentFlag::AlignRight);
+    _patch->addControl(_cbPatchInfo);
+}
+
+void SettingsTabGeneral::setupPatchRevert() {
+    _cbPatchRevert = std::make_shared<SettingsButton>("Revert Patch");
+    _patch->addControl(_cbPatchRevert);
+}
+
+void SettingsTabGeneral::setupPatchReapply() {
+    _cbPatchReapply = std::make_shared<SettingsButton>("Reapply Patch");
+    _patch->addControl(_cbPatchReapply);
 }
 
 
