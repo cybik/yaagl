@@ -13,11 +13,16 @@
 
 class SettingsControl {
 public:
-    explicit SettingsControl(std::string);
+    explicit SettingsControl(const QString&);
     virtual QLayout* getLayout() = 0;
+
+    void finalize();
 protected:
+    virtual void addToLayout() = 0;
     std::shared_ptr<QGridLayout> _layout;
     std::shared_ptr<QFormLayout> _formLayout;
+
+    QString _name;
 };
 
 #endif //QAGL_SETTINGSCONTROL_H

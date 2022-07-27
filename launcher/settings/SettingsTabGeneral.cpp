@@ -5,9 +5,6 @@
 #include "SettingsTabGeneral.h"
 
 SettingsTabGeneral::SettingsTabGeneral(std::shared_ptr<Nedrysoft::Ribbon::RibbonWidget> ri) : SettingsTab() {
-    _tabWidget = std::make_shared<QWidget>();
-    _tabLayout = _setupRibbonPage(std::make_shared<QHBoxLayout>(_tabWidget.get()));
-
     setupGeneralGroup();
     setupPatchGroup();
     setupDiscordGroup();

@@ -15,8 +15,10 @@
 
 class SettingsButton : public SettingsControl {
 public:
-    explicit SettingsButton(std::string name);
+    explicit SettingsButton(const QString& name);
     QLayout* getLayout() override;
+protected:
+    void addToLayout() override;
 private:
     std::shared_ptr<Nedrysoft::Ribbon::RibbonButton> _control;
 };

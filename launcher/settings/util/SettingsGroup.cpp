@@ -6,9 +6,9 @@
 
 #define MAX_WIDTH 140
 
-SettingsGroup::SettingsGroup(std::string name) {
+SettingsGroup::SettingsGroup(const QString& name) {
     _group = std::make_shared<Nedrysoft::Ribbon::RibbonGroup>();
-    _group->setGroupName(name.c_str());
+    _group->setGroupName(name);
     _group->setMinimumSize(MAX_WIDTH, 0);
     _group->setSizePolicy(QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Minimum);
     _groupLayout = std::make_shared<QVBoxLayout>();

@@ -14,7 +14,7 @@
 
 class SettingsTabMore : public SettingsTab {
 public:
-    SettingsTabMore(std::shared_ptr<Nedrysoft::Ribbon::RibbonWidget> ri);
+    explicit SettingsTabMore(std::shared_ptr<Nedrysoft::Ribbon::RibbonWidget> ri);
 private:
     std::shared_ptr<Nedrysoft::Ribbon::RibbonGroup> _moreShaders;
     std::shared_ptr<Nedrysoft::Ribbon::RibbonGroup> _moreEnv;

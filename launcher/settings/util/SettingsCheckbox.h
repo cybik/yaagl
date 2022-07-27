@@ -15,8 +15,10 @@
 
 class SettingsCheckbox : public SettingsControl {
 public:
-    explicit SettingsCheckbox(std::string name);
+    explicit SettingsCheckbox(const QString& name);
     QLayout* getLayout() override;
+protected:
+    void addToLayout() override;
 private:
     std::shared_ptr<Nedrysoft::Ribbon::RibbonCheckBox> _control;
 };

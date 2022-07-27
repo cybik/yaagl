@@ -4,13 +4,14 @@
 
 #include "SettingsCheckbox.h"
 
-SettingsCheckbox::SettingsCheckbox(std::string name) : SettingsControl(name){
+SettingsCheckbox::SettingsCheckbox(const QString& name) : SettingsControl(name){
     _control = std::make_shared<Nedrysoft::Ribbon::RibbonCheckBox>();
-    _control->setText(name.c_str());
+    _control->setText(name);
+    finalize();
+}
 
+void SettingsCheckbox::addToLayout() {
     _formLayout->addRow(_control.get());
-
-    _layout->addLayout(_formLayout->layout(), 0, 0);
 }
 
 QLayout* SettingsCheckbox::getLayout() {

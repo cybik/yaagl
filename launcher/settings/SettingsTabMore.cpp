@@ -3,10 +3,7 @@
 //
 
 #include "SettingsTabMore.h"
-SettingsTabMore::SettingsTabMore(std::shared_ptr<Nedrysoft::Ribbon::RibbonWidget> ri) {
-    _tabWidget = std::make_shared<QWidget>();
-    _tabLayout = _setupRibbonPage(std::make_shared<QHBoxLayout>(_tabWidget.get()));
-
+SettingsTabMore::SettingsTabMore(std::shared_ptr<Nedrysoft::Ribbon::RibbonWidget> ri) : SettingsTab() {
     _moreShaders = std::make_shared<Nedrysoft::Ribbon::RibbonGroup>();
     _moreShaders->setGroupName("Shaders");
     _moreEnv = std::make_shared<Nedrysoft::Ribbon::RibbonGroup>();

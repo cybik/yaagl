@@ -4,13 +4,18 @@
 
 #include "SettingsTab.h"
 
-void SettingsTab::addTab(std::shared_ptr<Nedrysoft::Ribbon::RibbonWidget> ri, std::string name) {
-    _tabLayout->addStretch();
-    ri->addTab(_tabWidget.get(), name.c_str());
+SettingsTab::SettingsTab() {
+    _setupRibbonPage();
 }
 
-std::shared_ptr<QHBoxLayout> SettingsTab::_setupRibbonPage(std::shared_ptr<QHBoxLayout> layout) {
-    layout->setSpacing(0);
-    layout->setContentsMargins(0,0,0,0);
-    return layout;
+void SettingsTab::addTab(std::shared_ptr<Nedrysoft::Ribbon::RibbonWidget> ri, const QString& name) {
+    _tabLayout->addStretch();
+    ri->addTab(_tabWidget.get(), name);
+}
+
+void SettingsTab::_setupRibbonPage() {
+    _tabWidget = std::make_shared<QWidget>();
+    _tabLayout = std::make_shared<QHBoxLayout>(_tabWidget.get());
+    _tabLayout->setSpacing(0);
+    _tabLayout->setContentsMargins(0,0,0,0);
 }

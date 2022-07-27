@@ -15,10 +15,12 @@
 
 class SettingsCombo : public SettingsControl {
 public:
-    explicit SettingsCombo(std::string name);
+    explicit SettingsCombo(const QString& name);
     QLayout* getLayout() override;
     void addChoice(const char* choice);
     void addChoices(int count, ...);
+protected:
+    void addToLayout() override;
 private:
     std::shared_ptr<Nedrysoft::Ribbon::RibbonComboBox> _control;
 };

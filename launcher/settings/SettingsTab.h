@@ -12,12 +12,13 @@
 
 class SettingsTab {
 public:
-    SettingsTab() = default;
+    SettingsTab();
 protected:
-    void addTab(std::shared_ptr<Nedrysoft::Ribbon::RibbonWidget>, std::string);
-    std::shared_ptr<QHBoxLayout> _setupRibbonPage(std::shared_ptr<QHBoxLayout> layout);
+    void addTab(std::shared_ptr<Nedrysoft::Ribbon::RibbonWidget>, const QString&);
     std::shared_ptr<QWidget> _tabWidget;
     std::shared_ptr<QHBoxLayout> _tabLayout;
+private:
+    void _setupRibbonPage();
 };
 
 

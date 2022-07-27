@@ -4,10 +4,7 @@
 
 #include "SettingsTabEnhancements.h"
 
-SettingsTabEnhancements::SettingsTabEnhancements(std::shared_ptr<Nedrysoft::Ribbon::RibbonWidget> ri) {
-    _tabWidget = std::make_shared<QWidget>();
-    _tabLayout = _setupRibbonPage(std::make_shared<QHBoxLayout>(_tabWidget.get()));
-
+SettingsTabEnhancements::SettingsTabEnhancements(std::shared_ptr<Nedrysoft::Ribbon::RibbonWidget> ri) : SettingsTab() {
     setupWINEGroup();
     setupGameGroup();
     setupLauncherGroup();

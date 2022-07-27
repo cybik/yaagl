@@ -15,9 +15,11 @@
 
 class SettingsLabel : public SettingsControl {
 public:
-    explicit SettingsLabel(std::string name);
+    explicit SettingsLabel(const QString& name);
     QLayout* getLayout() override;
     std::shared_ptr<QLabel> getControl() { return _control; }
+protected:
+    void addToLayout() override;
 private:
     std::shared_ptr<QLabel> _control;
 };

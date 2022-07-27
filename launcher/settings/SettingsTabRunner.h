@@ -13,7 +13,7 @@
 
 class SettingsTabRunner : public SettingsTab {
 public:
-    SettingsTabRunner(std::shared_ptr<Nedrysoft::Ribbon::RibbonWidget> ri);
+    explicit SettingsTabRunner(std::shared_ptr<Nedrysoft::Ribbon::RibbonWidget> ri);
 private:
     std::shared_ptr<Nedrysoft::Ribbon::RibbonGroup> _runWINE;
     std::shared_ptr<Nedrysoft::Ribbon::RibbonGroup> _runDXVK;

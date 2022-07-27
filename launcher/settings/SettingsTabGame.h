@@ -18,7 +18,7 @@
 
 class SettingsTabGame : public SettingsTab {
 public:
-    SettingsTabGame(std::shared_ptr<Nedrysoft::Ribbon::RibbonWidget> ri);
+    explicit SettingsTabGame(std::shared_ptr<Nedrysoft::Ribbon::RibbonWidget> ri);
 private:
     std::shared_ptr<Nedrysoft::Ribbon::RibbonGroup> _setup;
 

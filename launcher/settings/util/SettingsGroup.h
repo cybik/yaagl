@@ -14,7 +14,7 @@
 
 class SettingsGroup {
 public:
-    explicit SettingsGroup(std::string);
+    explicit SettingsGroup(const QString&);
     QWidget* getWidget();
     void addControl(std::shared_ptr<SettingsControl>);
 private:
