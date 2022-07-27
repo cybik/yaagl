@@ -14,6 +14,7 @@
 #include "SettingsControl.h"
 
 class SettingsLabel : public SettingsControl {
+Q_OBJECT
 public:
     explicit SettingsLabel(const QString& name);
     QLayout* getLayout() override;
