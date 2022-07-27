@@ -16,10 +16,14 @@
 #include "settings/SettingsWindow.h"
 
 namespace QAGL {
+    typedef enum {
+        Normal,
+        Unique_Window
+    } QAGL_App_Style;
     class Landing : public QObject {
 Q_OBJECT
     public:
-        explicit Landing(const QApplication &app);
+        explicit Landing(const QApplication &app, QAGL_App_Style style = QAGL_App_Style::Normal);
         void show(const QApplication &app);
 
     public slots:
@@ -57,6 +61,8 @@ Q_OBJECT
         // Utilities
         static QString generate_url();
         void background_set();
+
+        QAGL_App_Style _style = QAGL_App_Style::Normal;
     };
 
     class LandingWebEnginePage : public QWebEnginePage

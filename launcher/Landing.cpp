@@ -134,7 +134,7 @@ namespace QAGL {
         }
     }
 
-    Landing::Landing(const QApplication &app) {
+    Landing::Landing(const QApplication &app, QAGL::QAGL_App_Style style) {
         launcher_Window = std::make_shared<QMainWindow>();
 
         // defaults
@@ -167,20 +167,25 @@ namespace QAGL {
         // Add the web core to the window
         launcher_WidgetStack = std::make_shared<QStackedWidget>(launcher_Window.get());
         launcher_WidgetStack->addWidget(launcher_WebEngine.get());
-        /*
-        if(settings == nullptr) {
-            settings = std::make_shared<SettingsWindow>(launcher_Window.get());
+        _style = style;
+        if(style == QAGL_App_Style::Unique_Window) {
+            if(settings == nullptr) {
+                settings = std::make_shared<SettingsWindow>(launcher_Window.get());
+            }
+            launcher_WidgetStack->addWidget(settings->getWidget().get());
         }
-        launcher_WidgetStack->addWidget(settings->getWidget().get());*/
         launcher_Window->setCentralWidget(launcher_WidgetStack.get());
     }
 
     void Landing::load_settings() {
-        if(settings == nullptr) {
-            settings = std::make_shared<SettingsWindow>(launcher_Window.get());
+        if(_style == QAGL_App_Style::Normal) {
+            if(settings == nullptr) {
+                settings = std::make_shared<SettingsWindow>(launcher_Window.get());
+            }
+            settings->show();
+        } else {
+            launcher_WidgetStack->setCurrentIndex(1);
         }
-        settings->show();
-        //launcher_WidgetStack->setCurrentIndex(1);
     }
 
     QString Landing::generate_url() {

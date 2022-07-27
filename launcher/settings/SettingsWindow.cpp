@@ -4,14 +4,13 @@
 
 #include "SettingsWindow.h"
 
-SettingsWindow::SettingsWindow(QWidget* parent) {
+SettingsWindow::SettingsWindow(bool usedAsWidget, QWidget* parent) {
     _settingsWindow = std::make_shared<QMainWindow>(parent);
     _settingsWindow->setWindowTitle("QAGL Settings");
 
     _settingsWindow->setFixedSize(800,580);
     _settingsWindow->setWindowModality(Qt::ApplicationModal);
 
-#if defined(dumbass)
     _settingsLayout = std::make_shared<QVBoxLayout>(parent);
     _settingsLayout->setContentsMargins(0,0,0,0);
     _settingsLayout->setSpacing(0);
@@ -20,10 +19,6 @@ SettingsWindow::SettingsWindow(QWidget* parent) {
     _settingsWidget = std::make_shared<QWidget>(parent);
     _settingsWidget->setLayout(_settingsLayout.get());
     _settingsWindow->setCentralWidget(_settingsWidget.get());
-#else
-    _settingsWindow->setMenuWidget(setup().get());
-    _settingsWindow->setCentralWidget(setupGol().get());
-#endif
 }
 
 std::shared_ptr<Nedrysoft::Ribbon::RibbonWidget> SettingsWindow::setup() {
