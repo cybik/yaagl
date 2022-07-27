@@ -7,6 +7,7 @@
 
 #include "resources/gear_image.h"
 #include <QMainWindow>
+#include <QStackedWidget>
 #include <QtWebEngineWidgets/QtWebEngineWidgets>
 
 #include <memory>
@@ -38,6 +39,7 @@ Q_OBJECT
 
         // Launcher Landing
         std::shared_ptr<QMainWindow> launcher_Window;
+        std::shared_ptr<QStackedWidget> launcher_WidgetStack;
         std::shared_ptr<QWebEngineView> launcher_WebEngine;
 
         // Webkit/Chromium Developer Console

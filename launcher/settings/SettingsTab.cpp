@@ -10,7 +10,7 @@ SettingsTab::SettingsTab() {
 
 void SettingsTab::addTab(std::shared_ptr<Nedrysoft::Ribbon::RibbonWidget> ri, const QString& name) {
     _tabLayout->addStretch();
-    ri->addTab(_tabWidget.get(), name);
+    _index = ri->addTab(_tabWidget.get(), name);
 }
 
 void SettingsTab::_setupRibbonPage() {
@@ -18,4 +18,8 @@ void SettingsTab::_setupRibbonPage() {
     _tabLayout = std::make_shared<QHBoxLayout>(_tabWidget.get());
     _tabLayout->setSpacing(0);
     _tabLayout->setContentsMargins(0,0,0,0);
+}
+
+void SettingsTab::trigger(std::shared_ptr<Nedrysoft::Ribbon::RibbonWidget> ri) {
+    ri->setCurrentIndex(_index);
 }

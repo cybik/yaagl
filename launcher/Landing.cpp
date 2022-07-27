@@ -165,7 +165,14 @@ namespace QAGL {
         );
 
         // Add the web core to the window
-        launcher_Window->setCentralWidget(launcher_WebEngine.get());
+        launcher_WidgetStack = std::make_shared<QStackedWidget>(launcher_Window.get());
+        launcher_WidgetStack->addWidget(launcher_WebEngine.get());
+        /*
+        if(settings == nullptr) {
+            settings = std::make_shared<SettingsWindow>(launcher_Window.get());
+        }
+        launcher_WidgetStack->addWidget(settings->getWidget().get());*/
+        launcher_Window->setCentralWidget(launcher_WidgetStack.get());
     }
 
     void Landing::load_settings() {
@@ -173,6 +180,7 @@ namespace QAGL {
             settings = std::make_shared<SettingsWindow>(launcher_Window.get());
         }
         settings->show();
+        //launcher_WidgetStack->setCurrentIndex(1);
     }
 
     QString Landing::generate_url() {

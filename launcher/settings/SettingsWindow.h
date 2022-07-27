@@ -14,16 +14,22 @@
 #include "SettingsTabs.h"
 #include <QtWebEngineWidgets/QtWebEngineWidgets>
 
+#define dumbass
+
 class SettingsWindow {
 public:
     SettingsWindow(QWidget* parent = nullptr);
     void show();
-    std::shared_ptr<QMainWindow> getWidget();
+    std::shared_ptr<QWidget> getWidget();
 private:
 
     std::shared_ptr<Nedrysoft::Ribbon::RibbonWidget> setup();
     std::shared_ptr<QWebEngineView> setupGol();
     std::shared_ptr<QMainWindow> _settingsWindow;
+#if defined(dumbass)
+    std::shared_ptr<QVBoxLayout> _settingsLayout;
+    std::shared_ptr<QWidget> _settingsWidget;
+#endif
     std::shared_ptr<Nedrysoft::Ribbon::RibbonWidget> ri;
 
     // meta-principle: a group is a widget hbox containing a bunch of ribbongroups?
