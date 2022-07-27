@@ -30,3 +30,15 @@ void SettingsCombo::addChoice(const char* choice) {
 QLayout* SettingsCombo::getLayout() {
     return _layout->layout();
 }
+
+void SettingsCombo::setupEventHandlers() {
+    // noop
+    connect(
+        _control.get(), SIGNAL(currentIndexChanged(int)),
+        this, SLOT(onIndexChanged(int))
+    );
+}
+
+void SettingsCombo::onIndexChanged(int newIndex) {
+
+}

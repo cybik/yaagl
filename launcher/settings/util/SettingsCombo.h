@@ -14,6 +14,7 @@
 #include "SettingsControl.h"
 
 class SettingsCombo : public SettingsControl {
+Q_OBJECT
 public:
     explicit SettingsCombo(const QString& name);
     QLayout* getLayout() override;
@@ -21,8 +22,11 @@ public:
     void addChoices(int count, ...);
 protected:
     void addToLayout() override;
+    void setupEventHandlers() override;
 private:
     std::shared_ptr<Nedrysoft::Ribbon::RibbonComboBox> _control;
+public slots:
+    void onIndexChanged(int);
 };
 
 

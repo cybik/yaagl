@@ -11,7 +11,8 @@
 #include <RibbonGroup>
 #include <memory>
 
-class SettingsControl {
+class SettingsControl : public QObject{
+Q_OBJECT
 public:
     explicit SettingsControl(const QString&);
     virtual QLayout* getLayout() = 0;
@@ -19,6 +20,7 @@ public:
     void finalize();
 protected:
     virtual void addToLayout() = 0;
+    virtual void setupEventHandlers() = 0;
     std::shared_ptr<QGridLayout> _layout;
     std::shared_ptr<QFormLayout> _formLayout;
 

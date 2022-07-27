@@ -14,13 +14,17 @@
 #include "SettingsControl.h"
 
 class SettingsButton : public SettingsControl {
+Q_OBJECT
 public:
     explicit SettingsButton(const QString& name);
     QLayout* getLayout() override;
 protected:
     void addToLayout() override;
+    void setupEventHandlers() override;
 private:
     std::shared_ptr<Nedrysoft::Ribbon::RibbonButton> _control;
+public slots:
+    void onClick(bool);
 };
 
 

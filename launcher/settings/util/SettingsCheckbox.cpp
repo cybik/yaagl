@@ -17,3 +17,14 @@ void SettingsCheckbox::addToLayout() {
 QLayout* SettingsCheckbox::getLayout() {
     return _layout->layout();
 }
+
+void SettingsCheckbox::setupEventHandlers() {
+    connect(
+        _control.get(), SIGNAL(stateChanged(int)),
+        this, SLOT(onStateChanged(int))
+    );
+}
+
+void SettingsCheckbox::onStateChanged(int newState) {
+
+}

@@ -17,3 +17,14 @@ void SettingsButton::addToLayout() {
 QLayout* SettingsButton::getLayout() {
     return _layout->layout();
 }
+
+void SettingsButton::setupEventHandlers() {
+    connect(
+        _control.get(), SIGNAL(clicked(bool)),
+         this, SLOT(onClick(bool))
+    );
+}
+
+void SettingsButton::onClick(bool isChecked) {
+
+}

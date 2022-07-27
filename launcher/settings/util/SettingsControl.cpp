@@ -19,4 +19,5 @@ SettingsControl::SettingsControl(const QString& name) {
 void SettingsControl::finalize() {
     addToLayout();
     _layout->addLayout(_formLayout->layout(), 0, 0);
+    setupEventHandlers();
 }

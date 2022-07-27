@@ -14,13 +14,17 @@
 #include "SettingsControl.h"
 
 class SettingsCheckbox : public SettingsControl {
+Q_OBJECT
 public:
     explicit SettingsCheckbox(const QString& name);
     QLayout* getLayout() override;
 protected:
     void addToLayout() override;
+    void setupEventHandlers() override;
 private:
     std::shared_ptr<Nedrysoft::Ribbon::RibbonCheckBox> _control;
+public slots:
+    void onStateChanged(int);
 };
 
 

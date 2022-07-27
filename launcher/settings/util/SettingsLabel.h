@@ -20,6 +20,7 @@ public:
     std::shared_ptr<QLabel> getControl() { return _control; }
 protected:
     void addToLayout() override;
+    void setupEventHandlers() override;
 private:
     std::shared_ptr<QLabel> _control;
 };

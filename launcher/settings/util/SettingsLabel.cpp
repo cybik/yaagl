@@ -18,3 +18,7 @@ void SettingsLabel::addToLayout() {
 QLayout* SettingsLabel::getLayout() {
     return _layout->layout();
 }
+
+void SettingsLabel::setupEventHandlers() {
+    // noop
+}
