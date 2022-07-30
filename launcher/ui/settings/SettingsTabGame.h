@@ -7,13 +7,13 @@
 
 
 #include "SettingsTab.h"
-#include <RibbonWidget>
-#include <RibbonGroup>
+#include "3rdParty/nedrysoft/Ribbon/include/RibbonWidget"
+#include "3rdParty/nedrysoft/Ribbon/include/RibbonGroup"
 #include <QWidget>
 #include <QHBoxLayout>
 
-#include "util/SettingsControls.h"
-#include "util/SettingsGroup.h"
+#include "launcher/ui/settings/util/SettingsControls.h"
+#include "launcher/ui/settings/util/SettingsGroup.h"
 
 
 class SettingsTabGame : public SettingsTab {

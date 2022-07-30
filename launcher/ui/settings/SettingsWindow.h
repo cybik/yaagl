@@ -5,8 +5,8 @@
 #ifndef QAGL_SETTINGSWINDOW_H
 #define QAGL_SETTINGSWINDOW_H
 
-#include <RibbonWidget>
-#include <RibbonGroup>
+#include "3rdParty/nedrysoft/Ribbon/include/RibbonWidget"
+#include "3rdParty/nedrysoft/Ribbon/include/RibbonGroup"
 #include <QMainWindow>
 #include <memory>
 #include <functional>

@@ -8,7 +8,7 @@
 #include <QLayout>
 #include <QFormLayout>
 #include <string>
-#include <RibbonGroup>
+#include "3rdParty/nedrysoft/Ribbon/include/RibbonGroup"
 #include <memory>
 
 class SettingsControl : public QObject{

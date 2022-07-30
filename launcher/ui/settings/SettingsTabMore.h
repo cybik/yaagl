@@ -6,8 +6,8 @@
 #define QAGL_SETTINGSTABMORE_H
 
 #include "SettingsTab.h"
-#include <RibbonWidget>
-#include <RibbonGroup>
+#include "3rdParty/nedrysoft/Ribbon/include/RibbonWidget"
+#include "3rdParty/nedrysoft/Ribbon/include/RibbonGroup"
 #include <QWidget>
 #include <QHBoxLayout>
 

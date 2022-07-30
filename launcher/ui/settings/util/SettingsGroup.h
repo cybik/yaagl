@@ -5,7 +5,7 @@
 #ifndef QAGL_SETTINGSGROUP_H
 #define QAGL_SETTINGSGROUP_H
 
-#include <RibbonGroup>
+#include "3rdParty/nedrysoft/Ribbon/include/RibbonGroup"
 #include <string>
 #include <QVBoxLayout>
 #include <QSpacerItem>

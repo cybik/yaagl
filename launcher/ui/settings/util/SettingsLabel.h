@@ -2,10 +2,10 @@
 // Created by cybik on 22-07-24.
 //
 
-#ifndef QAGL_SETTINGSBTN_H
-#define QAGL_SETTINGSBTN_H
+#ifndef QAGL_SETTINGSLABEL_H
+#define QAGL_SETTINGSLABEL_H
 
-#include <RibbonButton>
+#include "3rdParty/nedrysoft/Ribbon/include/RibbonCheckBox"
 #include <string>
 #include <QHBoxLayout>
 #include <QLabel>
@@ -13,18 +13,17 @@
 
 #include "SettingsControl.h"
 
-class SettingsButton : public SettingsControl {
+class SettingsLabel : public SettingsControl {
 Q_OBJECT
 public:
-    explicit SettingsButton(const QString& name);
+    explicit SettingsLabel(const QString& name);
     QLayout* getLayout() override;
+    std::shared_ptr<QLabel> getControl() { return _control; }
 protected:
     void addToLayout() override;
     void setupEventHandlers() override;
 private:
-    std::shared_ptr<Nedrysoft::Ribbon::RibbonButton> _control;
-public slots:
-    void onClick(bool);
+    std::shared_ptr<QLabel> _control;
 };
 
 

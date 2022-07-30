@@ -5,7 +5,7 @@
 #ifndef QAGL_SETTINGSCHECK_H
 #define QAGL_SETTINGSCHECK_H
 
-#include <RibbonCheckBox>
+#include "3rdParty/nedrysoft/Ribbon/include/RibbonCheckBox"
 #include <string>
 #include <QHBoxLayout>
 #include <QLabel>

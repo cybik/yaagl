@@ -8,7 +8,7 @@
 #include <QWidget>
 #include <QHBoxLayout>
 #include <memory>
-#include <RibbonWidget>
+#include "3rdParty/nedrysoft/Ribbon/include/RibbonWidget"
 
 class SettingsTab {
 public:

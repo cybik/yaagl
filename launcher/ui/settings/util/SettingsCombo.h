@@ -5,7 +5,7 @@
 #ifndef QAGL_SETTINGSCOMBO_H
 #define QAGL_SETTINGSCOMBO_H
 
-#include <RibbonComboBox>
+#include "3rdParty/nedrysoft/Ribbon/include/RibbonComboBox"
 #include <string>
 #include <QHBoxLayout>
 #include <QLabel>

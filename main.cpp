@@ -1,6 +1,6 @@
 #include <QApplication>
 
-#include "launcher/Landing.h"
+#include "launcher/ui/Landing.h"
 #include "launcher/about.h"
 
 #include <stdlib.h>

@@ -6,12 +6,12 @@
 #define QAGL_SETTINGSTABGENERAL_H
 
 #include "SettingsTab.h"
-#include <RibbonWidget>
+#include "3rdParty/nedrysoft/Ribbon/include/RibbonWidget"
 #include <QWidget>
 #include <QHBoxLayout>
 
-#include "util/SettingsControls.h"
-#include "util/SettingsGroup.h"
+#include "launcher/ui/settings/util/SettingsControls.h"
+#include "launcher/ui/settings/util/SettingsGroup.h"
 
 class SettingsTabGeneral : public SettingsTab {
 public:

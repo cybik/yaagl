@@ -56,32 +56,34 @@ set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 add_executable(
     QAGL
         main.cpp
-        launcher/resources/gear_image.h
-        launcher/resources/stylesheets.h
-        launcher/util/Locales.h
-        launcher/util/Constants.h
+
         launcher/about.h
 
-        launcher/Landing.cpp launcher/Landing.h
-        launcher/Splash.cpp launcher/Splash.h
-
+        launcher/resources/gear_image.h
+        launcher/resources/stylesheets.h
         launcher/resources/SASSProcess.cpp launcher/resources/SASSProcess.h
 
-        launcher/settings/SettingsTabs.h
-        launcher/settings/SettingsWindow.cpp launcher/settings/SettingsWindow.h
-        launcher/settings/SettingsTab.cpp launcher/settings/SettingsTab.h
-        launcher/settings/SettingsTabGeneral.cpp launcher/settings/SettingsTabGeneral.h
-        launcher/settings/SettingsTabEnhancements.cpp launcher/settings/SettingsTabEnhancements.h
-        launcher/settings/SettingsTabRunner.cpp launcher/settings/SettingsTabRunner.h
-        launcher/settings/SettingsTabMore.cpp launcher/settings/SettingsTabMore.h
-        launcher/settings/SettingsTabGame.cpp launcher/settings/SettingsTabGame.h
-        launcher/settings/util/SettingsGroup.cpp launcher/settings/util/SettingsGroup.h
-        launcher/settings/util/SettingsButton.cpp launcher/settings/util/SettingsButton.h
-        launcher/settings/util/SettingsLabel.cpp launcher/settings/util/SettingsLabel.h
-        launcher/settings/util/SettingsCombo.cpp launcher/settings/util/SettingsCombo.h
-        launcher/settings/util/SettingsControl.cpp launcher/settings/util/SettingsControl.h
-        launcher/settings/util/SettingsCheckbox.cpp launcher/settings/util/SettingsCheckbox.h
-        launcher/settings/util/SettingsControl.h launcher/settings/util/SettingsControls.h
+        launcher/util/Locales.h
+        launcher/util/Constants.h
+
+        launcher/ui/Landing.cpp launcher/ui/Landing.h
+        launcher/ui/Splash.cpp launcher/ui/Splash.h
+
+        launcher/ui/settings/SettingsTabs.h
+        launcher/ui/settings/SettingsWindow.cpp launcher/ui/settings/SettingsWindow.h
+        launcher/ui/settings/SettingsTab.cpp launcher/ui/settings/SettingsTab.h
+        launcher/ui/settings/SettingsTabGeneral.cpp launcher/ui/settings/SettingsTabGeneral.h
+        launcher/ui/settings/SettingsTabEnhancements.cpp launcher/ui/settings/SettingsTabEnhancements.h
+        launcher/ui/settings/SettingsTabRunner.cpp launcher/ui/settings/SettingsTabRunner.h
+        launcher/ui/settings/SettingsTabMore.cpp launcher/ui/settings/SettingsTabMore.h
+        launcher/ui/settings/SettingsTabGame.cpp launcher/ui/settings/SettingsTabGame.h
+        launcher/ui/settings/util/SettingsGroup.cpp launcher/ui/settings/util/SettingsGroup.h
+        launcher/ui/settings/util/SettingsButton.cpp launcher/ui/settings/util/SettingsButton.h
+        launcher/ui/settings/util/SettingsLabel.cpp launcher/ui/settings/util/SettingsLabel.h
+        launcher/ui/settings/util/SettingsCombo.cpp launcher/ui/settings/util/SettingsCombo.h
+        launcher/ui/settings/util/SettingsControl.cpp launcher/ui/settings/util/SettingsControl.h
+        launcher/ui/settings/util/SettingsCheckbox.cpp launcher/ui/settings/util/SettingsCheckbox.h
+        launcher/ui/settings/util/SettingsControl.h launcher/ui/settings/util/SettingsControls.h
 )
 
 

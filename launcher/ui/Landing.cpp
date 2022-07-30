@@ -3,9 +3,9 @@
 //
 
 #include "Landing.h"
-#include "util/Constants.h"
-#include "resources/stylesheets.h"
-#include "resources/SASSProcess.h"
+#include "launcher/util/Constants.h"
+#include "launcher/resources/stylesheets.h"
+#include "launcher/resources/SASSProcess.h"
 
 #include <QVBoxLayout>
 #include <QWebEngineScript>
