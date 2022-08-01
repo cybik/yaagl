@@ -169,23 +169,25 @@ namespace QAGL {
         launcher_WidgetStack->addWidget(launcher_WebEngine.get());
         _style = style;
         if(style == QAGL_App_Style::Unique_Window) {
-            if(settings == nullptr) {
-                settings = std::make_shared<SettingsWindow>(launcher_Window.get());
-            }
-            launcher_WidgetStack->addWidget(settings->getWidget().get());
+            launcher_WidgetStack->addWidget(createSettings()->getWidget().get());
         }
         launcher_Window->setCentralWidget(launcher_WidgetStack.get());
     }
 
     void Landing::load_settings() {
         if(_style == QAGL_App_Style::Normal) {
-            if(settings == nullptr) {
-                settings = std::make_shared<SettingsWindow>(launcher_Window.get());
-            }
-            settings->show();
+            createSettings()->show();
         } else {
             launcher_WidgetStack->setCurrentIndex(1);
         }
+    }
+
+    std::shared_ptr<SettingsWindow> Landing::createSettings() {
+        if(settings == nullptr) {
+            settings = std::make_shared<SettingsWindow>(launcher_Window.get());
+        }
+        settings->setConfig(_configData);
+        return settings;
     }
 
     QString Landing::generate_url() {
@@ -195,6 +197,10 @@ namespace QAGL {
                 .append(".com/launcher/10/en-us?api_url=https%3A%2F%2Fapi-os-takumi.")
                 .append(placeholders::lowercase::company.c_str())
                 .append(".com%2Fhk4e_global&key=gcStgarh&prev=false");
+    }
+
+    void Landing::setConfigData(std::shared_ptr<SettingsData> ptr) {
+        _configData = ptr;
     }
 
     void Landing::show(const QApplication &app) {

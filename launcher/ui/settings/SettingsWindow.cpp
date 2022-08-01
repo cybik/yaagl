@@ -34,6 +34,7 @@ std::shared_ptr<Nedrysoft::Ribbon::RibbonWidget> SettingsWindow::setup() {
 
     return ri;
 }
+
 std::shared_ptr<QWebEngineView> SettingsWindow::setupGol() {
     if(settings_WebEngine == nullptr) {
         settings_WebEngine = std::make_shared<QWebEngineView>();
@@ -51,4 +52,8 @@ void SettingsWindow::show() {
 
 std::shared_ptr<QWidget> SettingsWindow::getWidget() {
     return _settingsWidget;
+}
+
+void SettingsWindow::setConfig(std::shared_ptr<SettingsData> ptr) {
+    _config = ptr;
 }

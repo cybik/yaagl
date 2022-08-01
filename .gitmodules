@@ -26,3 +26,9 @@
 [submodule "3rdParty/nedrysoft/ComponentSystem"]
 	path = 3rdParty/nedrysoft/ComponentSystem
 	url = git@github.com:cybik/componentsystem.git
+[submodule "3rdParty/xdg"]
+	path = 3rdParty/xdg
+	url = git@github.com:azubieta/xdg-utils-cxx.git
+[submodule "3rdParty/libfyaml"]
+	path = 3rdParty/libfyaml
+	url = git@github.com:pantoniou/libfyaml.git

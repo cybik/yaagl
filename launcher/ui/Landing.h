@@ -15,6 +15,8 @@
 #include <functional>
 #include "settings/SettingsWindow.h"
 
+#include "launcher/data/SettingsData.h"
+
 namespace QAGL {
     typedef enum {
         Normal,
@@ -25,6 +27,7 @@ Q_OBJECT
     public:
         explicit Landing(const QApplication &app, QAGL_App_Style style = QAGL_App_Style::Normal);
         void show(const QApplication &app);
+        void setConfigData(std::shared_ptr<SettingsData> ptr);
 
     public slots:
         void background_req(QNetworkReply *);
@@ -57,6 +60,10 @@ Q_OBJECT
 
         // JSON - Background Image data
         std::shared_ptr<QJsonDocument> background;
+
+        std::shared_ptr<SettingsData> _configData;
+
+        std::shared_ptr<SettingsWindow> createSettings();
 
         // Utilities
         static QString generate_url();

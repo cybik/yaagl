@@ -14,12 +14,15 @@
 #include "SettingsTabs.h"
 #include <QtWebEngineWidgets/QtWebEngineWidgets>
 
+#include "launcher/data/SettingsData.h"
 
 class SettingsWindow {
 public:
     SettingsWindow(bool usedAsWidget = false, QWidget* parent = nullptr);
     void show();
     std::shared_ptr<QWidget> getWidget();
+
+    void setConfig(std::shared_ptr<SettingsData> ptr);
 private:
 
     std::shared_ptr<Nedrysoft::Ribbon::RibbonWidget> setup();
@@ -37,9 +40,9 @@ private:
     std::shared_ptr<SettingsTabEnhancements> _tabEnhancements;
     std::shared_ptr<SettingsTabRunner> _tabRunner;
     std::shared_ptr<SettingsTabMore> _tabMore;
-
-
     std::shared_ptr<QWebEngineView> settings_WebEngine;
+
+    std::shared_ptr<SettingsData> _config;
 };
 
 

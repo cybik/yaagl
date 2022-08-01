@@ -10,6 +10,7 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+add_subdirectory("${PROJECT_SOURCE_DIR}/3rdParty/xdg")
 add_subdirectory("${PROJECT_SOURCE_DIR}/3rdParty/yaml-cpp")
 add_subdirectory("${PROJECT_SOURCE_DIR}/3rdParty/nedrysoft")
 
@@ -34,6 +35,7 @@ find_package(Qt5
 include_directories(
     AFTER
         "${PROJECT_SOURCE_DIR}/3rdParty/libsass/include"
+        "${PROJECT_SOURCE_DIR}/3rdParty/xdg/include"
         "${PROJECT_SOURCE_DIR}/3rdParty/nedrysoft/Ribbon/include"
         "${PROJECT_SOURCE_DIR}/3rdParty/nedrysoft/ThemeSupport/include"
         "${PROJECT_SOURCE_DIR}/3rdParty/nedrysoft/SettingsDialog/include"
@@ -58,6 +60,8 @@ add_executable(
         main.cpp
 
         launcher/about.h
+
+        launcher/data/SettingsData.cpp launcher/data/SettingsData.h
 
         launcher/resources/gear_image.h
         launcher/resources/stylesheets.h
@@ -84,11 +88,14 @@ add_executable(
         launcher/ui/settings/util/SettingsControl.cpp launcher/ui/settings/util/SettingsControl.h
         launcher/ui/settings/util/SettingsCheckbox.cpp launcher/ui/settings/util/SettingsCheckbox.h
         launcher/ui/settings/util/SettingsControl.h launcher/ui/settings/util/SettingsControls.h
+        launcher/data/Settings.h
+        launcher/data/Settings.cpp
 )
 
 
 target_link_libraries(
     QAGL
+        #fyaml
         yaml-cpp
         Qt5::Gui
         Qt5::Xml
@@ -97,6 +104,7 @@ target_link_libraries(
         Qt5::WebEngine
         Qt5::WebEngineWidgets
         Ribbon
+        XdgUtils::BaseDir
 
         "${PROJECT_SOURCE_DIR}/3rdParty/libsass/lib/libsass.a"
 )

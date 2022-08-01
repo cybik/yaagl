@@ -3,11 +3,20 @@
 #include "launcher/ui/Landing.h"
 #include "launcher/about.h"
 
+#include <memory>
 #include <stdlib.h>
+
+#include "launcher/data/SettingsData.h"
+
+#include <XdgUtils/BaseDir/BaseDir.h>
 
 using namespace QAGL;
 
+static std::shared_ptr<SettingsData> data;
+
 int main(int argc, char *argv[]) {
+    data = SettingsData::getSettingsData(XdgUtils::BaseDir::XdgDataHome());
+
     QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
     QApplication app(argc, argv);
@@ -35,6 +44,7 @@ int main(int argc, char *argv[]) {
     app.setOrganizationDomain(ORG_DOMAIN);
     app.setApplicationDisplayName(APP_NAME);
     std::unique_ptr<Landing> landing = std::make_unique<Landing>(app, style);
+    landing->setConfigData(data);
     QPixmap pix;
     pix.loadFromData(QByteArray::fromBase64(qiqi_smol.toLocal8Bit(), QByteArray::Base64Encoding));
     app.setWindowIcon(pix);
