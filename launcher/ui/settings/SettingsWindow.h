@@ -16,8 +16,7 @@
 
 #include "launcher/data/SettingsData.h"
 
-class SettingsWindow : public QObject {
-Q_OBJECT
+class SettingsWindow {
 public:
     SettingsWindow(bool usedAsWidget = false, QWidget* parent = nullptr);
     void showing();
@@ -25,13 +24,10 @@ public:
     std::shared_ptr<QWidget> getWidget();
 
     void setConfig(std::shared_ptr<SettingsData> ptr);
-    //bool eventFilter(QObject *watched, QEvent *event) override;
-signals:
-    void exit_settings();
-public slots:
-    void onTabBarClicked(int);
+    void setExitCallback(std::function<void()> onExitSettings);
 private:
-
+    std::function<void()> _onExitSettings;
+    void onTabBarClicked(int);
     std::shared_ptr<Nedrysoft::Ribbon::RibbonWidget> setup(bool usedAsWidget);
     std::shared_ptr<QWebEngineView> setupGol(bool usedAsWidget);
     std::shared_ptr<QMainWindow> _settingsWindow;

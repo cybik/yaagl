@@ -172,9 +172,10 @@ namespace QAGL {
         _style = style;
         if(style == QAGL_App_Style::Unique_Window) {
             launcher_WidgetStack->addWidget(createSettings()->getWidget().get());
-            QObject::connect(
-                createSettings().get(), SIGNAL(exit_settings()),
-                this, SLOT(exit_settings())
+            createSettings()->setExitCallback(
+                [&]() {
+                    exit_settings();
+                }
             );
         }
         launcher_Window->setCentralWidget(launcher_WidgetStack.get());

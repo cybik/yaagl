@@ -3,17 +3,20 @@
 //
 
 #include "SettingsData.h"
-#include <iostream>
+
+#include <string>
+
+#include <yaml-cpp/node/emit.h>
 
 #define ANIME_PATH "/anime-game-launcher"
 
 
-std::shared_ptr<SettingsData> SettingsData::getSettingsData(std::string path) {
-    return std::make_shared<SettingsData>(path.append(ANIME_PATH));
+std::unique_ptr<SettingsData> SettingsData::getSettingsData(std::string path) {
+    return std::move(std::make_unique<SettingsData>(path.append(ANIME_PATH)));
 }
 
-void SettingsData::parse() {
-
+std::string SettingsData::to_string() {
+    return YAML::Dump(*_settings->generate());
 }
 
 SettingsData::SettingsData(std::filesystem::path path) {

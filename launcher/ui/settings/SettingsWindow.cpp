@@ -24,9 +24,13 @@ SettingsWindow::SettingsWindow(bool usedAsWidget, QWidget* parent) {
     _settingsWindow->setCentralWidget(_settingsWidget.get());
 }
 
+void SettingsWindow::setExitCallback(std::function<void()> onExitSettings) {
+    _onExitSettings = onExitSettings;
+}
+
 void SettingsWindow::onTabBarClicked(int tab_index) {
     if(_tabButtonBack && _tabButtonBack->indexMatches(tab_index)) {
-        exit_settings();
+        _onExitSettings();
     }
 }
 
@@ -37,9 +41,11 @@ std::shared_ptr<Nedrysoft::Ribbon::RibbonWidget> SettingsWindow::setup(bool used
             // add back arrow.
             _tabButtonBack = std::make_shared<SettingsTabButtonBack>(ri);
             //ri->tabBar()->installEventFilter(this);
-            connect(
-                ri->tabBar(), SIGNAL(tabBarClicked(int)),
-                this, SLOT(onTabBarClicked(int))
+            QObject::connect(
+                ri->tabBar(), &QTabBar::tabBarClicked,
+                [&](int tab_index) {
+                    onTabBarClicked(tab_index);
+                }
             );
         }
         _tabGeneral = std::make_shared<SettingsTabGeneral>(ri);

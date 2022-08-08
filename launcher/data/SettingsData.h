@@ -14,10 +14,10 @@
 
 class SettingsData {
 public:
-    static std::shared_ptr<SettingsData> getSettingsData(std::string path);
+    static std::unique_ptr<SettingsData> getSettingsData(std::string path);
     explicit SettingsData(std::filesystem::path);
 
-    void parse();
+    std::string to_string();
 private:
     SettingsData() = delete;
 
