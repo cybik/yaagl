@@ -25,13 +25,16 @@ namespace QAGL {
     class Landing : public QObject {
 Q_OBJECT
     public:
-        explicit Landing(const QApplication &app, QAGL_App_Style style = QAGL_App_Style::Normal);
+        explicit Landing(const QApplication &app,
+                         std::unique_ptr<SettingsData> settings,
+                         QAGL_App_Style style = QAGL_App_Style::Normal
+        );
         void show(const QApplication &app);
-        void setConfigData(std::shared_ptr<SettingsData> ptr);
 
     public slots:
         void background_req(QNetworkReply *);
         void show_dev();
+        void exit_settings();
         void loaded(bool);
 
     protected:

@@ -14,6 +14,8 @@ class SettingsTab {
 public:
     SettingsTab();
     void trigger(std::shared_ptr<Nedrysoft::Ribbon::RibbonWidget>);
+    bool indexMatches(int against);
+    int getIndex();
 protected:
     void addTab(std::shared_ptr<Nedrysoft::Ribbon::RibbonWidget>, const QString&);
     std::shared_ptr<QWidget> _tabWidget;

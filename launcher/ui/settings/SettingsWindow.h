@@ -16,17 +16,24 @@
 
 #include "launcher/data/SettingsData.h"
 
-class SettingsWindow {
+class SettingsWindow : public QObject {
+Q_OBJECT
 public:
     SettingsWindow(bool usedAsWidget = false, QWidget* parent = nullptr);
+    void showing();
     void show();
     std::shared_ptr<QWidget> getWidget();
 
     void setConfig(std::shared_ptr<SettingsData> ptr);
+    //bool eventFilter(QObject *watched, QEvent *event) override;
+signals:
+    void exit_settings();
+public slots:
+    void onTabBarClicked(int);
 private:
 
-    std::shared_ptr<Nedrysoft::Ribbon::RibbonWidget> setup();
-    std::shared_ptr<QWebEngineView> setupGol();
+    std::shared_ptr<Nedrysoft::Ribbon::RibbonWidget> setup(bool usedAsWidget);
+    std::shared_ptr<QWebEngineView> setupGol(bool usedAsWidget);
     std::shared_ptr<QMainWindow> _settingsWindow;
 
     std::shared_ptr<QVBoxLayout> _settingsLayout;
@@ -35,6 +42,7 @@ private:
     std::shared_ptr<Nedrysoft::Ribbon::RibbonWidget> ri;
 
     // meta-principle: a group is a widget hbox containing a bunch of ribbongroups?
+    std::shared_ptr<SettingsTabButtonBack> _tabButtonBack;
     std::shared_ptr<SettingsTabGeneral> _tabGeneral;
     std::shared_ptr<SettingsTabGame> _tabGame;
     std::shared_ptr<SettingsTabEnhancements> _tabEnhancements;

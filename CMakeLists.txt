@@ -76,6 +76,7 @@ add_executable(
         launcher/ui/settings/SettingsTabs.h
         launcher/ui/settings/SettingsWindow.cpp launcher/ui/settings/SettingsWindow.h
         launcher/ui/settings/SettingsTab.cpp launcher/ui/settings/SettingsTab.h
+        launcher/ui/settings/SettingsTabButtonBack.cpp launcher/ui/settings/SettingsTabButtonBack.h
         launcher/ui/settings/SettingsTabGeneral.cpp launcher/ui/settings/SettingsTabGeneral.h
         launcher/ui/settings/SettingsTabEnhancements.cpp launcher/ui/settings/SettingsTabEnhancements.h
         launcher/ui/settings/SettingsTabRunner.cpp launcher/ui/settings/SettingsTabRunner.h

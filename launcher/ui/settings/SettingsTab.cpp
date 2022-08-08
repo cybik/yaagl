@@ -8,6 +8,14 @@ SettingsTab::SettingsTab() {
     _setupRibbonPage();
 }
 
+bool SettingsTab::indexMatches(int against) {
+    return _index == against;
+}
+
+int SettingsTab::getIndex() {
+    return _index;
+}
+
 void SettingsTab::addTab(std::shared_ptr<Nedrysoft::Ribbon::RibbonWidget> ri, const QString& name) {
     _tabLayout->addStretch();
     _index = ri->addTab(_tabWidget.get(), name);

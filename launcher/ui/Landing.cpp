@@ -134,7 +134,9 @@ namespace QAGL {
         }
     }
 
-    Landing::Landing(const QApplication &app, QAGL::QAGL_App_Style style) {
+    Landing::Landing(const QApplication &app, std::unique_ptr<SettingsData> settings, QAGL::QAGL_App_Style style) {
+        _configData = std::move(settings);
+
         launcher_Window = std::make_shared<QMainWindow>();
 
         // defaults
@@ -170,11 +172,20 @@ namespace QAGL {
         _style = style;
         if(style == QAGL_App_Style::Unique_Window) {
             launcher_WidgetStack->addWidget(createSettings()->getWidget().get());
+            QObject::connect(
+                createSettings().get(), SIGNAL(exit_settings()),
+                this, SLOT(exit_settings())
+            );
         }
         launcher_Window->setCentralWidget(launcher_WidgetStack.get());
     }
 
+    void Landing::exit_settings() {
+        launcher_WidgetStack->setCurrentIndex(0);
+    }
+
     void Landing::load_settings() {
+        createSettings()->showing();
         if(_style == QAGL_App_Style::Normal) {
             createSettings()->show();
         } else {
@@ -197,10 +208,6 @@ namespace QAGL {
                 .append(".com/launcher/10/en-us?api_url=https%3A%2F%2Fapi-os-takumi.")
                 .append(placeholders::lowercase::company.c_str())
                 .append(".com%2Fhk4e_global&key=gcStgarh&prev=false");
-    }
-
-    void Landing::setConfigData(std::shared_ptr<SettingsData> ptr) {
-        _configData = ptr;
     }
 
     void Landing::show(const QApplication &app) {
