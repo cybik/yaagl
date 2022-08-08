@@ -196,7 +196,7 @@ namespace QAGL {
 
     std::shared_ptr<SettingsWindow> Landing::createSettings() {
         if(settings == nullptr) {
-            settings = std::make_shared<SettingsWindow>(launcher_Window.get());
+            settings = std::make_shared<SettingsWindow>(_style == QAGL_App_Style::Unique_Window);
         }
         settings->setConfig(_configData);
         return settings;

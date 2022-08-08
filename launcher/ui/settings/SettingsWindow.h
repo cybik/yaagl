@@ -18,7 +18,7 @@
 
 class SettingsWindow {
 public:
-    SettingsWindow(bool usedAsWidget = false, QWidget* parent = nullptr);
+    SettingsWindow(bool usedAsWidget = false);
     void showing();
     void show();
     std::shared_ptr<QWidget> getWidget();
