@@ -14,7 +14,7 @@
 class SettingsTabButtonBack : public SettingsTab
 {
 public:
-    explicit SettingsTabButtonBack(std::shared_ptr<Nedrysoft::Ribbon::RibbonWidget> ri);
+    explicit SettingsTabButtonBack(Nedrysoft::Ribbon::RibbonWidget* ri);
 };
 
 

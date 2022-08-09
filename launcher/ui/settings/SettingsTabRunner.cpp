@@ -4,7 +4,7 @@
 
 #include "SettingsTabRunner.h"
 
-SettingsTabRunner::SettingsTabRunner(std::shared_ptr<Nedrysoft::Ribbon::RibbonWidget> ri) : SettingsTab() {
+SettingsTabRunner::SettingsTabRunner(Nedrysoft::Ribbon::RibbonWidget* ri) : SettingsTab() {
     _runWINE = std::make_shared<Nedrysoft::Ribbon::RibbonGroup>();
     _runWINE->setGroupName("Runner Setup");
     _runDXVK = std::make_shared<Nedrysoft::Ribbon::RibbonGroup>();

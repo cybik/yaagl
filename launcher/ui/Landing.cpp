@@ -167,18 +167,18 @@ namespace QAGL {
         );
 
         // Add the web core to the window
-        launcher_WidgetStack = std::make_shared<QStackedWidget>(launcher_Window.get());
+        launcher_WidgetStack = new QStackedWidget(nullptr);
         launcher_WidgetStack->addWidget(launcher_WebEngine.get());
         _style = style;
         if(style == QAGL_App_Style::Unique_Window) {
-            launcher_WidgetStack->addWidget(createSettings()->getWidget().get());
+            launcher_WidgetStack->addWidget(createSettings()->getWidget());
             createSettings()->setExitCallback(
                 [&]() {
                     exit_settings();
                 }
             );
         }
-        launcher_Window->setCentralWidget(launcher_WidgetStack.get());
+        launcher_Window->setCentralWidget(launcher_WidgetStack);
     }
 
     void Landing::exit_settings() {

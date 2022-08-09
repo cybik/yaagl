@@ -4,7 +4,7 @@
 
 #include "SettingsTabEnhancements.h"
 
-SettingsTabEnhancements::SettingsTabEnhancements(std::shared_ptr<Nedrysoft::Ribbon::RibbonWidget> ri) : SettingsTab() {
+SettingsTabEnhancements::SettingsTabEnhancements(Nedrysoft::Ribbon::RibbonWidget* ri) : SettingsTab() {
     setupWINEGroup();
     setupGameGroup();
     setupLauncherGroup();

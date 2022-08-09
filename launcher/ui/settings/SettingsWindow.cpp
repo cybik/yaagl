@@ -17,11 +17,11 @@ SettingsWindow::SettingsWindow(bool usedAsWidget) {
     _settingsLayout = std::make_shared<QVBoxLayout>();
     _settingsLayout->setContentsMargins(0,0,0,0);
     _settingsLayout->setSpacing(0);
-    _settingsLayout->addWidget(setup(usedAsWidget).get());
+    _settingsLayout->addWidget(setup(usedAsWidget));
     _settingsLayout->addWidget(setupGol(usedAsWidget).get());
-    _settingsWidget = std::make_shared<QWidget>();
+    _settingsWidget = new QWidget();
     _settingsWidget->setLayout(_settingsLayout.get());
-    _settingsWindow->setCentralWidget(_settingsWidget.get());
+    _settingsWindow->setCentralWidget(_settingsWidget);
 }
 
 void SettingsWindow::setExitCallback(std::function<void()> onExitSettings) {
@@ -34,9 +34,9 @@ void SettingsWindow::onTabBarClicked(int tab_index) {
     }
 }
 
-std::shared_ptr<Nedrysoft::Ribbon::RibbonWidget> SettingsWindow::setup(bool usedAsWidget) {
+Nedrysoft::Ribbon::RibbonWidget* SettingsWindow::setup(bool usedAsWidget) {
     if(ri == nullptr) {
-        ri = std::make_shared<Nedrysoft::Ribbon::RibbonWidget>();
+        ri = new Nedrysoft::Ribbon::RibbonWidget();
         if(usedAsWidget) {
             // add back arrow.
             _tabButtonBack = std::make_shared<SettingsTabButtonBack>(ri);
@@ -78,7 +78,7 @@ void SettingsWindow::show() {
     _settingsWindow->show();
 }
 
-std::shared_ptr<QWidget> SettingsWindow::getWidget() {
+QWidget* SettingsWindow::getWidget() {
     return _settingsWidget;
 }
 

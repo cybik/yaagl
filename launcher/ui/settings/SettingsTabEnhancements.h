@@ -16,7 +16,7 @@
 
 class SettingsTabEnhancements : public SettingsTab {
 public:
-    explicit SettingsTabEnhancements(std::shared_ptr<Nedrysoft::Ribbon::RibbonWidget> ri);
+    explicit SettingsTabEnhancements(Nedrysoft::Ribbon::RibbonWidget* ri);
 private:
     void setupWINEGroup();
     std::shared_ptr<SettingsGroup> _enhWine;

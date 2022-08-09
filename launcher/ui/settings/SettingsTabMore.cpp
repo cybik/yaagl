@@ -3,7 +3,7 @@
 //
 
 #include "SettingsTabMore.h"
-SettingsTabMore::SettingsTabMore(std::shared_ptr<Nedrysoft::Ribbon::RibbonWidget> ri) : SettingsTab() {
+SettingsTabMore::SettingsTabMore(Nedrysoft::Ribbon::RibbonWidget* ri) : SettingsTab() {
     _moreShaders = std::make_shared<Nedrysoft::Ribbon::RibbonGroup>();
     _moreShaders->setGroupName("Shaders");
     _moreEnv = std::make_shared<Nedrysoft::Ribbon::RibbonGroup>();

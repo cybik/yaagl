@@ -4,6 +4,6 @@
 
 #include "SettingsTabButtonBack.h"
 
-SettingsTabButtonBack::SettingsTabButtonBack(std::shared_ptr<Nedrysoft::Ribbon::RibbonWidget> ri) : SettingsTab() {
+SettingsTabButtonBack::SettingsTabButtonBack(Nedrysoft::Ribbon::RibbonWidget* ri) : SettingsTab() {
     addTab(ri, "< Back");
 }

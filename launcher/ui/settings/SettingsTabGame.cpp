@@ -4,7 +4,7 @@
 
 #include "SettingsTabGame.h"
 
-SettingsTabGame::SettingsTabGame(std::shared_ptr<Nedrysoft::Ribbon::RibbonWidget> ri) : SettingsTab() {
+SettingsTabGame::SettingsTabGame(Nedrysoft::Ribbon::RibbonWidget* ri) : SettingsTab() {
     setupGeneralGroup();
     setupVoicePacksGroup();
     setupMiscGroup();

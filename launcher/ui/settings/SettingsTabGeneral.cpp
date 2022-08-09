@@ -4,7 +4,7 @@
 
 #include "SettingsTabGeneral.h"
 
-SettingsTabGeneral::SettingsTabGeneral(std::shared_ptr<Nedrysoft::Ribbon::RibbonWidget> ri) : SettingsTab() {
+SettingsTabGeneral::SettingsTabGeneral(Nedrysoft::Ribbon::RibbonWidget* ri) : SettingsTab() {
     setupGeneralGroup();
     setupPatchGroup();
     setupDiscordGroup();

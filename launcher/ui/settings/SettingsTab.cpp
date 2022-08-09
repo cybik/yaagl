@@ -16,7 +16,7 @@ int SettingsTab::getIndex() {
     return _index;
 }
 
-void SettingsTab::addTab(std::shared_ptr<Nedrysoft::Ribbon::RibbonWidget> ri, const QString& name) {
+void SettingsTab::addTab(Nedrysoft::Ribbon::RibbonWidget* ri, const QString& name) {
     _tabLayout->addStretch();
     _index = ri->addTab(_tabWidget.get(), name);
 }
@@ -28,6 +28,6 @@ void SettingsTab::_setupRibbonPage() {
     _tabLayout->setContentsMargins(0,0,0,0);
 }
 
-void SettingsTab::trigger(std::shared_ptr<Nedrysoft::Ribbon::RibbonWidget> ri) {
+void SettingsTab::trigger(Nedrysoft::Ribbon::RibbonWidget* ri) {
     ri->setCurrentIndex(_index);
 }

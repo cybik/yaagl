@@ -21,21 +21,22 @@ public:
     SettingsWindow(bool usedAsWidget = false);
     void showing();
     void show();
-    std::shared_ptr<QWidget> getWidget();
+    QWidget* getWidget();
 
     void setConfig(std::shared_ptr<SettingsData> ptr);
     void setExitCallback(std::function<void()> onExitSettings);
 private:
     std::function<void()> _onExitSettings;
     void onTabBarClicked(int);
-    std::shared_ptr<Nedrysoft::Ribbon::RibbonWidget> setup(bool usedAsWidget);
+    Nedrysoft::Ribbon::RibbonWidget* setup(bool usedAsWidget);
     std::shared_ptr<QWebEngineView> setupGol(bool usedAsWidget);
     std::shared_ptr<QMainWindow> _settingsWindow;
 
     std::shared_ptr<QVBoxLayout> _settingsLayout;
-    std::shared_ptr<QWidget> _settingsWidget;
+    QWidget* _settingsWidget;
 
-    std::shared_ptr<Nedrysoft::Ribbon::RibbonWidget> ri;
+    //Nedrysoft::Ribbon::RibbonWidget* ri;
+    Nedrysoft::Ribbon::RibbonWidget* ri = nullptr;
 
     // meta-principle: a group is a widget hbox containing a bunch of ribbongroups?
     std::shared_ptr<SettingsTabButtonBack> _tabButtonBack;
