@@ -6,25 +6,33 @@
 
 #include <algorithm>
 
+bool getBoolFromNode(const YAML::Node &file, const char* key) {
+    return file[key].IsDefined() && file[key].as<bool>();
+}
+
+std::string getStringFromNode(const YAML::Node &file, const char* key) {
+    return file[key].IsDefined() ? file[key].as<std::string>() : "";
+}
+
 void Settings::parse(const YAML::Node &file) {
-    runner = file["runner"].as<std::string>();
-    dxvk = file["dxvk"].as<std::string>();
-    theme = file["theme"].as<std::string>();
-    hud = file["hud"].as<std::string>();
-    shaders = file["shaders"].as<std::string>();
+    runner = getStringFromNode(file, "runner");
+    dxvk = getStringFromNode(file, "dxvk");
+    theme = getStringFromNode(file, "theme");
+    hud = getStringFromNode(file, "hud");
+    shaders = getStringFromNode(file, "shaders");
     discord.parse(file["discord"]);
-    gamemode = file["gamemode"].as<bool>();
-    fps_unlocker = file["fps_unlocker"].as<bool>();
-    purge_dxvk_logs = file["purge_dxvk_logs"].as<bool>();
+    gamemode = getBoolFromNode(file, "gamemode");
+    fps_unlocker = getBoolFromNode(file, "fps_unlocker");
+    purge_dxvk_logs = getBoolFromNode(file, "purge_dxvk_logs");
     lang.parse(file["lang"]);
     env = nullptr;
     folders.parse(file["folders"]);
     purge_logs.parse(file["purge_logs"]);
     wine.parse(file["wine"]);
-    borderless_window = file["borderless_window"].as<bool>();
-    use_terminal = file["use_terminal"].as<bool>();
-    skip_analytics = file["skip_analytics"].as<bool>();
-    server = file["server"].as<std::string>();
+    borderless_window = getBoolFromNode(file, "borderless_window");
+    use_terminal = getBoolFromNode(file, "use_terminal");
+    skip_analytics = getBoolFromNode(file, "skip_analytics");
+    server = getStringFromNode(file, "server");
 }
 
 Settings::Settings(const YAML::Node &file) {
