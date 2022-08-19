@@ -10,6 +10,10 @@ bool getBoolFromNode(const YAML::Node &file, const char* key) {
     return file[key].IsDefined() && file[key].as<bool>();
 }
 
+int getIntFromNode(const YAML::Node &file, const char* key) {
+    return file[key].IsDefined() ? file[key].as<int>() : -1;
+}
+
 std::string getStringFromNode(const YAML::Node &file, const char* key) {
     return file[key].IsDefined() ? file[key].as<std::string>() : "";
 }
@@ -67,8 +71,8 @@ std::unique_ptr<YAML::Node> Settings::generate() {
 }
 
 void SettingsWine::parse(const YAML::Node &file) {
-    sync = file["sync"].as<std::string>();
-    fsr = file["fsr"].as<bool>();
+    sync = getStringFromNode(file, "sync");
+    fsr = getBoolFromNode(file, "fsr");
     virtual_desktop.parse(file["virtual_desktop"]);
 }
 
@@ -81,9 +85,9 @@ std::unique_ptr<YAML::Node> SettingsWine::generate() {
 }
 
 void SettingsWineVirtualDesktop::parse(const YAML::Node &file) {
-    enabled = file["enabled"].as<bool>();
-    width = file["width"].as<int>();
-    height = file["height"].as<int>();
+    enabled = getBoolFromNode(file, "enabled");
+    width = getIntFromNode(file, "width");
+    height = getIntFromNode(file, "height");
 }
 
 std::unique_ptr<YAML::Node> SettingsWineVirtualDesktop::generate() {
@@ -95,8 +99,8 @@ std::unique_ptr<YAML::Node> SettingsWineVirtualDesktop::generate() {
 }
 
 void SettingsPurge::parse(const YAML::Node &file) {
-    launcher = file["launcher"].as<std::string>();
-    game = file["game"].as<bool>();
+    launcher = getStringFromNode(file, "launcher");
+    game = getBoolFromNode(file, "game");
 }
 
 std::unique_ptr<YAML::Node> SettingsPurge::generate() {
@@ -107,9 +111,9 @@ std::unique_ptr<YAML::Node> SettingsPurge::generate() {
 }
 
 void SettingsFolders::parse(const YAML::Node &file) {
-    prefix = file["prefix"].as<std::string>();
-    game = file["game"].as<std::string>();
-    temp = file["temp"].as<std::string>();
+    prefix = getStringFromNode(file, "prefix");
+    game = getStringFromNode(file, "game");
+    temp = getStringFromNode(file, "temp");
 }
 
 std::unique_ptr<YAML::Node> SettingsFolders::generate() {
@@ -121,12 +125,12 @@ std::unique_ptr<YAML::Node> SettingsFolders::generate() {
 }
 
 void SettingsLanguage::parse(const YAML::Node &file) {
-    launcher = file["launcher"].as<std::string>();
+    launcher = getStringFromNode(file, "launcher");
     if(file["voice"].Type() != YAML::NodeType::Sequence) {
         abort();
     }
     for(int i = 0; i < file["voice"].size(); i++) {
-        voice.push_back(file["voice"][i].as<std::string>());
+        voice.push_back(getStringFromNode(file, "voice"][i));
     }
 }
 
@@ -143,8 +147,8 @@ std::unique_ptr<YAML::Node> SettingsLanguage::generate() {
 
 
 void SettingsDiscord::parse(const YAML::Node &file) {
-    enabled = file["enabled"].as<bool>();
-    timer = file["timer"].as<bool>();
+    enabled = getBoolFromNode(file, "enabled");
+    timer = getBoolFromNode(file, "timer");
     inLauncher.parse(file["states"]["in-launcher"]);
     inGame.parse(file["states"]["in-game"]);
 }
@@ -161,9 +165,9 @@ std::unique_ptr<YAML::Node> SettingsDiscord::generate() {
 }
 
 void SettingsDiscordState::parse(const YAML::Node &file) {
-    details = file["details"].as<std::string>();
-    state = file["state"].as<std::string>();
-    icon = file["icon"].as<std::string>();
+    details = getStringFromNode(file, "details");
+    state = getStringFromNode(file, "state");
+    icon = getStringFromNode(file, "icon");
 }
 
 std::unique_ptr<YAML::Node> SettingsDiscordState::generate() {
