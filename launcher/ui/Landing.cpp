@@ -198,7 +198,7 @@ namespace QAGL {
         if(settings == nullptr) {
             settings = std::make_shared<SettingsWindow>(_style == QAGL_App_Style::Unique_Window);
         }
-        settings->setConfig(_configData);
+        settings->setConfig(_configData->getSettings());
         return settings;
     }
 

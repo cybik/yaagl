@@ -82,8 +82,13 @@ QWidget* SettingsWindow::getWidget() {
     return _settingsWidget;
 }
 
-void SettingsWindow::setConfig(std::shared_ptr<SettingsData> ptr) {
+void SettingsWindow::setConfig(std::shared_ptr<Settings> ptr) {
     _config = ptr;
+    if(_tabGeneral)         _tabGeneral->parse(ptr);
+    if(_tabGame)            _tabGame->parse(ptr);
+    if(_tabRunner)          _tabRunner->parse(ptr);
+    if(_tabEnhancements)    _tabEnhancements->parse(ptr);
+    if(_tabMore)            _tabMore->parse(ptr);
     if(ptr) {
         std::cout << _config->to_string() << std::endl;
     }

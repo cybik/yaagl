@@ -14,6 +14,7 @@
 class SettingsTabRunner : public SettingsTab {
 public:
     explicit SettingsTabRunner(Nedrysoft::Ribbon::RibbonWidget* ri);
+    void parse(std::shared_ptr<Settings>) override;
 private:
     std::shared_ptr<Nedrysoft::Ribbon::RibbonGroup> _runWINE;
     std::shared_ptr<Nedrysoft::Ribbon::RibbonGroup> _runDXVK;

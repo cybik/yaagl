@@ -16,6 +16,7 @@
 class SettingsTabGeneral : public SettingsTab {
 public:
     explicit SettingsTabGeneral(Nedrysoft::Ribbon::RibbonWidget* ri);
+    void parse(std::shared_ptr<Settings> data) override;
 private:
     void setupGeneralGroup();
     std::shared_ptr<SettingsGroup> _general;

@@ -17,7 +17,7 @@ public:
     static std::unique_ptr<SettingsData> getSettingsData(std::string path);
     explicit SettingsData(std::filesystem::path);
 
-    std::string to_string();
+    std::shared_ptr<Settings> getSettings();
 private:
     SettingsData() = delete;
 

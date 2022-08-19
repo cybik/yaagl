@@ -52,3 +52,7 @@ void SettingsTabGame::setupMiscGroup() {
 }
 
 void SettingsTabGame::setupMisc() { }
+
+void SettingsTabGame::parse(std::shared_ptr<Settings> data) {
+
+}

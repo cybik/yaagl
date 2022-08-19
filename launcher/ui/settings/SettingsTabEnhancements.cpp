@@ -88,3 +88,7 @@ void SettingsTabEnhancements::setupLauncherCombo() {
     );
     _enhLauncher->addControl(_cbLauncherCombo);
 }
+
+void SettingsTabEnhancements::parse(std::shared_ptr<Settings> data) {
+
+}

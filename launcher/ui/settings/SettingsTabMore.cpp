@@ -14,3 +14,6 @@ SettingsTabMore::SettingsTabMore(Nedrysoft::Ribbon::RibbonWidget* ri) : Settings
 
     addTab(ri, "Advanced");
 }
+void SettingsTabMore::parse(std::shared_ptr<Settings> data) {
+
+}

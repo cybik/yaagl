@@ -25,6 +25,14 @@ void SettingsCheckbox::setupEventHandlers() {
     );
 }
 
+void SettingsCheckbox::setChecked(bool checked) {
+    _control->setChecked(checked);
+}
+
+bool SettingsCheckbox::isChecked() {
+    return _control->isChecked();
+}
+
 void SettingsCheckbox::onStateChanged(int newState) {
 
 }

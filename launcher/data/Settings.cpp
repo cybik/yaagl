@@ -39,6 +39,10 @@ Settings::Settings(const YAML::Node &file) {
     parse(file);
 }
 
+std::string Settings::to_string() {
+    return YAML::Dump(*generate());
+}
+
 std::unique_ptr<YAML::Node> Settings::generate() {
     auto out = std::make_unique<YAML::Node>();
     (*out)["runner"] = runner;

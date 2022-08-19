@@ -64,7 +64,7 @@ Q_OBJECT
         // JSON - Background Image data
         std::shared_ptr<QJsonDocument> background;
 
-        std::shared_ptr<SettingsData> _configData;
+        std::unique_ptr<SettingsData> _configData;
 
         std::shared_ptr<SettingsWindow> createSettings();
 

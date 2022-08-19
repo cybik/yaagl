@@ -15,8 +15,8 @@ std::unique_ptr<SettingsData> SettingsData::getSettingsData(std::string path) {
     return std::move(std::make_unique<SettingsData>(path.append(ANIME_PATH)));
 }
 
-std::string SettingsData::to_string() {
-    return YAML::Dump(*_settings->generate());
+std::shared_ptr<Settings> SettingsData::getSettings() {
+    return _settings;
 }
 
 SettingsData::SettingsData(std::filesystem::path path) {

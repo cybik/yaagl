@@ -10,12 +10,16 @@
 #include <memory>
 #include "3rdParty/nedrysoft/Ribbon/include/RibbonWidget"
 
+#include "launcher/data/Settings.h"
+#include "launcher/data/SettingsData.h"
+
 class SettingsTab {
 public:
     SettingsTab();
     void trigger(Nedrysoft::Ribbon::RibbonWidget*);
     bool indexMatches(int against);
     int getIndex();
+    virtual void parse(std::shared_ptr<Settings>) = 0;
 protected:
     void addTab(Nedrysoft::Ribbon::RibbonWidget*, const QString&);
     std::shared_ptr<QWidget> _tabWidget;

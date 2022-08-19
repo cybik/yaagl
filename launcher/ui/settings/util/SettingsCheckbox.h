@@ -16,6 +16,8 @@
 class SettingsCheckbox : public SettingsControl {
 Q_OBJECT
 public:
+    void setChecked(bool);
+    bool isChecked();
     explicit SettingsCheckbox(const QString& name);
     QLayout* getLayout() override;
 protected:

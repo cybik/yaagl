@@ -15,3 +15,6 @@ SettingsTabRunner::SettingsTabRunner(Nedrysoft::Ribbon::RibbonWidget* ri) : Sett
 
     addTab(ri, "Runner");
 }
+void SettingsTabRunner::parse(std::shared_ptr<Settings> data) {
+
+}

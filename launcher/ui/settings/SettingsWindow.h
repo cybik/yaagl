@@ -23,7 +23,7 @@ public:
     void show();
     QWidget* getWidget();
 
-    void setConfig(std::shared_ptr<SettingsData> ptr);
+    void setConfig(std::shared_ptr<Settings> ptr);
     void setExitCallback(std::function<void()> onExitSettings);
 private:
     std::function<void()> _onExitSettings;
@@ -47,7 +47,7 @@ private:
     std::shared_ptr<SettingsTabMore> _tabMore;
     std::shared_ptr<QWebEngineView> settings_WebEngine;
 
-    std::shared_ptr<SettingsData> _config;
+    std::shared_ptr<Settings> _config;
 };
 
 

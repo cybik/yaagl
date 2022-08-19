@@ -110,6 +110,8 @@ public:
     bool use_terminal;
     bool skip_analytics;
     std::string server; // enum
+
+    std::string to_string();
 };
 
 #endif //QAGL_SETTINGS_H
