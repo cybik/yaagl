@@ -130,7 +130,7 @@ void SettingsLanguage::parse(const YAML::Node &file) {
         abort();
     }
     for(int i = 0; i < file["voice"].size(); i++) {
-        voice.push_back(getStringFromNode(file, "voice"][i));
+        voice.push_back(getStringFromNode(file, file["voice"][i]));
     }
 }
 
