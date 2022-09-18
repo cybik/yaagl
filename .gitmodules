@@ -32,3 +32,9 @@
 [submodule "3rdParty/libfyaml"]
 	path = 3rdParty/libfyaml
 	url = git@github.com:pantoniou/libfyaml.git
+[submodule "3rdParty/agc"]
+	path = 3rdParty/agc
+	url = git@github.com:an-anime-team/anime-game-core.git
+[submodule "3rdParty/agcli"]
+	path = 3rdParty/agcli
+	url = git@github.com:an-anime-team/anime-game-cli.git
