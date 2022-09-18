@@ -14,79 +14,79 @@ SettingsTabEnhancements::SettingsTabEnhancements(Nedrysoft::Ribbon::RibbonWidget
 
 void SettingsTabEnhancements::setupWINEGroup() {
     _enhWine = std::make_shared<SettingsGroup>("WINE");
-    setupHudCombo();
-    setupWineSyncCombo();
-    setupAmdFSRCb();
-    setupVirtualDesktopCb();
+    setupHudCombo(_enhWine);
+    setupWineSyncCombo(_enhWine);
+    setupAmdFSRCb(_enhWine);
+    setupVirtualDesktopCb(_enhWine);
 
     _tabLayout->addWidget(_enhWine->getWidget());
 }
 
-void SettingsTabEnhancements::setupHudCombo() {
+void SettingsTabEnhancements::setupHudCombo(std::shared_ptr<SettingsGroup> group) {
     _cbHud = std::make_shared<SettingsCombo>("HUD");
     _cbHud->addChoices(3, "None", "DXVK", "MangoHUD");
-    _enhWine->addControl(_cbHud);
+    group->addControl(_cbHud);
 }
 
-void SettingsTabEnhancements::setupWineSyncCombo() {
+void SettingsTabEnhancements::setupWineSyncCombo(std::shared_ptr<SettingsGroup> group) {
     _cbWineSync = std::make_shared<SettingsCombo>("WINE Synchronization");
     _cbWineSync->addChoices(4, "None", "ESync", "FSync", "Futex2");
-    _enhWine->addControl(_cbWineSync);
+    group->addControl(_cbWineSync);
 }
 
-void SettingsTabEnhancements::setupAmdFSRCb() {
+void SettingsTabEnhancements::setupAmdFSRCb(std::shared_ptr<SettingsGroup> group) {
     _cbFSR = std::make_shared<SettingsCheckbox>("Allow AMD FSR");
-    _enhWine->addControl(_cbFSR);
+    group->addControl(_cbFSR);
 }
 
-void SettingsTabEnhancements::setupVirtualDesktopCb() {
+void SettingsTabEnhancements::setupVirtualDesktopCb(std::shared_ptr<SettingsGroup> group) {
     _cbVirDesk = std::make_shared<SettingsCheckbox>("Virtual Desktop");
-    _enhWine->addControl(_cbVirDesk);
+    group->addControl(_cbVirDesk);
 }
 
 ///
 
 void SettingsTabEnhancements::setupGameGroup() {
     _enhGame = std::make_shared<SettingsGroup>("Game");
-    setupGameModeCb();
-    setupBorderlessWindowCb();
-    setupUnlocFPSCb();
-    setupTerminalCb();
+    setupGameModeCb(_enhGame);
+    setupBorderlessWindowCb(_enhGame);
+    setupUnlocFPSCb(_enhGame);
+    setupTerminalCb(_enhGame);
     _tabLayout->addWidget(_enhGame->getWidget());
 }
 
-void SettingsTabEnhancements::setupGameModeCb() {
+void SettingsTabEnhancements::setupGameModeCb(std::shared_ptr<SettingsGroup> group) {
     _cbGamemode = std::make_shared<SettingsCheckbox>("Use GameMode");
-    _enhGame->addControl(_cbGamemode);
+    group->addControl(_cbGamemode);
 }
 
-void SettingsTabEnhancements::setupBorderlessWindowCb() {
+void SettingsTabEnhancements::setupBorderlessWindowCb(std::shared_ptr<SettingsGroup> group) {
     _cbWindow = std::make_shared<SettingsCheckbox>("Allow Borderless Window");
-    _enhGame->addControl(_cbWindow);
+    group->addControl(_cbWindow);
 }
 
-void SettingsTabEnhancements::setupUnlocFPSCb() {
+void SettingsTabEnhancements::setupUnlocFPSCb(std::shared_ptr<SettingsGroup> group) {
     _cbFPS = std::make_shared<SettingsCheckbox>("Unlock FPS (DANGER)");
-    _enhGame->addControl(_cbFPS);
+    group->addControl(_cbFPS);
 }
 
-void SettingsTabEnhancements::setupTerminalCb() {
+void SettingsTabEnhancements::setupTerminalCb(std::shared_ptr<SettingsGroup> group) {
     _cbTerm = std::make_shared<SettingsCheckbox>("Use Terminal");
-    _enhGame->addControl(_cbTerm);
+    group->addControl(_cbTerm);
 }
 
 void SettingsTabEnhancements::setupLauncherGroup() {
     _enhLauncher = std::make_shared<SettingsGroup>("Launcher");
-    setupLauncherCombo();
+    setupLauncherCombo(_enhLauncher);
     _tabLayout->addWidget(_enhLauncher->getWidget());
 }
 
-void SettingsTabEnhancements::setupLauncherCombo() {
+void SettingsTabEnhancements::setupLauncherCombo(std::shared_ptr<SettingsGroup> group) {
     _cbLauncherCombo = std::make_shared<SettingsCombo>("Delete launcher logs");
     _cbLauncherCombo->addChoices(3,
                        "1 day", "3 days", "5 days"
     );
-    _enhLauncher->addControl(_cbLauncherCombo);
+    group->addControl(_cbLauncherCombo);
 }
 
 void SettingsTabEnhancements::parse(std::shared_ptr<Settings> data) {

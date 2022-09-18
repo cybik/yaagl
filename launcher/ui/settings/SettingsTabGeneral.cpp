@@ -8,7 +8,8 @@
 
 SettingsTabGeneral::SettingsTabGeneral(Nedrysoft::Ribbon::RibbonWidget* ri) : SettingsTab() {
     setupGeneralGroup();
-    setupPatchGroup();
+    setupPatchInfoGroup();
+    setupPatchOpsGroup();
     setupDiscordGroup();
     setupDiscordTextOptionsGroup();
     setupDiscordIconOptionsGroup();
@@ -19,103 +20,111 @@ SettingsTabGeneral::SettingsTabGeneral(Nedrysoft::Ribbon::RibbonWidget* ri) : Se
 void SettingsTabGeneral::setupGeneralGroup() {
     _general = std::make_shared<SettingsGroup>("Launcher");
 
-    setupLanguage();
-    setupTheme();
+    setupLanguage(_general);
+    setupTheme(_general);
 
     _tabLayout->addWidget(_general->getWidget());
 }
 
 
-void SettingsTabGeneral::setupLanguage() {
+void SettingsTabGeneral::setupLanguage(std::shared_ptr<SettingsGroup> group) {
     _cbLang = std::make_shared<SettingsCombo>("Language");
     _cbLang->addChoices(11,
                         "English (US)", "Русский", "Español",
                         "Deutsch", "Français", "Italiano", "日本語",
                         "Magyar", "Norsk", "简体中文", "Engwish"
     );
-    _general->addControl(_cbLang);
+    group->addControl(_cbLang);
 }
 
-void SettingsTabGeneral::setupTheme() {
+void SettingsTabGeneral::setupTheme(std::shared_ptr<SettingsGroup> group) {
     _cbTheme = std::make_shared<SettingsCombo>("Theme");
     _cbTheme->addChoices(3, "System", "Dark", "Light");
-    _general->addControl(_cbTheme);
+    group->addControl(_cbTheme);
 }
 
+void SettingsTabGeneral::setupPatchInfoGroup() {
+    _patch = std::make_shared<SettingsGroup>("Patch Info");
 
-void SettingsTabGeneral::setupPatchGroup() {
-    _patch = std::make_shared<SettingsGroup>("Patch Ops");
-
-    setupPatchDesc();
-    setupPatchInfo();
-    setupPatchRevert();
-    setupPatchReapply();
+    setupPatchDesc(_patch);
+    setupPatchInfo(_patch);
 
     _tabLayout->addWidget(_patch->getWidget());
 }
 
-void SettingsTabGeneral::setupPatchDesc() {
-    _cbPatchDesc = std::make_shared<SettingsLabel>("Patch Version:");
-    _patch->addControl(_cbPatchDesc);
+void SettingsTabGeneral::setupPatchOpsGroup() {
+    _patchOps = std::make_shared<SettingsGroup>("Patch Ops");
+
+    setupPatchRevert(_patchOps);
+    setupPatchReapply(_patchOps);
+
+    _tabLayout->addWidget(_patchOps->getWidget());
 }
 
-void SettingsTabGeneral::setupPatchInfo() {
+void SettingsTabGeneral::setupPatchDesc(std::shared_ptr<SettingsGroup> group) {
+    _cbPatchDesc = std::make_shared<SettingsLabel>("Patch Version:");
+    group->addControl(_cbPatchDesc);
+}
+
+void SettingsTabGeneral::setupPatchInfo(std::shared_ptr<SettingsGroup> group) {
     _cbPatchInfo = std::make_shared<SettingsLabel>("Patch Info");
     _cbPatchInfo->getControl()
                 ->setAlignment(Qt::AlignmentFlag::AlignRight);
-    _cbPatchInfo->setColor(QColor::fromRgb(104,81,216));
-    _patch->addControl(_cbPatchInfo);
+    _cbPatchInfo->setColor(QColor::fromCmyk(70,60,0,10));
+    group->addControl(_cbPatchInfo);
 
-    _cbPatchInfo->setText(QString(moe::launcher::agcli::get_upstream_patch_state().version.c_str()));
+    _cbPatchInfo->setText(QString(
+        moe::launcher::agcli::get_local_patch_state("obi-wan").version.c_str())
+    );
 }
 
-void SettingsTabGeneral::setupPatchRevert() {
+void SettingsTabGeneral::setupPatchRevert(std::shared_ptr<SettingsGroup> group) {
     _cbPatchRevert = std::make_shared<SettingsButton>("Revert Patch");
-    _patch->addControl(_cbPatchRevert);
+    group->addControl(_cbPatchRevert);
 }
 
-void SettingsTabGeneral::setupPatchReapply() {
+void SettingsTabGeneral::setupPatchReapply(std::shared_ptr<SettingsGroup> group) {
     _cbPatchReapply = std::make_shared<SettingsButton>("Reapply Patch");
-    _patch->addControl(_cbPatchReapply);
+    group->addControl(_cbPatchReapply);
 }
 
 
 void SettingsTabGeneral::setupDiscordGroup() {
     _discord = std::make_shared<SettingsGroup>("Discord");
 
-    setupDiscord();
+    setupDiscord(_discord);
 
     _tabLayout->addWidget(_discord->getWidget());
 }
 
-void SettingsTabGeneral::setupDiscord() {
+void SettingsTabGeneral::setupDiscord(std::shared_ptr<SettingsGroup> group) {
     _cbDiscordEnabled = std::make_shared<SettingsCheckbox>("Enable Discord RPC");
-    _discord->addControl(_cbDiscordEnabled);
+    group->addControl(_cbDiscordEnabled);
 }
 
 void SettingsTabGeneral::setupDiscordTextOptionsGroup() {
     _discordSettings = std::make_shared<SettingsGroup>("Discord");
 
-    setupDiscordTextOptions();
+    setupDiscordTextOptions(_discordSettings);
     _discordSettings->getWidget()->setVisible(false);
 
     _tabLayout->addWidget(_discordSettings->getWidget());
 }
 
-void SettingsTabGeneral::setupDiscordTextOptions() {
+void SettingsTabGeneral::setupDiscordTextOptions(std::shared_ptr<SettingsGroup> group) {
 
 }
 
 void SettingsTabGeneral::setupDiscordIconOptionsGroup() {
     _discordIconSettings = std::make_shared<SettingsGroup>("Discord Icons");
 
-    setupDiscordIconOptions();
+    setupDiscordIconOptions(_discordIconSettings);
     _discordIconSettings->getWidget()->setVisible(false);
 
     _tabLayout->addWidget(_discordIconSettings->getWidget());
 }
 
-void SettingsTabGeneral::setupDiscordIconOptions() {
+void SettingsTabGeneral::setupDiscordIconOptions(std::shared_ptr<SettingsGroup> group) {
 
 }
 

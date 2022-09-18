@@ -25,11 +25,11 @@ private:
 
     void setupGeneralGroup();
     std::shared_ptr<SettingsGroup> _general;
-    void setupGeneral();
+    void setupGeneral(std::shared_ptr<SettingsGroup>);
 
     void setupVoicePacksGroup();
     std::shared_ptr<SettingsGroup> _voicepacks;
-    void setupVoicePacks();
+    void setupVoicePacks(std::shared_ptr<SettingsGroup>);
     std::shared_ptr<SettingsCheckbox> _cbEN;
     std::shared_ptr<SettingsCheckbox> _cbJA;
     std::shared_ptr<SettingsCheckbox> _cbKR;
@@ -37,7 +37,7 @@ private:
 
     void setupMiscGroup();
     std::shared_ptr<SettingsGroup> _misc;
-    void setupMisc();
+    void setupMisc(std::shared_ptr<SettingsGroup>);
 };
 
 #endif //QAGL_SETTINGSTABGAME_H

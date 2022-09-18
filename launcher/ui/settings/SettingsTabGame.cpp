@@ -15,43 +15,43 @@ SettingsTabGame::SettingsTabGame(Nedrysoft::Ribbon::RibbonWidget* ri) : Settings
 void SettingsTabGame::setupGeneralGroup() {
     _general = std::make_shared<SettingsGroup>("General");
 
-    setupGeneral();
+    setupGeneral(_general);
     _tabLayout->addWidget(_general->getWidget());
 }
 
-void SettingsTabGame::setupGeneral() { }
+void SettingsTabGame::setupGeneral(std::shared_ptr<SettingsGroup>) { }
 
 void SettingsTabGame::setupVoicePacksGroup() {
     _voicepacks = std::make_shared<SettingsGroup>("Voice Packs");
 
-    setupVoicePacks();
+    setupVoicePacks(_voicepacks);
 
     _tabLayout->addWidget(_voicepacks->getWidget());
 }
 
-void SettingsTabGame::setupVoicePacks() {
+void SettingsTabGame::setupVoicePacks(std::shared_ptr<SettingsGroup> group) {
     _cbEN = std::make_shared<SettingsCheckbox>("English");
-    _voicepacks->addControl(_cbEN);
+    group->addControl(_cbEN);
 
     _cbJA = std::make_shared<SettingsCheckbox>("日本語");
-    _voicepacks->addControl(_cbJA);
+    group->addControl(_cbJA);
 
     _cbKR = std::make_shared<SettingsCheckbox>("한글");
-    _voicepacks->addControl(_cbKR);
+    group->addControl(_cbKR);
 
     _cbZH = std::make_shared<SettingsCheckbox>("简体中文");
-    _voicepacks->addControl(_cbZH);
+    group->addControl(_cbZH);
 }
 
 void SettingsTabGame::setupMiscGroup() {
     _misc = std::make_shared<SettingsGroup>("Miscellaneous");
 
-    setupGeneral();
+    setupGeneral(_misc);
 
     _tabLayout->addWidget(_misc->getWidget());
 }
 
-void SettingsTabGame::setupMisc() { }
+void SettingsTabGame::setupMisc(std::shared_ptr<SettingsGroup>) { }
 
 void SettingsTabGame::parse(std::shared_ptr<Settings> data) {
     _cbEN->setChecked(data->lang.lang_game_en);

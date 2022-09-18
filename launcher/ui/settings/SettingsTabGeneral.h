@@ -20,34 +20,36 @@ public:
 private:
     void setupGeneralGroup();
     std::shared_ptr<SettingsGroup> _general;
-    void setupLanguage();
+    void setupLanguage(std::shared_ptr<SettingsGroup>);
     std::shared_ptr<SettingsCombo> _cbLang;
-    void setupTheme();
+    void setupTheme(std::shared_ptr<SettingsGroup>);
     std::shared_ptr<SettingsCombo> _cbTheme;
 
-    void setupPatchGroup();
+    void setupPatchInfoGroup();
     std::shared_ptr<SettingsGroup> _patch;
-    void setupPatchDesc();
+    void setupPatchDesc(std::shared_ptr<SettingsGroup>);
     std::shared_ptr<SettingsLabel> _cbPatchDesc;
-    void setupPatchInfo();
+    void setupPatchInfo(std::shared_ptr<SettingsGroup>);
     std::shared_ptr<SettingsLabel> _cbPatchInfo;
-    void setupPatchRevert();
+    void setupPatchOpsGroup();
+    std::shared_ptr<SettingsGroup> _patchOps;
+    void setupPatchRevert(std::shared_ptr<SettingsGroup>);
     std::shared_ptr<SettingsButton> _cbPatchRevert;
-    void setupPatchReapply();
+    void setupPatchReapply(std::shared_ptr<SettingsGroup>);
     std::shared_ptr<SettingsButton> _cbPatchReapply;
 
     void setupDiscordGroup();
     std::shared_ptr<SettingsGroup> _discord;
-    void setupDiscord();
+    void setupDiscord(std::shared_ptr<SettingsGroup>);
     std::shared_ptr<SettingsCheckbox> _cbDiscordEnabled;
 
     void setupDiscordTextOptionsGroup();
     std::shared_ptr<SettingsGroup> _discordSettings;
-    void setupDiscordTextOptions();
+    void setupDiscordTextOptions(std::shared_ptr<SettingsGroup>);
 
     void setupDiscordIconOptionsGroup();
     std::shared_ptr<SettingsGroup> _discordIconSettings;
-    void setupDiscordIconOptions();
+    void setupDiscordIconOptions(std::shared_ptr<SettingsGroup>);
 };
 
 
