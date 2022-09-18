@@ -6,8 +6,17 @@
 
 SettingsLabel::SettingsLabel(const QString& name) : SettingsControl(name){
     _control = std::make_shared<QLabel>();
-    _control->setText(name);
     finalize();
+    setText(name);
+}
+
+void SettingsLabel::setText(const QString &text) {
+    _control->setText(text);
+}
+void SettingsLabel::setColor(const QColor &color) {
+    QPalette pal = _control->palette();
+    pal.setColor(_control->foregroundRole(), color);
+    _control->setPalette(pal);
 }
 
 void SettingsLabel::addToLayout() {

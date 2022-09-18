@@ -54,5 +54,8 @@ void SettingsTabGame::setupMiscGroup() {
 void SettingsTabGame::setupMisc() { }
 
 void SettingsTabGame::parse(std::shared_ptr<Settings> data) {
-
+    _cbEN->setChecked(data->lang.lang_game_en);
+    _cbJA->setChecked(data->lang.lang_game_jp);
+    _cbKR->setChecked(data->lang.lang_game_kr);
+    _cbZH->setChecked(data->lang.lang_game_zh);
 }

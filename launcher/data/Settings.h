@@ -44,7 +44,11 @@ public:
     void parse(const YAML::Node& file) override;
     std::unique_ptr<YAML::Node> generate() override;
     std::string launcher;         // enum?
-    std::list<std::string> voice; // enum list?
+
+    bool lang_game_en = false;
+    bool lang_game_jp = false;
+    bool lang_game_kr = false;
+    bool lang_game_zh = false;
 };
 
 class SettingsFolders : protected SettingsParsing  {

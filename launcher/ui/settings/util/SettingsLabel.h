@@ -19,6 +19,8 @@ public:
     explicit SettingsLabel(const QString& name);
     QLayout* getLayout() override;
     std::shared_ptr<QLabel> getControl() { return _control; }
+    void setText(const QString& name);
+    void setColor(const QColor& color);
 protected:
     void addToLayout() override;
     void setupEventHandlers() override;

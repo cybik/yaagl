@@ -6,6 +6,8 @@
 
 #include <algorithm>
 
+#include <iostream>
+
 bool getBoolFromNode(const YAML::Node &file, const char* key) {
     return file[key].IsDefined() && file[key].as<bool>();
 }
@@ -130,18 +132,23 @@ void SettingsLanguage::parse(const YAML::Node &file) {
         abort();
     }
     for(int i = 0; i < file["voice"].size(); i++) {
-        voice.push_back(getStringFromNode(file, file["voice"][i]));
+        //voice.push_back( file["voice"][i].as<std::string>());
+        if(file["voice"][i].as<std::string>() == "en-us") lang_game_en = true;
+        else if(file["voice"][i].as<std::string>() == "ja-jp") lang_game_jp = true;
+        else if(file["voice"][i].as<std::string>() == "ko-kr") lang_game_kr = true;
+        else if(file["voice"][i].as<std::string>() == "zh-cn") lang_game_zh = true;
     }
 }
 
 std::unique_ptr<YAML::Node> SettingsLanguage::generate() {
     auto out = std::make_unique<YAML::Node>();
     (*out)["launcher"] = launcher;
-    for(int i = 0; i < voice.size(); i++) {
-        for (const auto &item: voice) {
-            (*out)["voice"].push_back(item);
-        }
-    }
+
+    if(lang_game_en) (*out)["voice"].push_back("en-us");
+    if(lang_game_jp) (*out)["voice"].push_back("ja-jp");
+    if(lang_game_kr) (*out)["voice"].push_back("ko-kr");
+    if(lang_game_zh) (*out)["voice"].push_back("zh-cn");
+
     return std::move(out);
 }
 

@@ -4,6 +4,8 @@
 
 #include "SettingsTabGeneral.h"
 
+#include <cxxlib.rs.h>
+
 SettingsTabGeneral::SettingsTabGeneral(Nedrysoft::Ribbon::RibbonWidget* ri) : SettingsTab() {
     setupGeneralGroup();
     setupPatchGroup();
@@ -60,10 +62,11 @@ void SettingsTabGeneral::setupPatchDesc() {
 void SettingsTabGeneral::setupPatchInfo() {
     _cbPatchInfo = std::make_shared<SettingsLabel>("Patch Info");
     _cbPatchInfo->getControl()
-                ->setStyleSheet("QLabel { color : blue; }");
-    _cbPatchInfo->getControl()
                 ->setAlignment(Qt::AlignmentFlag::AlignRight);
+    _cbPatchInfo->setColor(QColor::fromRgb(104,81,216));
     _patch->addControl(_cbPatchInfo);
+
+    _cbPatchInfo->setText(QString(moe::launcher::agcli::get_upstream_patch_state().version.c_str()));
 }
 
 void SettingsTabGeneral::setupPatchRevert() {

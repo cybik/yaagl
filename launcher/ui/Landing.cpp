@@ -6,12 +6,24 @@
 #include "launcher/util/Constants.h"
 #include "launcher/resources/stylesheets.h"
 #include "launcher/resources/SASSProcess.h"
+#include "launcher/resources/inject.h"
 
 #include <QVBoxLayout>
 #include <QWebEngineScript>
 #include <QShortcut>
 
 #define YAAGL_SETTINGS "#yaagl-settings"
+
+#include <iostream>
+
+#if 0
+void examine(const QJsonObject& object) {
+    std::cout << "---- gap ----" << std::endl;
+    for(const QString& ref: object.keys()) {
+        std::cout << ref.toStdString() << " :: " << object.find(ref).value().toString().toStdString() << std::endl;
+    }
+}
+#endif
 
 namespace QAGL {
     void Landing::show_dev() {
@@ -86,13 +98,9 @@ namespace QAGL {
            launcher_WebEngine->page()->scripts().findScript("cpp-sends-their-regards").isNull()
         ) {
             QWebEngineScript script;
-            QString s = QString::fromLatin1(
-                "(function() {\n" \
-                    "css = document.createElement('style'); css.type = 'text/css'; css.id = '%1';\n"\
-                    "css.textContent = `%2`;\n"\
-                    "document.head.appendChild(css);\n"\
-                "})()")
-                .arg("cpp-sends-their-regards").arg(SASSProcess(idx_sass.toStdString()).c_str());
+            QString s = QString::fromLatin1(QAGL_INJECT_STYLESHEET)
+                            .arg("cpp-sends-their-regards")
+                            .arg(SASSProcess(idx_sass.toStdString()).c_str());
             launcher_WebEngine->page()->runJavaScript(s, QWebEngineScript::ApplicationWorld);
 
             script.setName("cpp-sends-their-regards");
@@ -109,20 +117,10 @@ namespace QAGL {
            launcher_WebEngine->page()->scripts().findScript("setts").isNull()
         ) {
             QWebEngineScript script;
-            QString s = QString::fromLatin1(
-                "(function() {\n" \
-                    "img_idle = document.createElement('img'); img_idle.src = '%1';\n"\
-                    "img_idle.className = 'unactive'; img_idle.alt = 'icon';\n"\
-                    "img_hovr = document.createElement('img'); img_hovr.src = '%2';\n"\
-                    "img_hovr.className = 'active'; img_hovr.alt = 'icon';\n"\
-                    "settings = document.createElement('div'); settings.id = 'settings';\n"\
-                    "settings.appendChild(img_idle); settings.appendChild(img_hovr);\n"\
-                    "document.body.appendChild(settings);\n"\
-                    "const t = document.getElementById(\"settings\");\n"\
-                    "t.onclick = () => { t == null || location.assign('%3'); },\n"\
-                    "t.onmouseenter = () => { t == null || t.classList.add(\"hovered\"); },\n"\
-                    "t.onmouseleave = () => { t == null || t.classList.remove(\"hovered\"); }"\
-                "})()").arg(gear_idle.c_str()).arg(gear_hover.c_str()).arg(YAAGL_SETTINGS);
+            QString s = QString::fromLatin1(QAGL_INJECT_SETTINGS)
+                            .arg(gear_idle.c_str())
+                            .arg(gear_hover.c_str())
+                            .arg(YAAGL_SETTINGS);
             launcher_WebEngine->page()->runJavaScript(s, QWebEngineScript::ApplicationWorld);
 
             script.setName("setts");
@@ -140,7 +138,8 @@ namespace QAGL {
         launcher_Window = std::make_shared<QMainWindow>();
 
         // defaults
-        launcher_Window->setFixedSize(1280, 720 - QApplication::style()->pixelMetric(QStyle::PM_TitleBarHeight));
+        launcher_Window->setFixedSize(1280, 730);
+        //launcher_Window->setFixedSize(1280, 720 - QApplication::style()->pixelMetric(QStyle::PM_TitleBarHeight));
         launcher_Window->setWindowTitle("Yet Another Anime Game Launcher");
 
         // Menu

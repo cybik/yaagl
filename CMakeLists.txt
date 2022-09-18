@@ -39,6 +39,7 @@ include_directories(
         "${PROJECT_SOURCE_DIR}/3rdParty/nedrysoft/Ribbon/include"
         "${PROJECT_SOURCE_DIR}/3rdParty/nedrysoft/ThemeSupport/include"
         "${PROJECT_SOURCE_DIR}/3rdParty/nedrysoft/SettingsDialog/include"
+        "${PROJECT_SOURCE_DIR}/3rdParty/agcli/target/cxxbridge/anime-game-cli/src"
 )
 
 # hi https://dev.my-gate.net/2021/08/04/understanding-rpath-with-cmake/
@@ -91,6 +92,8 @@ add_executable(
         launcher/ui/settings/util/SettingsControl.h launcher/ui/settings/util/SettingsControls.h
         launcher/data/Settings.h
         launcher/data/Settings.cpp
+
+        "${PROJECT_SOURCE_DIR}/3rdParty/agcli/target/cxxbridge/anime-game-cli/src/cxxlib.rs.cc"
 )
 
 
@@ -108,5 +111,6 @@ target_link_libraries(
         XdgUtils::BaseDir
 
         "${PROJECT_SOURCE_DIR}/3rdParty/libsass/lib/libsass.a"
+        "${PROJECT_SOURCE_DIR}/3rdParty/agcli/target/debug/libanime_game_cli.a"
 )
 
