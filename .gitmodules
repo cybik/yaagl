@@ -4,7 +4,7 @@
 [submodule "3rdParty/an-anime-game-launcher"]
 	path = 3rdParty/an-anime-game-launcher
 	url = https://gitlab.com/KRypt0n_/an-anime-game-launcher.git
-        branch = 2.2.1
+    branch = 2.2.1
 [submodule "3rdParty/wribbon"]
 	path = 3rdParty/wribbon
 	url = https://github.com/wteamit/wribbon.git
@@ -32,6 +32,6 @@
 [submodule "3rdParty/libfyaml"]
 	path = 3rdParty/libfyaml
 	url = git@github.com:pantoniou/libfyaml.git
-[submodule "3rdParty/agcli"]
-	path = 3rdParty/agcli
-	url = git@github.com:cybik/anime-game-cli.git
+[submodule "3rdParty/anime-launcher-sdk"]
+	path = 3rdParty/anime-launcher-sdk
+	url = git@github.com:an-anime-team/anime-launcher-sdk.git

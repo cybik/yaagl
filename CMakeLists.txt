@@ -39,7 +39,8 @@ include_directories(
         "${PROJECT_SOURCE_DIR}/3rdParty/nedrysoft/Ribbon/include"
         "${PROJECT_SOURCE_DIR}/3rdParty/nedrysoft/ThemeSupport/include"
         "${PROJECT_SOURCE_DIR}/3rdParty/nedrysoft/SettingsDialog/include"
-        "${PROJECT_SOURCE_DIR}/3rdParty/agcli/target/cxxbridge/anime-game-cli/src"
+        #"${PROJECT_SOURCE_DIR}/3rdParty/agc/target/cxxbridge/anime-game-core/src"
+        #"${PROJECT_SOURCE_DIR}/3rdParty/agcli/target/cxxbridge/anime-game-cli/src"
 )
 
 # hi https://dev.my-gate.net/2021/08/04/understanding-rpath-with-cmake/
@@ -93,7 +94,14 @@ add_executable(
         launcher/data/Settings.h
         launcher/data/Settings.cpp
 
-        "${PROJECT_SOURCE_DIR}/3rdParty/agcli/target/cxxbridge/anime-game-cli/src/cxxlib.rs.cc"
+        #"${PROJECT_SOURCE_DIR}/3rdParty/agc/target/cxxbridge/anime-game-core/src/cxxlib.rs.cc"
+        #"${PROJECT_SOURCE_DIR}/3rdParty/agc/target/cxxbridge/anime-game-core/src/genshin/cxxlib.rs.cc"
+        #"${PROJECT_SOURCE_DIR}/3rdParty/agc/target/cxxbridge/anime-game-core/src/honkai/cxxlib.rs.cc"
+        #"${PROJECT_SOURCE_DIR}/3rdParty/agcli/target/cxxbridge/anime-game-cli/src/cxxlib.rs.cc"
+        #"${PROJECT_SOURCE_DIR}/3rdParty/agcli/target/cxxbridge/anime-game-cli/src/commands/cxxlib.rs.cc"
+        #"${PROJECT_SOURCE_DIR}/3rdParty/agcli/target/cxxbridge/anime-game-cli/src/commands/voice/cxxlib.rs.cc"
+        #"${PROJECT_SOURCE_DIR}/3rdParty/agcli/target/cxxbridge/anime-game-cli/src/commands/game/cxxlib.rs.cc"
+        #"${PROJECT_SOURCE_DIR}/3rdParty/agcli/target/cxxbridge/anime-game-cli/src/commands/patch/cxxlib.rs.cc"
 )
 
 
@@ -111,6 +119,7 @@ target_link_libraries(
         XdgUtils::BaseDir
 
         "${PROJECT_SOURCE_DIR}/3rdParty/libsass/lib/libsass.a"
-        "${PROJECT_SOURCE_DIR}/3rdParty/agcli/target/debug/libanime_game_cli.a"
+        #"${PROJECT_SOURCE_DIR}/3rdParty/agc/target/debug/libanime_game_core.a"
+        #"${PROJECT_SOURCE_DIR}/3rdParty/agcli/target/debug/libanime_game_cli.a"
 )
 

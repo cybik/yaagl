@@ -4,8 +4,6 @@
 
 #include "SettingsTabGeneral.h"
 
-#include <cxxlib.rs.h>
-
 SettingsTabGeneral::SettingsTabGeneral(Nedrysoft::Ribbon::RibbonWidget* ri) : SettingsTab() {
     setupGeneralGroup();
     setupPatchInfoGroup();
@@ -72,10 +70,6 @@ void SettingsTabGeneral::setupPatchInfo(std::shared_ptr<SettingsGroup> group) {
                 ->setAlignment(Qt::AlignmentFlag::AlignRight);
     _cbPatchInfo->setColor(QColor::fromCmyk(70,60,0,10));
     group->addControl(_cbPatchInfo);
-
-    _cbPatchInfo->setText(QString(
-        moe::launcher::agcli::get_local_patch_state("obi-wan").version.c_str())
-    );
 }
 
 void SettingsTabGeneral::setupPatchRevert(std::shared_ptr<SettingsGroup> group) {

@@ -65,7 +65,7 @@ std::shared_ptr<QWebEngineView> SettingsWindow::setupGol(bool usedAsWidget) {
         settings_WebEngine = std::make_shared<QWebEngineView>();
         settings_WebEngine->setContextMenuPolicy(Qt::NoContextMenu);
         settings_WebEngine->setAcceptDrops(false);
-        settings_WebEngine->load(QUrl("https://gol.launcher.moe"));
+        settings_WebEngine->load(QUrl("https://launcher.moe"));
     }
     return settings_WebEngine;
 }
