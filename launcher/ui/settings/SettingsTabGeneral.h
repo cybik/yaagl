@@ -12,7 +12,7 @@
 
 #include "launcher/ui/settings/util/SettingsControls.h"
 #include "launcher/ui/settings/util/SettingsGroup.h"
-#include "launcher/process/launch.h"
+#include "launcher/process/game.h"
 
 class SettingsTabGeneral : public SettingsTab {
 public:
@@ -58,7 +58,7 @@ private:
     std::shared_ptr<SettingsGroup> _discordIconSettings;
     void setupDiscordIconOptions(std::shared_ptr<SettingsGroup>);
 
-    std::shared_ptr<Launch> _launcher;
+    std::shared_ptr<Game> _game;
     qint64 _pid;
 };
 

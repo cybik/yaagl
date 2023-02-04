@@ -13,7 +13,7 @@ class Launch {
 public:
     static std::shared_ptr<Launch> getLaunch();
 
-    void LaunchIt(qint64* pid);
+    std::shared_ptr<Launch> LaunchIt(qint64* pid);
 private:
     static std::shared_ptr<Launch> _launch;
     Launch();

@@ -3,6 +3,10 @@ project(QAGL LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
+if(${CMAKE_BUILD_TYPE} STREQUAL "Debug")
+    add_compile_definitions("_DEBUG")
+endif ()
+
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
@@ -102,7 +106,7 @@ add_executable(
         #"${PROJECT_SOURCE_DIR}/3rdParty/agcli/target/cxxbridge/anime-game-cli/src/commands/voice/cxxlib.rs.cc"
         #"${PROJECT_SOURCE_DIR}/3rdParty/agcli/target/cxxbridge/anime-game-cli/src/commands/game/cxxlib.rs.cc"
         #"${PROJECT_SOURCE_DIR}/3rdParty/agcli/target/cxxbridge/anime-game-cli/src/commands/patch/cxxlib.rs.cc"
-        launcher/process/process.cpp launcher/process/process.h launcher/process/launch.cpp launcher/process/launch.h)
+        launcher/process/process.cpp launcher/process/process.h launcher/process/launch.cpp launcher/process/launch.h launcher/process/game.cpp launcher/process/game.h)
 
 
 target_link_libraries(

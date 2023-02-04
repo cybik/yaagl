@@ -4,8 +4,6 @@
 
 #include "SettingsTabGeneral.h"
 
-#include <algorithm>
-#include <QMessageBox>
 
 SettingsTabGeneral::SettingsTabGeneral(Nedrysoft::Ribbon::RibbonWidget* ri) : SettingsTab() {
     setupGeneralGroup();
@@ -61,13 +59,9 @@ void SettingsTabGeneral::setupGameLaunch() {
 }
 
 void SettingsTabGeneral::onLaunchClick() {
-    QMessageBox * msg = new QMessageBox();
-    msg->setText("mikkiku");
-    msg->standardButtons();
-    msg->show();
-
-    _launcher = Launch::getLaunch();
-    _launcher->LaunchIt(&_pid);
+    _game = Game::getGame()
+            ->Setup()
+            ->Launch(&_pid);
 }
 
 void SettingsTabGeneral::setupLaunchDesc(std::shared_ptr<SettingsGroup> group) {
