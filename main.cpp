@@ -14,8 +14,6 @@ using namespace QAGL;
 static std::shared_ptr<SettingsData> data;
 
 int main(int argc, char *argv[]) {
-    data = SettingsData::getSettingsData();
-
     QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
     QApplication app(argc, argv);
@@ -42,7 +40,7 @@ int main(int argc, char *argv[]) {
     app.setOrganizationName(ORG_DOMAIN);
     app.setOrganizationDomain(ORG_DOMAIN);
     app.setApplicationDisplayName(APP_NAME);
-    std::unique_ptr<Landing> landing = std::make_unique<Landing>(app, std::move(data),style);
+    std::unique_ptr<Landing> landing = std::make_unique<Landing>(app, style);
     QPixmap pix;
     pix.loadFromData(QByteArray::fromBase64(qiqi_smol.toLocal8Bit(), QByteArray::Base64Encoding));
     app.setWindowIcon(pix);

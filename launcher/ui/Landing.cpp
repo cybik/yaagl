@@ -132,8 +132,8 @@ namespace QAGL {
         }
     }
 
-    Landing::Landing(const QApplication &app, std::shared_ptr<SettingsData> settings, QAGL_App_Style style) {
-        _configData = std::move(settings);
+    Landing::Landing(const QApplication &app,
+                     QAGL_App_Style style) {
 
         launcher_Window = std::make_shared<QMainWindow>();
 

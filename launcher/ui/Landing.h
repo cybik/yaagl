@@ -26,7 +26,6 @@ namespace QAGL {
 Q_OBJECT
     public:
         explicit Landing(const QApplication &app,
-                         std::shared_ptr<SettingsData> settings,
                          QAGL_App_Style style = QAGL_App_Style::Normal
         );
         void show(const QApplication &app);
