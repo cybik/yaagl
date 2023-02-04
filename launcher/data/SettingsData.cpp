@@ -10,9 +10,13 @@
 
 #define ANIME_PATH "/anime-game-launcher"
 
+#include <XdgUtils/BaseDir/BaseDir.h>
 
-std::unique_ptr<SettingsData> SettingsData::getSettingsData(std::string path) {
-    return std::move(std::make_unique<SettingsData>(path.append(ANIME_PATH)));
+
+std::shared_ptr<SettingsData> SettingsData::getSettingsData() {
+    return std::move(std::make_unique<SettingsData>(
+        std::string(XdgUtils::BaseDir::XdgDataHome()).append(ANIME_PATH))
+    );
 }
 
 std::shared_ptr<Settings> SettingsData::getSettings() {

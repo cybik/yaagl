@@ -26,7 +26,7 @@ namespace QAGL {
 Q_OBJECT
     public:
         explicit Landing(const QApplication &app,
-                         std::unique_ptr<SettingsData> settings,
+                         std::shared_ptr<SettingsData> settings,
                          QAGL_App_Style style = QAGL_App_Style::Normal
         );
         void show(const QApplication &app);
@@ -64,7 +64,7 @@ Q_OBJECT
         // JSON - Background Image data
         std::shared_ptr<QJsonDocument> background;
 
-        std::unique_ptr<SettingsData> _configData;
+        std::shared_ptr<SettingsData> _configData;
 
         std::shared_ptr<SettingsWindow> createSettings();
 

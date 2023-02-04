@@ -8,14 +8,13 @@
 
 #include "launcher/data/SettingsData.h"
 
-#include <XdgUtils/BaseDir/BaseDir.h>
 
 using namespace QAGL;
 
-static std::unique_ptr<SettingsData> data;
+static std::shared_ptr<SettingsData> data;
 
 int main(int argc, char *argv[]) {
-    data = std::move(SettingsData::getSettingsData(XdgUtils::BaseDir::XdgDataHome()));
+    data = SettingsData::getSettingsData();
 
     QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);

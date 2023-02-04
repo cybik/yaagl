@@ -132,7 +132,7 @@ namespace QAGL {
         }
     }
 
-    Landing::Landing(const QApplication &app, std::unique_ptr<SettingsData> settings, QAGL::QAGL_App_Style style) {
+    Landing::Landing(const QApplication &app, std::shared_ptr<SettingsData> settings, QAGL_App_Style style) {
         _configData = std::move(settings);
 
         launcher_Window = std::make_shared<QMainWindow>();
@@ -197,7 +197,7 @@ namespace QAGL {
         if(settings == nullptr) {
             settings = std::make_shared<SettingsWindow>(_style == QAGL_App_Style::Unique_Window);
         }
-        settings->setConfig(_configData->getSettings());
+        settings->setConfig(SettingsData::getSettingsData()->getSettings());
         return settings;
     }
 
