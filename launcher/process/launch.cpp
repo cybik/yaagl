@@ -8,28 +8,29 @@
 #include <QMessageBox>
 #endif
 
-const QString _genpath = "/Depot/Games/Genshin/Game/drive_c/Program Files/Genshin Impact";
-const QString _winepath = "/home/cybik/.steam/root/compatibilitytools.d/proton-latest/files/bin/wine";
-const QString _executable = "GenshinImpact.exe";
-const QString _winepfx = "/Depot/Games/Genshin/GameTrash2";
+//const QString _genpath = "/Depot/Games/Genshin/Game/drive_c/Program Files/Genshin Impact";
+//const QString _winepath = "/home/cybik/.steam/root/compatibilitytools.d/proton-latest/files/bin/wine";
+//const QString _executable = "GenshinImpact.exe";
+//const QString _winepfx = "/Depot/Games/Genshin/GameTrash2";
 
-std::shared_ptr<Launch> Launch::_launch(nullptr);
+//std::shared_ptr<Launch> Launch::_launch(nullptr);
 
+/*
 std::shared_ptr<Launch> Launch::getLaunch() {
     if(_launch == nullptr) {
-        _launch.reset(new Launch());
+        _launch.reset(new Launch(QString(), QString(), QString(), QString()));
     }
     return _launch;
-}
+}*/
 
-Launch::Launch() {
+Launch::Launch(QString _winepath, QString _genpath, QString _executable, QString _winepfx) {
     auto qpe = QProcessEnvironment();
     qpe.insert("WINEPREFIX", _winepfx);
 
     _process = std::make_unique<Process>(_winepath, _executable, _genpath, QStringList(), qpe);
 }
 
-std::shared_ptr<Launch> Launch::LaunchIt(qint64* pid) {
+void Launch::LaunchIt(qint64* pid) {
 #if defined(_DEBUG)
     QString _text = "Program being run\n\n";
     _text += (" * Program:\n  " + _process->get()->program() + "\n");
@@ -47,12 +48,12 @@ std::shared_ptr<Launch> Launch::LaunchIt(qint64* pid) {
         }
     }
     QMessageBox * msg = new QMessageBox();
-    msg->setWindowTitle("Launch Process");
+    msg->setWindowTitle("LaunchIt Process");
     msg->setText(_text);
     msg->setTextFormat(Qt::TextFormat::PlainText);
     msg->standardButtons();
     msg->show();
 #endif
     _process->start(pid);
-    return getLaunch();
+    //return getLaunch();
 }

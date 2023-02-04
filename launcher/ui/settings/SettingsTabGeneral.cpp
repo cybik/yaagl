@@ -59,9 +59,8 @@ void SettingsTabGeneral::setupGameLaunch() {
 }
 
 void SettingsTabGeneral::onLaunchClick() {
-    _game = Game::getGame()
-            ->Setup()
-            ->Launch(&_pid);
+    _game = Game::getGame();
+    _game->LaunchIt(&_pid);
 }
 
 void SettingsTabGeneral::setupLaunchDesc(std::shared_ptr<SettingsGroup> group) {

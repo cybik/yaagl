@@ -25,6 +25,8 @@ private:
     std::filesystem::path _file;
 
     std::shared_ptr<Settings> _settings;
+
+    static std::shared_ptr<SettingsData> _settingsData;
 };
 
 

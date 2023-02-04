@@ -11,12 +11,12 @@
 #include "process.h"
 class Launch {
 public:
-    static std::shared_ptr<Launch> getLaunch();
+    //static std::shared_ptr<Launch> getLaunch();
 
-    std::shared_ptr<Launch> LaunchIt(qint64* pid);
+    void LaunchIt(qint64* pid);
+    Launch(QString wp, QString gp, QString e, QString pfx);
 private:
-    static std::shared_ptr<Launch> _launch;
-    Launch();
+    //static std::shared_ptr<Launch> _launch;
 
     std::unique_ptr<Process> _process;
 };

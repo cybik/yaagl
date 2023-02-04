@@ -13,10 +13,13 @@
 class Game {
 public:
     static std::shared_ptr<Game> getGame();
-    std::shared_ptr<Game> Launch(qint64*);
+    qint64 LaunchIt(qint64*);
     std::shared_ptr<Game> Setup();
 private:
+    Game();
     static std::shared_ptr<Game> _game;
+
+    std::shared_ptr<Launch> _launch;
 };
 
 #endif //QAGL_GAME_H
