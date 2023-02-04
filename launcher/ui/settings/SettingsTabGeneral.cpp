@@ -4,6 +4,9 @@
 
 #include "SettingsTabGeneral.h"
 
+#include <algorithm>
+#include <QMessageBox>
+
 SettingsTabGeneral::SettingsTabGeneral(Nedrysoft::Ribbon::RibbonWidget* ri) : SettingsTab() {
     setupGeneralGroup();
     setupPatchInfoGroup();
@@ -12,6 +15,7 @@ SettingsTabGeneral::SettingsTabGeneral(Nedrysoft::Ribbon::RibbonWidget* ri) : Se
     setupDiscordTextOptionsGroup();
     setupDiscordIconOptionsGroup();
 
+    setupGameLaunch();
     addTab(ri, "General");
 }
 
@@ -48,6 +52,28 @@ void SettingsTabGeneral::setupPatchInfoGroup() {
     setupPatchInfo(_patch);
 
     _tabLayout->addWidget(_patch->getWidget());
+}
+
+void SettingsTabGeneral::setupGameLaunch() {
+    _launch = std::make_shared<SettingsGroup>("Launch it");
+    setupLaunchDesc(_launch);
+    _tabLayout->addWidget(_launch->getWidget());
+}
+
+void SettingsTabGeneral::onLaunchClick() {
+    QMessageBox * msg = new QMessageBox();
+    msg->setText("mikkiku");
+    msg->standardButtons();
+    msg->show();
+
+    _launcher = Launch::getLaunch();
+    _launcher->LaunchIt(&_pid);
+}
+
+void SettingsTabGeneral::setupLaunchDesc(std::shared_ptr<SettingsGroup> group) {
+    _cbLaunch = std::make_shared<SettingsButton>("YEET");
+    _cbLaunch->addHandler( std::make_unique<std::function<void(bool)>>([&](bool) { this->onLaunchClick(); }) );
+    group->addControl(_cbLaunch);
 }
 
 void SettingsTabGeneral::setupPatchOpsGroup() {

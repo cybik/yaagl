@@ -12,6 +12,7 @@
 
 #include "launcher/ui/settings/util/SettingsControls.h"
 #include "launcher/ui/settings/util/SettingsGroup.h"
+#include "launcher/process/launch.h"
 
 class SettingsTabGeneral : public SettingsTab {
 public:
@@ -24,6 +25,12 @@ private:
     std::shared_ptr<SettingsCombo> _cbLang;
     void setupTheme(std::shared_ptr<SettingsGroup>);
     std::shared_ptr<SettingsCombo> _cbTheme;
+
+    void setupGameLaunch();
+    std::shared_ptr<SettingsGroup> _launch;
+    void setupLaunchDesc(std::shared_ptr<SettingsGroup>);
+    std::shared_ptr<SettingsButton> _cbLaunch;
+    void onLaunchClick();
 
     void setupPatchInfoGroup();
     std::shared_ptr<SettingsGroup> _patch;
@@ -50,6 +57,9 @@ private:
     void setupDiscordIconOptionsGroup();
     std::shared_ptr<SettingsGroup> _discordIconSettings;
     void setupDiscordIconOptions(std::shared_ptr<SettingsGroup>);
+
+    std::shared_ptr<Launch> _launcher;
+    qint64 _pid;
 };
 
 

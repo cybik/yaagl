@@ -20,11 +20,17 @@ QLayout* SettingsButton::getLayout() {
 
 void SettingsButton::setupEventHandlers() {
     connect(
-        _control.get(), SIGNAL(clicked(bool)),
-         this, SLOT(onClick(bool))
+        _control.get(), &Nedrysoft::Ribbon::RibbonButton::clicked,
+        [&](bool checked) {onClick(checked);}
     );
 }
 
 void SettingsButton::onClick(bool isChecked) {
+    if(_handler) {
+        (*_handler)(isChecked);
+    }
+}
 
+void SettingsButton::addHandler(std::unique_ptr<std::function<void(bool)>> _in) {
+    _handler = std::move(_in);
 }

@@ -18,11 +18,13 @@ Q_OBJECT
 public:
     explicit SettingsButton(const QString& name);
     QLayout* getLayout() override;
+    void addHandler(std::unique_ptr<std::function<void(bool)>>);
 protected:
     void addToLayout() override;
     void setupEventHandlers() override;
 private:
     std::shared_ptr<Nedrysoft::Ribbon::RibbonButton> _control;
+    std::unique_ptr<std::function<void(bool)>> _handler;
 public slots:
     void onClick(bool);
 };
