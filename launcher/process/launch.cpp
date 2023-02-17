@@ -9,6 +9,8 @@ const QString _winepath = "/home/cybik/.steam/root/compatibilitytools.d/proton-l
 const QString _executable = "GenshinImpact.exe";
 const QString _winepfx = "/Depot/Games/Genshin/GameTrash2";
 
+std::shared_ptr<Launch> Launch::_launch = nullptr;
+
 std::shared_ptr<Launch> Launch::getLaunch() {
     if(_launch == nullptr) {
         _launch.reset(new Launch());
