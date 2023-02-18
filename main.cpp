@@ -8,18 +8,16 @@
 
 #include "launcher/data/SettingsData.h"
 
-#include <XdgUtils/BaseDir/BaseDir.h>
-
 using namespace QAGL;
 
-static std::unique_ptr<SettingsData> data;
+static std::shared_ptr<SettingsData> data;
 
 int main(int argc, char *argv[]) {
-    data = std::move(SettingsData::getSettingsData(XdgUtils::BaseDir::XdgDataHome()));
-
     QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
     QApplication app(argc, argv);
+
+    data = SettingsData::getSettingsData();
 
     std::string tf;
     if(const char* _tf = std::getenv("SteamTenfoot")) {

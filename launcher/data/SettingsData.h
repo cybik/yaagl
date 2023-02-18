@@ -14,7 +14,7 @@
 
 class SettingsData {
 public:
-    static std::unique_ptr<SettingsData> getSettingsData(std::string path);
+    static std::shared_ptr<SettingsData> getSettingsData();
     explicit SettingsData(std::filesystem::path);
 
     std::shared_ptr<Settings> getSettings();
@@ -25,6 +25,7 @@ private:
     std::filesystem::path _file;
 
     std::shared_ptr<Settings> _settings;
+    static std::shared_ptr<SettingsData> _settingsData;
 };
 
 

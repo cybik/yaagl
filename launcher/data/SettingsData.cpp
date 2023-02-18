@@ -8,11 +8,19 @@
 
 #include <yaml-cpp/node/emit.h>
 
-#define ANIME_PATH "/anime-game-launcher"
+#define ANIME_PATH "/anime-game-launcher-qt"
 
-
-std::unique_ptr<SettingsData> SettingsData::getSettingsData(std::string path) {
-    return std::move(std::make_unique<SettingsData>(path.append(ANIME_PATH)));
+#include <XdgUtils/BaseDir/BaseDir.h>
+std::shared_ptr<SettingsData> SettingsData::_settingsData = nullptr;
+std::shared_ptr<SettingsData> SettingsData::getSettingsData() {
+    if(!_settingsData) {
+        _settingsData = std::make_shared<SettingsData>(
+            std::string(XdgUtils::BaseDir::XdgDataHome())
+                + std::filesystem::path::preferred_separator
+                + ANIME_PATH
+        );
+    }
+    return _settingsData;
 }
 
 std::shared_ptr<Settings> SettingsData::getSettings() {

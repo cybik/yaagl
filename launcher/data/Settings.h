@@ -92,7 +92,7 @@ public:
 
 class Settings : protected SettingsParsing {
 public:
-    Settings(); // TODO: config being initiated.
+    Settings() = default; // TODO: config being initiated.
     Settings(const YAML::Node& file);
     void parse(const YAML::Node& file) override;
     std::unique_ptr<YAML::Node> generate() override;

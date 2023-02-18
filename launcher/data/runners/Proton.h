@@ -8,17 +8,20 @@
 #include <string>
 #include <memory>
 
+#include "Common.h"
 
-class Proton {
+class Proton : public Common {
 public:
-    std::shared_ptr<Proton> get_instance();
+    static std::shared_ptr<Proton> get_instance();
+protected:
+    void handle(QNetworkReply*) override;
 private:
     Proton();
     static const std::string _proton_url;
 
     static std::shared_ptr<Proton> _self;
 
-    void setup();
+    void setups();
 
 };
 

@@ -3,8 +3,8 @@
 //
 
 #include "Settings.h"
-
-#include <algorithm>
+#include "launcher/data/runners/Proton.h"
+#include "launcher/data/runners/Wine.h"
 
 #include <iostream>
 
@@ -43,6 +43,8 @@ void Settings::parse(const YAML::Node &file) {
 
 Settings::Settings(const YAML::Node &file) {
     parse(file);
+    Proton::get_instance();
+    Wine::get_instance();
 }
 
 std::string Settings::to_string() {
