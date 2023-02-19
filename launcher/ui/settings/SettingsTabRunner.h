@@ -11,14 +11,32 @@
 #include <QWidget>
 #include <QHBoxLayout>
 
+#include "launcher/ui/settings/util/SettingsControls.h"
+#include "launcher/ui/settings/util/SettingsGroup.h"
+
+#include "launcher/data/runners/Wine.h"
+#include "launcher/data/runners/Proton.h"
+
+#include <tuple>
+
 class SettingsTabRunner : public SettingsTab {
 public:
     explicit SettingsTabRunner(Nedrysoft::Ribbon::RibbonWidget* ri);
     void parse(std::shared_ptr<Settings>) override;
 private:
-    std::shared_ptr<Nedrysoft::Ribbon::RibbonGroup> _runWINE;
-    std::shared_ptr<Nedrysoft::Ribbon::RibbonGroup> _runDXVK;
+    std::shared_ptr<SettingsGroup> _runWINE;
+    std::shared_ptr<SettingsCombo> _cbWINE;
+    std::shared_ptr<SettingsGroup> _runDXVK;
+
+    void setupRunnerGroup();
+    void setupDXVKGroup();
+
+    void setupRunners(std::shared_ptr<SettingsGroup> group);
+    void setupDXVKs(std::shared_ptr<SettingsGroup> group);
+
+    std::vector<std::tuple<std::string, std::shared_ptr<RunnerCommon>>> _runners;
 };
+
 
 
 #endif //QAGL_SETTINGSTABRUNNER_H

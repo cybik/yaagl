@@ -2,6 +2,7 @@
 // Created by cybik on 22-07-24.
 //
 
+#include <iostream>
 #include "SettingsCombo.h"
 
 SettingsCombo::SettingsCombo(const QString& name) : SettingsControl(name) {
@@ -27,6 +28,10 @@ void SettingsCombo::addChoice(const char* choice) {
     _control->addItem(choice);
 }
 
+void SettingsCombo::addChoice(const char* choice, std::string metadata) {
+    _control->addItem(choice, QVariant(metadata.c_str()));
+}
+
 QLayout* SettingsCombo::getLayout() {
     return _layout->layout();
 }
@@ -40,5 +45,8 @@ void SettingsCombo::setupEventHandlers() {
 }
 
 void SettingsCombo::onIndexChanged(int newIndex) {
-
+    if(!_control->itemData(newIndex).isNull()) {
+        //_selected_metadata = _control->itemData(newIndex);
+        std::cout << _control->itemData(newIndex).toString().toStdString().c_str() << std::endl;
+    }
 }

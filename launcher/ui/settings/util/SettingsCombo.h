@@ -19,6 +19,7 @@ public:
     explicit SettingsCombo(const QString& name);
     QLayout* getLayout() override;
     void addChoice(const char* choice);
+    void addChoice(const char* choice, std::string);
     void addChoices(int count, ...);
 protected:
     void addToLayout() override;

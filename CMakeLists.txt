@@ -13,6 +13,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_subdirectory("${PROJECT_SOURCE_DIR}/3rdParty/xdg")
 add_subdirectory("${PROJECT_SOURCE_DIR}/3rdParty/yaml-cpp")
 add_subdirectory("${PROJECT_SOURCE_DIR}/3rdParty/nedrysoft")
+add_subdirectory("${PROJECT_SOURCE_DIR}/3rdParty/qed")
+add_subdirectory("${PROJECT_SOURCE_DIR}/3rdParty/qarchive")
+add_subdirectory("${PROJECT_SOURCE_DIR}/3rdParty/teemo")
 
 find_package(QT
     NAMES
@@ -36,6 +39,9 @@ include_directories(
     AFTER
         "${PROJECT_SOURCE_DIR}/3rdParty/libsass/include"
         "${PROJECT_SOURCE_DIR}/3rdParty/xdg/include"
+        "${PROJECT_SOURCE_DIR}/3rdParty/qed/include"
+        "${PROJECT_SOURCE_DIR}/3rdParty/teemo/include"
+        "${PROJECT_SOURCE_DIR}/3rdParty/qarchive/include"
         "${PROJECT_SOURCE_DIR}/3rdParty/nedrysoft/Ribbon/include"
         "${PROJECT_SOURCE_DIR}/3rdParty/nedrysoft/ThemeSupport/include"
         "${PROJECT_SOURCE_DIR}/3rdParty/nedrysoft/SettingsDialog/include"
@@ -106,7 +112,7 @@ add_executable(
         launcher/process/launch.cpp launcher/process/launch.h
         launcher/data/runners/Proton.cpp launcher/data/runners/Proton.h
         launcher/data/runners/Wine.cpp launcher/data/runners/Wine.h
-        launcher/data/runners/Common.cpp launcher/data/runners/Common.h)
+        launcher/data/runners/RunnerCommon.cpp launcher/data/runners/RunnerCommon.h)
 
 
 target_link_libraries(
@@ -121,6 +127,9 @@ target_link_libraries(
         Qt5::WebEngineWidgets
         Ribbon
         XdgUtils::BaseDir
+        QEasyDownloader
+        teemo
+        QArchive
 
         "${PROJECT_SOURCE_DIR}/3rdParty/libsass/lib/libsass.a"
         #"${PROJECT_SOURCE_DIR}/3rdParty/agc/target/debug/libanime_game_core.a"

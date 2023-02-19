@@ -35,3 +35,15 @@
 [submodule "3rdParty/anime-launcher-sdk"]
 	path = 3rdParty/anime-launcher-sdk
 	url = git@github.com:an-anime-team/anime-launcher-sdk.git
+[submodule "3rdParty/teemo"]
+	path = 3rdParty/teemo
+	url = git@github.com:winsoft666/teemo.git
+[submodule "3rdParty/qed"]
+	path = 3rdParty/qed
+	url = git@github.com:SammyEnigma/QEasyDownloader.git
+[submodule "3rdParty/bit7z"]
+	path = 3rdParty/bit7z
+	url = git@github.com:rikyoz/bit7z.git
+[submodule "3rdParty/qarchive"]
+	path = 3rdParty/qarchive
+	url = git@github.com:antony-jr/QArchive.git

@@ -21,7 +21,8 @@ std::shared_ptr<Wine> Wine::get_instance() {
 }
 
 void Wine::handle(QNetworkReply* _rep) {
-    std::cout << _rep->readAll().toStdString() << std::endl;
+    parse_in(_rep->readAll());
+    std::cout << to_string().toStdString() << std::endl;
 }
 
 void Wine::setups() {
@@ -32,4 +33,8 @@ void Wine::setups() {
 
 Wine::Wine() {
     setups();
+}
+
+std::string Wine::get_identifier() {
+    return _identifier;
 }

@@ -8,10 +8,11 @@
 #include <string>
 #include <memory>
 
-#include "Common.h"
+#include "RunnerCommon.h"
 
-class Proton : public Common {
+class Proton : public RunnerCommon {
 public:
+    std::string get_identifier() override;
     static std::shared_ptr<Proton> get_instance();
 protected:
     void handle(QNetworkReply*) override;
@@ -23,6 +24,7 @@ private:
 
     void setups();
 
+    static const std::string _identifier;
 };
 
 

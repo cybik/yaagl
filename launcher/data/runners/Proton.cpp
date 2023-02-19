@@ -11,6 +11,7 @@
 #include <QNetworkReply>
 
 const std::string Proton::_proton_url = "https://raw.githubusercontent.com/cybik/yaagl-data/main/runners/proton.json";
+const std::string Proton::_identifier = "GE-Proton";
 std::shared_ptr<Proton> Proton::_self = nullptr;
 
 std::shared_ptr<Proton> Proton::get_instance() {
@@ -21,7 +22,8 @@ std::shared_ptr<Proton> Proton::get_instance() {
 }
 
 void Proton::handle(QNetworkReply* _rep) {
-    std::cout << _rep->readAll().toStdString() << std::endl;
+    parse_in(_rep->readAll());
+    std::cout << to_string().toStdString() << std::endl;
 }
 
 void Proton::setups() {
@@ -32,4 +34,8 @@ void Proton::setups() {
 
 Proton::Proton() {
     setups();
+}
+
+std::string Proton::get_identifier() {
+    return _identifier;
 }

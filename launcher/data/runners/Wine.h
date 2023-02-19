@@ -8,11 +8,12 @@
 #include <string>
 #include <memory>
 
-#include "Common.h"
+#include "RunnerCommon.h"
 
-class Wine : public Common {
+class Wine : public RunnerCommon {
 public:
     static std::shared_ptr<Wine> get_instance();
+    std::string get_identifier() override;
 protected:
     void handle(QNetworkReply*) override;
 private:
@@ -23,7 +24,8 @@ private:
 
     void setups();
 
+    std::string _identifier;
 };
 
 
-#endif //QAGL_PROTON_H
+#endif //QAGL_WINE_H

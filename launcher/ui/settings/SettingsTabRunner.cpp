@@ -5,16 +5,35 @@
 #include "SettingsTabRunner.h"
 
 SettingsTabRunner::SettingsTabRunner(Nedrysoft::Ribbon::RibbonWidget* ri) : SettingsTab() {
-    _runWINE = std::make_shared<Nedrysoft::Ribbon::RibbonGroup>();
-    _runWINE->setGroupName("Runner Setup");
-    _runDXVK = std::make_shared<Nedrysoft::Ribbon::RibbonGroup>();
-    _runDXVK->setGroupName("DXVK Setup");
-
-    _tabLayout->addWidget(_runWINE.get());
-    _tabLayout->addWidget(_runDXVK.get());
+    setupRunnerGroup();
+    setupDXVKGroup();
 
     addTab(ri, "Runner");
 }
+
+void SettingsTabRunner::setupDXVKGroup() {
+    _runDXVK = std::make_shared<SettingsGroup>("DXVK Setup");
+    setupDXVKs(_runDXVK);
+    _tabLayout->addWidget(_runDXVK->getWidget());
+}
+
+void SettingsTabRunner::setupDXVKs(std::shared_ptr<SettingsGroup> group) {
+    // noop
+}
+
+void SettingsTabRunner::setupRunnerGroup() {
+    _runWINE = std::make_shared<SettingsGroup>("Runner Setup");
+    setupRunners(_runWINE);
+    _tabLayout->addWidget(_runWINE->getWidget());
+}
+
+void SettingsTabRunner::setupRunners(std::shared_ptr<SettingsGroup> group) {
+    _cbWINE = std::make_shared<SettingsCombo>("Runner Style");
+    _cbWINE->addChoice(Proton::get_instance()->get_identifier().c_str(), "_proton_");
+    _cbWINE->addChoice(Wine::get_instance()->get_identifier().c_str(), "_wine_");
+    group->addControl(_cbWINE);
+}
+
 void SettingsTabRunner::parse(std::shared_ptr<Settings> data) {
 
 }
