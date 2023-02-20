@@ -11,7 +11,7 @@
 #include "3rdParty/nedrysoft/Ribbon/include/RibbonGroup"
 #include <memory>
 
-class SettingsControl : public QObject{
+class SettingsControl : public QObject {
 Q_OBJECT
 public:
     explicit SettingsControl(const QString&);
@@ -25,6 +25,14 @@ protected:
     std::shared_ptr<QFormLayout> _formLayout;
 
     QString _name;
+    void onAnyChange();
+};
+
+class SettingsDataControl : public SettingsControl {
+public:
+    explicit SettingsDataControl(const QString&);
+protected:
+    bool _first_run = true;
 };
 
 #endif //QAGL_SETTINGSCONTROL_H

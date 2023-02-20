@@ -8,6 +8,8 @@
 
 #include <iostream>
 
+#include <variant>
+
 bool getBoolFromNode(const YAML::Node &file, const char* key) {
     return file[key].IsDefined() && file[key].as<bool>();
 }
@@ -74,6 +76,15 @@ std::unique_ptr<YAML::Node> Settings::generate() {
     return std::move(out);
 }
 
+void Settings::update() {
+    lang.update();
+    folders.update();
+    purge_logs.update();
+    wine.update();
+    discord.update();
+    // do updates here
+}
+
 void SettingsWine::parse(const YAML::Node &file) {
     sync = getStringFromNode(file, "sync");
     fsr = getBoolFromNode(file, "fsr");
@@ -86,6 +97,10 @@ std::unique_ptr<YAML::Node> SettingsWine::generate() {
     (*out)["fsr"] = fsr;
     (*out)["virtual_desktop"] = (*virtual_desktop.generate());
     return std::move(out);
+}
+
+void SettingsWine::update() {
+
 }
 
 void SettingsWineVirtualDesktop::parse(const YAML::Node &file) {
@@ -102,6 +117,10 @@ std::unique_ptr<YAML::Node> SettingsWineVirtualDesktop::generate() {
     return std::move(out);
 }
 
+void SettingsWineVirtualDesktop::update() {
+
+}
+
 void SettingsPurge::parse(const YAML::Node &file) {
     launcher = getStringFromNode(file, "launcher");
     game = getBoolFromNode(file, "game");
@@ -112,6 +131,10 @@ std::unique_ptr<YAML::Node> SettingsPurge::generate() {
     (*out)["game"] = game;
     (*out)["launcher"] = launcher;
     return std::move(out);
+}
+
+void SettingsPurge::update() {
+
 }
 
 void SettingsFolders::parse(const YAML::Node &file) {
@@ -126,6 +149,10 @@ std::unique_ptr<YAML::Node> SettingsFolders::generate() {
     (*out)["game"] = game;
     (*out)["temp"] = temp;
     return std::move(out);
+}
+
+void SettingsFolders::update() {
+
 }
 
 void SettingsLanguage::parse(const YAML::Node &file) {
@@ -154,9 +181,13 @@ std::unique_ptr<YAML::Node> SettingsLanguage::generate() {
     return std::move(out);
 }
 
+void SettingsLanguage::update() {
+
+}
+
 
 void SettingsDiscord::parse(const YAML::Node &file) {
-    enabled = getBoolFromNode(file, "enabled");
+    enabled = { getBoolFromNode(file, "enabled") , std::weak_ptr<SettingsCheckbox>() };
     timer = getBoolFromNode(file, "timer");
     inLauncher.parse(file["states"]["in-launcher"]);
     inGame.parse(file["states"]["in-game"]);
@@ -164,13 +195,19 @@ void SettingsDiscord::parse(const YAML::Node &file) {
 
 std::unique_ptr<YAML::Node> SettingsDiscord::generate() {
     auto out = std::make_unique<YAML::Node>();
-    (*out)["enabled"] = enabled;
+    (*out)["enabled"] = std::get<bool>(enabled);
     (*out)["timer"] = timer;
     YAML::Node states;
     states["in-launcher"] = (*inLauncher.generate());
     states["in-game"] = (*inGame.generate());
     (*out)["states"] = states;
     return std::move(out);
+}
+
+void SettingsDiscord::update() {
+    if(std::get<std::weak_ptr<SettingsCheckbox>>(enabled).lock() != nullptr) {
+        std::get<bool>(enabled) = (std::get<std::weak_ptr<SettingsCheckbox>>(enabled).lock()->isChecked());
+    }
 }
 
 void SettingsDiscordState::parse(const YAML::Node &file) {
@@ -185,4 +222,8 @@ std::unique_ptr<YAML::Node> SettingsDiscordState::generate() {
     (*out)["state"] = state;
     (*out)["icon"] = icon;
     return std::move(out);
+}
+
+void SettingsDiscordState::update() {
+
 }

@@ -18,6 +18,8 @@ public:
     explicit SettingsData(std::filesystem::path);
 
     std::shared_ptr<Settings> getSettings();
+    void update();
+    void saveSettings();
 private:
     SettingsData() = delete;
 

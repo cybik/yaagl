@@ -29,8 +29,8 @@ void SettingsTabRunner::setupRunnerGroup() {
 
 void SettingsTabRunner::setupRunners(std::shared_ptr<SettingsGroup> group) {
     _cbWINE = std::make_shared<SettingsCombo>("Runner Style");
-    _cbWINE->addChoice(Proton::get_instance()->get_identifier().c_str(), "_proton_");
-    _cbWINE->addChoice(Wine::get_instance()->get_identifier().c_str(), "_wine_");
+    _cbWINE->addChoice(Proton::get_instance()->getRunnerName(), Proton::get_instance()->getRootKey());
+    _cbWINE->addChoice(Wine::get_instance()->getRunnerName(), Wine::get_instance()->getRootKey());
     group->addControl(_cbWINE);
 }
 

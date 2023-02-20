@@ -149,5 +149,6 @@ void SettingsTabGeneral::setupDiscordIconOptions(std::shared_ptr<SettingsGroup> 
 }
 
 void SettingsTabGeneral::parse(std::shared_ptr<Settings> data) {
-    _cbDiscordEnabled->setChecked(data->discord.enabled);
+    _cbDiscordEnabled->setChecked(std::get<bool>(data->discord.enabled));
+    std::get<std::weak_ptr<SettingsCheckbox>>(data->discord.enabled) = _cbDiscordEnabled;
 }

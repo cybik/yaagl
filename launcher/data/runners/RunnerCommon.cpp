@@ -26,7 +26,30 @@ void RunnerCommon::parse_in(const QByteArray& array) {
     _key = (*_doc)["id"].toString();
     _metadata = (*_doc)["metadata"].toObject();
     _name = _metadata["name"].toString();
-    _url_upstream = _metadata["url"].toString();;
+    _url_upstream = _metadata["url"].toString();
+    _releases = _metadata["releases"].toArray();
+    for(int i = 0; i<_releases.size(); i++) {
+        _rels.push_back(RunnerRelease(_releases[i].toObject()));
+    }
+}
+
+RunnerRelease::RunnerRelease(QJsonObject _obj)
+{
+    _name = _obj["name"].toString();
+    _release = _obj["release"].toString();
+    _file = _obj["file"].toString();
+}
+
+QString &RunnerRelease::getFile() {
+    return _file;
+}
+
+QString &RunnerRelease::getRelease() {
+    return _release;
+}
+
+QString &RunnerRelease::getName() {
+    return _name;
 }
 
 QString RunnerCommon::to_string() {
@@ -43,4 +66,8 @@ QString RunnerCommon::getRunnerName() {
 
 QString RunnerCommon::getRunnerURL() {
     return _url_upstream;
+}
+
+std::vector<RunnerRelease> &RunnerCommon::getReleases() {
+    return _rels;
 }

@@ -11,6 +11,9 @@
 #define ANIME_PATH "/anime-game-launcher-qt"
 
 #include <XdgUtils/BaseDir/BaseDir.h>
+#include <iostream>
+#include <fstream>
+
 std::shared_ptr<SettingsData> SettingsData::_settingsData = nullptr;
 std::shared_ptr<SettingsData> SettingsData::getSettingsData() {
     if(!_settingsData) {
@@ -34,4 +37,19 @@ SettingsData::SettingsData(std::filesystem::path path) {
         return;
     }
     //_settings = std::make_shared<Settings>();
+}
+
+void SettingsData::saveSettings() {
+    /*std::cout << _file.string() << std::endl;
+    std::cout << "------------------------" << std::endl;
+    std::cout << _settings->to_string();
+    std::cout << "------------------------" << std::endl;
+    */
+    std::ofstream ofs(_file);
+    ofs << _settings->to_string();
+    ofs.close();
+}
+
+void SettingsData::update() {
+    getSettings()->update();
 }

@@ -9,10 +9,15 @@
 #include <list>
 #include <yaml-cpp/yaml.h>
 
+#include <tuple>
+
+#include <launcher/ui/settings/util/SettingsControls.h>
+
 class SettingsParsing {
 public:
     virtual void parse(const YAML::Node& file) = 0;
     virtual std::unique_ptr<YAML::Node> generate() = 0;
+    virtual void update() = 0;
 protected:
     SettingsParsing() = default;
 };
@@ -25,6 +30,8 @@ public:
     std::string icon;
     void parse(const YAML::Node& file) override;
     std::unique_ptr<YAML::Node> generate() override;
+
+    void update() override;
 };
 
 class SettingsDiscord : protected SettingsParsing  {
@@ -32,10 +39,13 @@ public:
     SettingsDiscord() = default;
     void parse(const YAML::Node& file) override;
     std::unique_ptr<YAML::Node> generate() override;
-    bool enabled;
+    std::tuple<bool, std::weak_ptr<SettingsCheckbox>> enabled;
+    //bool enabled;
     bool timer;
     SettingsDiscordState inLauncher;
     SettingsDiscordState inGame;
+
+    void update() override;
 };
 
 class SettingsLanguage : protected SettingsParsing  {
@@ -49,6 +59,8 @@ public:
     bool lang_game_jp = false;
     bool lang_game_kr = false;
     bool lang_game_zh = false;
+
+    void update() override;
 };
 
 class SettingsFolders : protected SettingsParsing  {
@@ -59,6 +71,8 @@ public:
     std::string prefix;
     std::string game;
     std::string temp;
+
+    void update() override;
 };
 
 class SettingsPurge : protected SettingsParsing  {
@@ -68,6 +82,8 @@ public:
     std::unique_ptr<YAML::Node> generate() override;
     bool game;
     std::string launcher;
+
+    void update() override;
 };
 
 class SettingsWineVirtualDesktop : protected SettingsParsing  {
@@ -78,6 +94,8 @@ public:
     bool enabled;
     int width;
     int height;
+
+    void update() override;
 };
 
 class SettingsWine : protected SettingsParsing  {
@@ -88,6 +106,8 @@ public:
     std::string sync;        // enum?
     bool fsr;
     SettingsWineVirtualDesktop virtual_desktop;
+
+    void update() override;
 };
 
 class Settings : protected SettingsParsing {
@@ -116,6 +136,8 @@ public:
     std::string server; // enum
 
     std::string to_string();
+
+    void update() override;
 };
 
 #endif //QAGL_SETTINGS_H

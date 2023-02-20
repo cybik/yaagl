@@ -13,7 +13,7 @@
 
 #include "SettingsControl.h"
 
-class SettingsCheckbox : public SettingsControl {
+class SettingsCheckbox : public SettingsDataControl {
 Q_OBJECT
 public:
     void setChecked(bool);
@@ -25,8 +25,8 @@ protected:
     void setupEventHandlers() override;
 private:
     std::shared_ptr<Nedrysoft::Ribbon::RibbonCheckBox> _control;
-public slots:
     void onStateChanged(int);
+
 };
 
 

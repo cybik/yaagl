@@ -13,13 +13,13 @@
 
 #include "SettingsControl.h"
 
-class SettingsCombo : public SettingsControl {
+class SettingsCombo : public SettingsDataControl {
 Q_OBJECT
 public:
     explicit SettingsCombo(const QString& name);
     QLayout* getLayout() override;
     void addChoice(const char* choice);
-    void addChoice(const char* choice, std::string);
+    void addChoice(const QString&, const QString&);
     void addChoices(int count, ...);
 protected:
     void addToLayout() override;

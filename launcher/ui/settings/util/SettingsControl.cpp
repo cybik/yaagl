@@ -4,6 +4,8 @@
 
 #include "SettingsControl.h"
 
+#include "launcher/data/SettingsData.h"
+
 SettingsControl::SettingsControl(const QString& name) {
     _name = name;
     _layout = std::make_shared<QGridLayout>();
@@ -21,3 +23,10 @@ void SettingsControl::finalize() {
     _layout->addLayout(_formLayout->layout(), 0, 0);
     setupEventHandlers();
 }
+
+void SettingsControl::onAnyChange() {
+    // save
+    SettingsData::getSettingsData()->saveSettings();
+}
+
+SettingsDataControl::SettingsDataControl(const QString &_in) : SettingsControl(_in) {}

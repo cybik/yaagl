@@ -23,7 +23,7 @@ std::string SASSProcess(std::string input) {
     struct Sass_Data_Context* ctx;
     //char buffer[BUFSIZE];
     //size_t size = 1;
-    char *source_string = (char*)malloc(sizeof(char) * input.size());
+    char *source_string = (char*)malloc(sizeof(char) * (input.size()+1));
 
     if(source_string == NULL) {
         printf("Allocation failed");

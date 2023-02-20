@@ -12,7 +12,6 @@
 
 class Proton : public RunnerCommon {
 public:
-    std::string get_identifier() override;
     static std::shared_ptr<Proton> get_instance();
 protected:
     void handle(QNetworkReply*) override;

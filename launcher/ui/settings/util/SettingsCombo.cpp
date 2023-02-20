@@ -5,7 +5,7 @@
 #include <iostream>
 #include "SettingsCombo.h"
 
-SettingsCombo::SettingsCombo(const QString& name) : SettingsControl(name) {
+SettingsCombo::SettingsCombo(const QString& name) : SettingsDataControl(name) {
     _control = std::make_shared<Nedrysoft::Ribbon::RibbonComboBox>();
     _control->setSizePolicy(QSizePolicy(QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Minimum));
     finalize();
@@ -28,8 +28,8 @@ void SettingsCombo::addChoice(const char* choice) {
     _control->addItem(choice);
 }
 
-void SettingsCombo::addChoice(const char* choice, std::string metadata) {
-    _control->addItem(choice, QVariant(metadata.c_str()));
+void SettingsCombo::addChoice(const QString& choice, const QString& metadata) {
+    _control->addItem(choice, QVariant(metadata));
 }
 
 QLayout* SettingsCombo::getLayout() {

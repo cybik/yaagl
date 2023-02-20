@@ -173,7 +173,7 @@ namespace QAGL {
         launcher_WidgetStack->addWidget(launcher_WebEngine.get());
         _style = style;
         if(style == QAGL_App_Style::Unique_Window) {
-            launcher_WidgetStack->addWidget(createSettings()->getWidget());
+            launcher_WidgetStack->addWidget(createSettings()->getWidget()); // first
             createSettings()->setExitCallback(
                 [&]() {
                     exit_settings();
@@ -199,8 +199,8 @@ namespace QAGL {
     std::shared_ptr<SettingsWindow> Landing::createSettings() {
         if(settings == nullptr) {
             settings = std::make_shared<SettingsWindow>(_style == QAGL_App_Style::Unique_Window);
+            settings->setConfig(_configData->getSettings());
         }
-        settings->setConfig(_configData->getSettings());
         return settings;
     }
 

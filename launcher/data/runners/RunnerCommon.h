@@ -10,30 +10,46 @@
 
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QJsonArray>
 
 #include <functional>
 #include <memory>
 
+class RunnerRelease {
+    RunnerRelease() = delete;
+
+    QString _file;
+    QString _release;
+    QString _name;
+public:
+    QString& getName();
+    QString& getRelease();
+    QString& getFile();
+    RunnerRelease(QJsonObject);
+};
+
 class RunnerCommon {
-    virtual std::string get_identifier() = 0;
 protected:
     void setup(QUrl, std::function<void(QNetworkReply *)>);
     virtual void handle(QNetworkReply*) = 0; // pure virtual
     void parse_in(const QByteArray&);
     std::shared_ptr<QJsonDocument> _doc;
 
-    QString getRootKey();
-
-    QString getRunnerName();
-
     QString getRunnerURL();
-
     QString to_string();
+
+    std::vector<RunnerRelease>& getReleases();
 private:
     QString _key;
     QJsonObject _metadata;
     QString _name;
     QString _url_upstream;
+
+    QJsonArray _releases;
+    std::vector<RunnerRelease> _rels;
+public:
+    QString getRootKey();
+    QString getRunnerName();
 };
 
 

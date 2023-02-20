@@ -7,15 +7,16 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+option(ASAN "Check memory" OFF)
 
 add_subdirectory("${PROJECT_SOURCE_DIR}/3rdParty/xdg")
 add_subdirectory("${PROJECT_SOURCE_DIR}/3rdParty/yaml-cpp")
 add_subdirectory("${PROJECT_SOURCE_DIR}/3rdParty/nedrysoft")
 add_subdirectory("${PROJECT_SOURCE_DIR}/3rdParty/qed")
 add_subdirectory("${PROJECT_SOURCE_DIR}/3rdParty/qarchive")
-add_subdirectory("${PROJECT_SOURCE_DIR}/3rdParty/teemo")
 
 find_package(QT
     NAMES
@@ -40,7 +41,6 @@ include_directories(
         "${PROJECT_SOURCE_DIR}/3rdParty/libsass/include"
         "${PROJECT_SOURCE_DIR}/3rdParty/xdg/include"
         "${PROJECT_SOURCE_DIR}/3rdParty/qed/include"
-        "${PROJECT_SOURCE_DIR}/3rdParty/teemo/include"
         "${PROJECT_SOURCE_DIR}/3rdParty/qarchive/include"
         "${PROJECT_SOURCE_DIR}/3rdParty/nedrysoft/Ribbon/include"
         "${PROJECT_SOURCE_DIR}/3rdParty/nedrysoft/ThemeSupport/include"
@@ -62,6 +62,10 @@ set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
 # which point to directories outside the build tree to the install RPATH
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 
+if(ASAN)
+    add_compile_options(-fsanitize=address)
+    add_link_options(-fsanitize=address)
+endif()
 
 add_executable(
     QAGL
@@ -128,7 +132,6 @@ target_link_libraries(
         Ribbon
         XdgUtils::BaseDir
         QEasyDownloader
-        teemo
         QArchive
 
         "${PROJECT_SOURCE_DIR}/3rdParty/libsass/lib/libsass.a"

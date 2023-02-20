@@ -13,7 +13,6 @@
 class Wine : public RunnerCommon {
 public:
     static std::shared_ptr<Wine> get_instance();
-    std::string get_identifier() override;
 protected:
     void handle(QNetworkReply*) override;
 private:
