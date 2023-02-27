@@ -13,6 +13,7 @@
 #include <XdgUtils/BaseDir/BaseDir.h>
 #include <iostream>
 #include <fstream>
+#include <ios>
 
 std::shared_ptr<SettingsData> SettingsData::_settingsData = nullptr;
 std::shared_ptr<SettingsData> SettingsData::getSettingsData() {
@@ -45,8 +46,9 @@ void SettingsData::saveSettings() {
     std::cout << _settings->to_string();
     std::cout << "------------------------" << std::endl;
     */
-    std::ofstream ofs(_file);
-    ofs << _settings->to_string();
+    std::ofstream ofs;
+    ofs.open(_file, std::ios_base::out);
+    ofs << _settings->to_string() << std::endl;
     ofs.close();
 }
 

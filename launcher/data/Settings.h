@@ -123,7 +123,7 @@ public:
     std::string shaders;
     SettingsDiscord discord;
     bool gamemode;
-    bool fps_unlocker;
+    //bool fps_unlocker;
     bool purge_dxvk_logs;
     SettingsLanguage lang;
     void* env; // map

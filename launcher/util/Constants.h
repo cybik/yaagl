@@ -44,12 +44,8 @@ namespace QAGL {
              atob("bG9nLXVwbG9hZC1vcy5taWhveW8uY29t"), atob("b3ZlcnNlYXVzcGlkZXIueXVhbnNoZW4uY29t"),
         };
         const std::string winetricks = "https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks";
-        const std::string fpsunlock[2] = {
-            "https://github.com/34736384/" + placeholders::lowercase::first + "-fps-unlock/releases/download/v1.4.2/unlockfps.exe",
-            "https://dev.kaifa.ch/Maroxy/an-anime-game-aur/raw/branch/fpsunlock/fpsunlock.bat"
-        };
     }
-    const std::string versionUri = (uri::api+"/resource?key=gcStgarh&launcher_id=10");
+    const std::string versionUri = (uri::api+"/resource?key=gcStgarh&launcher_id=10&language=");
     const std::string backgroundUri = (uri::api+"/content?filter_adv=true&launcher_id=10&key=gcStgarh&language=");
 }
 

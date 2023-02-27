@@ -4,7 +4,6 @@
 
 #include "Proton.h"
 
-
 #include <iostream>
 
 #include <QNetworkAccessManager>

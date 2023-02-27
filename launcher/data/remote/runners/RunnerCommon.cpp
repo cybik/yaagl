@@ -11,6 +11,7 @@
 #include <QJsonObject>
 #include <iostream>
 
+/*
 void RunnerCommon::setup(QUrl _url, std::function<void(QNetworkReply *)> _func) {
     auto _nam = new QNetworkAccessManager();
     auto _req = new QNetworkRequest(_url);
@@ -18,7 +19,7 @@ void RunnerCommon::setup(QUrl _url, std::function<void(QNetworkReply *)> _func) 
         _nam, &QNetworkAccessManager::finished, _func
     );
     auto _rep = _nam->get(*_req);
-}
+}*/
 
 void RunnerCommon::parse_in(const QByteArray& array) {
     _doc = std::make_shared<QJsonDocument>(QJsonDocument::fromJson(array));

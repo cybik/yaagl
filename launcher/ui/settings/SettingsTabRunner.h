@@ -14,8 +14,8 @@
 #include "launcher/ui/settings/util/SettingsControls.h"
 #include "launcher/ui/settings/util/SettingsGroup.h"
 
-#include "launcher/data/runners/Wine.h"
-#include "launcher/data/runners/Proton.h"
+#include "launcher/data/remote/runners/Proton.h"
+#include "launcher/data/remote/runners/Wine.h"
 
 #include <tuple>
 

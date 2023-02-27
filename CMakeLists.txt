@@ -104,24 +104,18 @@ add_executable(
         launcher/data/Settings.h
         launcher/data/Settings.cpp
 
-        #"${PROJECT_SOURCE_DIR}/3rdParty/agc/target/cxxbridge/anime-game-core/src/cxxlib.rs.cc"
-        #"${PROJECT_SOURCE_DIR}/3rdParty/agc/target/cxxbridge/anime-game-core/src/genshin/cxxlib.rs.cc"
-        #"${PROJECT_SOURCE_DIR}/3rdParty/agc/target/cxxbridge/anime-game-core/src/honkai/cxxlib.rs.cc"
-        #"${PROJECT_SOURCE_DIR}/3rdParty/agcli/target/cxxbridge/anime-game-cli/src/cxxlib.rs.cc"
-        #"${PROJECT_SOURCE_DIR}/3rdParty/agcli/target/cxxbridge/anime-game-cli/src/commands/cxxlib.rs.cc"
-        #"${PROJECT_SOURCE_DIR}/3rdParty/agcli/target/cxxbridge/anime-game-cli/src/commands/voice/cxxlib.rs.cc"
-        #"${PROJECT_SOURCE_DIR}/3rdParty/agcli/target/cxxbridge/anime-game-cli/src/commands/game/cxxlib.rs.cc"
-        #"${PROJECT_SOURCE_DIR}/3rdParty/agcli/target/cxxbridge/anime-game-cli/src/commands/patch/cxxlib.rs.cc"
         launcher/process/process.cpp launcher/process/process.h
         launcher/process/launch.cpp launcher/process/launch.h
-        launcher/data/runners/Proton.cpp launcher/data/runners/Proton.h
-        launcher/data/runners/Wine.cpp launcher/data/runners/Wine.h
-        launcher/data/runners/RunnerCommon.cpp launcher/data/runners/RunnerCommon.h)
+        launcher/data/remote/runners/Proton.cpp launcher/data/remote/runners/Proton.h
+        launcher/data/remote/runners/Wine.cpp launcher/data/remote/runners/Wine.h
+        launcher/data/remote/runners/RunnerCommon.cpp launcher/data/remote/runners/RunnerCommon.h
+        launcher/data/remote/RemoteCommon.cpp launcher/data/remote/RemoteCommon.h
+        launcher/data/remote/game/GameDL.cpp launcher/data/remote/game/GameDL.h
+)
 
 
 target_link_libraries(
     QAGL
-        #fyaml
         yaml-cpp
         Qt5::Gui
         Qt5::Xml
@@ -135,7 +129,5 @@ target_link_libraries(
         QArchive
 
         "${PROJECT_SOURCE_DIR}/3rdParty/libsass/lib/libsass.a"
-        #"${PROJECT_SOURCE_DIR}/3rdParty/agc/target/debug/libanime_game_core.a"
-        #"${PROJECT_SOURCE_DIR}/3rdParty/agcli/target/debug/libanime_game_cli.a"
 )
 

@@ -36,8 +36,8 @@ private:
     std::shared_ptr<SettingsCheckbox> _cbGamemode;
     void setupBorderlessWindowCb(std::shared_ptr<SettingsGroup>);
     std::shared_ptr<SettingsCheckbox> _cbWindow;
-    void setupUnlocFPSCb(std::shared_ptr<SettingsGroup>);
-    std::shared_ptr<SettingsCheckbox> _cbFPS;
+    //void setupUnlocFPSCb(std::shared_ptr<SettingsGroup>);
+    //std::shared_ptr<SettingsCheckbox> _cbFPS;
     void setupTerminalCb(std::shared_ptr<SettingsGroup>);
     std::shared_ptr<SettingsCheckbox> _cbTerm;
 

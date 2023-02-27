@@ -15,6 +15,8 @@
 #include <functional>
 #include <memory>
 
+#include <launcher/data/remote/RemoteCommon.h>
+
 class RunnerRelease {
     RunnerRelease() = delete;
 
@@ -28,9 +30,9 @@ public:
     RunnerRelease(QJsonObject);
 };
 
-class RunnerCommon {
+class RunnerCommon : protected RemoteCommon {
 protected:
-    void setup(QUrl, std::function<void(QNetworkReply *)>);
+    //void setup(QUrl, std::function<void(QNetworkReply *)>);
     virtual void handle(QNetworkReply*) = 0; // pure virtual
     void parse_in(const QByteArray&);
     std::shared_ptr<QJsonDocument> _doc;

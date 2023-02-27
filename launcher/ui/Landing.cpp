@@ -90,6 +90,25 @@ namespace QAGL {
                     );
                 }
             );
+
+            {
+                if (networkLink_data == nullptr) {
+                    networkLink_data = std::make_shared<QNetworkAccessManager>();
+                    QObject::connect(
+                        networkLink_data.get(), &QNetworkAccessManager::finished,
+                        [](QNetworkReply *reply) {
+                            auto in_data = std::make_shared<QJsonDocument>(
+                                QJsonDocument::fromJson(reply->readAll())
+                            );
+                            std::cout << in_data->toJson().toStdString() << std::endl;
+                        }
+                    );
+                }
+                networkRequest_data = std::make_shared<QNetworkRequest>(QUrl((versionUri + "en-us").c_str()));
+                std::cout << (versionUri + "en-us") << std::endl;
+                networkLink_data->get(*networkRequest_data);
+            }
+            return;
         }
     }
 

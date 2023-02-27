@@ -50,7 +50,7 @@ void SettingsTabEnhancements::setupGameGroup() {
     _enhGame = std::make_shared<SettingsGroup>("Game");
     setupGameModeCb(_enhGame);
     setupBorderlessWindowCb(_enhGame);
-    setupUnlocFPSCb(_enhGame);
+    //setupUnlocFPSCb(_enhGame);
     setupTerminalCb(_enhGame);
     _tabLayout->addWidget(_enhGame->getWidget());
 }
@@ -65,10 +65,12 @@ void SettingsTabEnhancements::setupBorderlessWindowCb(std::shared_ptr<SettingsGr
     group->addControl(_cbWindow);
 }
 
+/*
 void SettingsTabEnhancements::setupUnlocFPSCb(std::shared_ptr<SettingsGroup> group) {
     _cbFPS = std::make_shared<SettingsCheckbox>("Unlock FPS (DANGER)");
     group->addControl(_cbFPS);
 }
+*/
 
 void SettingsTabEnhancements::setupTerminalCb(std::shared_ptr<SettingsGroup> group) {
     _cbTerm = std::make_shared<SettingsCheckbox>("Use Terminal");

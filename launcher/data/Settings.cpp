@@ -3,8 +3,8 @@
 //
 
 #include "Settings.h"
-#include "launcher/data/runners/Proton.h"
-#include "launcher/data/runners/Wine.h"
+#include "launcher/data/remote/runners/Wine.h"
+#include "launcher/data/remote/runners/Proton.h"
 
 #include <iostream>
 
@@ -30,7 +30,7 @@ void Settings::parse(const YAML::Node &file) {
     shaders = getStringFromNode(file, "shaders");
     discord.parse(file["discord"]);
     gamemode = getBoolFromNode(file, "gamemode");
-    fps_unlocker = getBoolFromNode(file, "fps_unlocker");
+    //fps_unlocker = getBoolFromNode(file, "fps_unlocker");
     purge_dxvk_logs = getBoolFromNode(file, "purge_dxvk_logs");
     lang.parse(file["lang"]);
     env = nullptr;
@@ -62,7 +62,7 @@ std::unique_ptr<YAML::Node> Settings::generate() {
     (*out)["shaders"] = shaders;
     (*out)["discord"] = (*discord.generate());
     (*out)["gamemode"] = gamemode;
-    (*out)["fps_unlocker"] = fps_unlocker;
+    //(*out)["fps_unlocker"] = fps_unlocker;
     (*out)["purge_dxvk_logs"] = purge_dxvk_logs;
     (*out)["lang"] = (*lang.generate());
     (*out)["env"] = std::list<std::string>();

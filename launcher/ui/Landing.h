@@ -59,7 +59,9 @@ Q_OBJECT
 
         // Network requests to our gaming overlords
         std::shared_ptr<QNetworkAccessManager> networkLink;
+        std::shared_ptr<QNetworkAccessManager> networkLink_data;
         std::shared_ptr<QNetworkRequest> networkRequest;
+        std::shared_ptr<QNetworkRequest> networkRequest_data;
 
         // JSON - Background Image data
         std::shared_ptr<QJsonDocument> background;
